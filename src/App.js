@@ -29,8 +29,6 @@ const organizedListModel = new OrganizedListModel({
 export default observer(
 class App extends Component {
   render() {
-    const list = organizedListModel.get('list');
-
     return (
       <div
         className="App height-full boxsizing-border flex-col mar-h-auto pad-3"
@@ -42,7 +40,6 @@ class App extends Component {
 
         <div className='flex-auto'>
           <ListComponent
-            list={list}
             organizedListModel={organizedListModel}
           />
         </div>

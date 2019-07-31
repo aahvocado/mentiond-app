@@ -7,8 +7,8 @@ export default observer(
 class ListComponent extends Component {
   /** @override */
   static defaultProps = {
-    /** @type {Array} */
-    list: [],
+    /** @type {OrganizedListModel} */
+    organizedListModel: [],
   };
   /** @override */
   constructor(props) {
@@ -19,8 +19,10 @@ class ListComponent extends Component {
   /** @override */
   render() {
     const {
-      list,
+      organizedListModel,
     } = this.props;
+
+    const list = organizedListModel.get('list');
 
     return (
       <ul
@@ -46,10 +48,14 @@ class ListComponent extends Component {
    *
    */
   onClickPlusItem(itemId) {
-    const {list} = this.props;
+    const {organizedListModel} = this.props;
+    const list = organizedListModel.get('list');
+
+    // update the mentions count
     const foundItem = list.find((item) => item.id === itemId);
     foundItem.mentions += 1;
 
-    this.props.organizedListModel.sortList();
+    // then resort
+    organizedListModel.sortList();
   }
 });
