@@ -14,7 +14,20 @@ const demoList = [
 
 function App() {
   return (
-    <div className="App bg-light-blue">
+    <div
+      className="App mar-h-auto"
+      style={{
+        maxWidth: 780,
+      }}
+    >
+      <h1
+        className='fsize-8 fontfamily-secondary talign-center pad-2 color-secondary-darker'
+        style={{
+          textShadow: 'white 3px 3px',
+        }}
+      >
+        Mentiond
+      </h1>
       <ListComponent list={demoList} />
     </div>
   );
