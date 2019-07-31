@@ -4,10 +4,10 @@ import ListComponent from 'common-components/ListComponent';
 
 const demoList = [
   {
-    children: 'a',
+    children: 'First Item',
     id: 'a',
   }, {
-    children: 'b',
+    children: 'Second Item',
     id: 'b',
   }
 ]
@@ -15,9 +15,9 @@ const demoList = [
 function App() {
   return (
     <div
-      className="App mar-h-auto"
+      className="App mar-h-auto pad-3"
       style={{
-        maxWidth: 780,
+        maxWidth: 640,
       }}
     >
       <h1

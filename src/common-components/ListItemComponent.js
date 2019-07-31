@@ -3,6 +3,8 @@ import React, { PureComponent } from 'react';
 export default class ListItemComponent extends PureComponent {
   /** @override */
   static defaultProps = {
+    /** @type {Number} */
+    index: -1,
   };
   /** @override */
   render() {
@@ -11,7 +13,7 @@ export default class ListItemComponent extends PureComponent {
     } = this.props;
 
     return (
-      <li>
+      <li className='fontfamily-primary color-grayest fsize-4 pad-2'>
         {children}
       </li>
     );
