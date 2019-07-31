@@ -7,7 +7,7 @@ export default observer(
 class ListComponent extends Component {
   /** @override */
   static defaultProps = {
-    /** @type {OrganizedListModel} */
+    /** @type {Array} */
     list: [],
   };
   /** @override */
@@ -32,7 +32,7 @@ class ListComponent extends Component {
         { list.map((itemData, idx) => {
           return (
             <ListItemComponent
-              key={`list-item-${idx}-${itemData.id}-key`}
+              key={`list-item-${itemData.id}-key`}
               index={idx}
               onClickPlus={() => this.onClickPlusItem(itemData.id)}
               {...itemData}
@@ -47,9 +47,9 @@ class ListComponent extends Component {
    */
   onClickPlusItem(itemId) {
     const {list} = this.props;
-    const foundIndex = list.findIndex((item) => item.id === itemId);
-
-    const foundItem = list[foundIndex];
+    const foundItem = list.find((item) => item.id === itemId);
     foundItem.mentions += 1;
+
+    this.props.organizedListModel.sortList();
   }
-})
+});

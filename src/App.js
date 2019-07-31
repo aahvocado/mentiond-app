@@ -11,11 +11,11 @@ const demoList = [
   {
     label: 'In the Mood for Love',
     id: 'a',
-    mentions: 0,
+    mentions: 2,
   }, {
     label: 'YiYi',
     id: 'b',
-    mentions: 0,
+    mentions: 3,
   }, {
     label: 'Once Upon a Time in Hollywood',
     id: 'c',
@@ -43,6 +43,7 @@ class App extends Component {
         <div className='flex-auto'>
           <ListComponent
             list={list}
+            organizedListModel={organizedListModel}
           />
         </div>
 
