@@ -2,6 +2,9 @@ import React from 'react';
 
 import ListComponent from 'common-components/ListComponent';
 
+import FooterComponent from 'components/FooterComponent';
+import LogoComponent from 'components/LogoComponent';
+
 const demoList = [
   {
     children: 'First Item',
@@ -15,20 +18,18 @@ const demoList = [
 function App() {
   return (
     <div
-      className="App mar-h-auto pad-3"
+      className="App height-full boxsizing-border flex-col mar-h-auto pad-3"
       style={{
         maxWidth: 640,
       }}
     >
-      <h1
-        className='fsize-8 fontfamily-secondary talign-center pad-2 color-secondary-darker'
-        style={{
-          textShadow: 'white 3px 3px',
-        }}
-      >
-        Mentiond
-      </h1>
-      <ListComponent list={demoList} />
+      <LogoComponent />
+
+      <div className='flex-auto'>
+        <ListComponent list={demoList} />
+      </div>
+
+      <FooterComponent />
     </div>
   );
 }

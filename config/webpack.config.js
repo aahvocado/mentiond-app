@@ -270,6 +270,7 @@ module.exports = function(webpackEnv) {
         .filter(ext => useTypeScript || !ext.includes('ts')),
       alias: {
         'common-components': path.resolve(paths.appSrc, 'common-components'),
+        components: path.resolve(paths.appSrc, components),
         styles: path.resolve(paths.appSrc, 'styles'),
 
         // Support React Native Web
