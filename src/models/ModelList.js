@@ -5,7 +5,7 @@ import {
   toJS,
 } from 'mobx';
 
-import Model from 'models.shared/Model';
+import Model from 'models/Model';
 
 /**
  * ModelList is an Array of Models

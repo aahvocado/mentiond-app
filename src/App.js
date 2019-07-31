@@ -4,6 +4,8 @@ import ListComponent from 'components/ListComponent';
 import FooterComponent from 'components/FooterComponent';
 import LogoComponent from 'components/LogoComponent';
 
+import OrganizedListModel from 'models/OrganizedListModel';
+
 const demoList = [
   {
     label: 'In the Mood for Love',
@@ -16,6 +18,9 @@ const demoList = [
     id: 'c',
   }
 ]
+const organizedListModel = new OrganizedListModel({
+  list: demoList,
+});
 
 function App() {
   return (
@@ -28,7 +33,7 @@ function App() {
       <LogoComponent />
 
       <div className='flex-auto'>
-        <ListComponent list={demoList} />
+        <ListComponent organizedListModel={organizedListModel} />
       </div>
 
       <FooterComponent />

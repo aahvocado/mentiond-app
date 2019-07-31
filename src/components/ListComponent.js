@@ -5,14 +5,16 @@ import ListItemComponent from './ListItemComponent';
 export default class ListComponent extends Component {
   /** @override */
   static defaultProps = {
-    /** @type {Array} */
-    list: [],
+    /** @type {OrganizedListModel} */
+    organizedListModel: [],
   };
   /** @override */
   render() {
     const {
-      list,
+      organizedListModel,
     } = this.props;
+
+    const list = organizedListModel.get('list');
 
     return (
       <ul

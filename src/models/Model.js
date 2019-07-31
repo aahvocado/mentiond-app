@@ -9,8 +9,8 @@ import {
 } from 'mobx';
 import uuid from 'uuid/v4';
 
-import convertObservableToJs from 'utilities.shared/convertObservableToJs';
-import createImportingAttributes from 'utilities.shared/createImportingAttributes';
+import convertObservableToJs from 'utilities/convertObservableToJs';
+import createImportingAttributes from 'utilities/createImportingAttributes';
 
 /**
  * Model base class
