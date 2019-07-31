@@ -12,4 +12,5 @@ export default class OrganizedListModel extends Model {
       ...newAttributes,
     });
   }
+
 }

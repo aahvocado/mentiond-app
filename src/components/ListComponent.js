@@ -1,20 +1,26 @@
 import React, { Component } from 'react';
+import { observer } from 'mobx-react';
 
 import ListItemComponent from './ListItemComponent';
 
-export default class ListComponent extends Component {
+export default observer(
+class ListComponent extends Component {
   /** @override */
   static defaultProps = {
     /** @type {OrganizedListModel} */
-    organizedListModel: [],
+    list: [],
   };
+  /** @override */
+  constructor(props) {
+    super(props);
+
+    this.onClickPlusItem = this.onClickPlusItem.bind(this);
+  }
   /** @override */
   render() {
     const {
-      organizedListModel,
+      list,
     } = this.props;
-
-    const list = organizedListModel.get('list');
 
     return (
       <ul
@@ -28,6 +34,7 @@ export default class ListComponent extends Component {
             <ListItemComponent
               key={`list-item-${idx}-${itemData.id}-key`}
               index={idx}
+              onClickPlus={() => this.onClickPlusItem(itemData.id)}
               {...itemData}
             />
           )
@@ -35,4 +42,14 @@ export default class ListComponent extends Component {
       </ul>
     );
   }
-}
+  /**
+   *
+   */
+  onClickPlusItem(itemId) {
+    const {list} = this.props;
+    const foundIndex = list.findIndex((item) => item.id === itemId);
+
+    const foundItem = list[foundIndex];
+    foundItem.mentions += 1;
+  }
+})
