@@ -7,11 +7,14 @@ import LogoComponent from 'components/LogoComponent';
 
 const demoList = [
   {
-    children: 'First Item',
+    label: 'In the Mood for Love',
     id: 'a',
   }, {
-    children: 'Second Item',
+    label: 'YiYi',
     id: 'b',
+  }, {
+    label: 'Once Upon a Time in Hollywood',
+    id: 'c',
   }
 ]
 
