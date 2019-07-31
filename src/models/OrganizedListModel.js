@@ -25,7 +25,7 @@ export default class OrganizedListModel extends Model {
    */
   addNew() {
     const list = this.get('list');
-    list.push(...itemSchema);
+    list.push({...itemSchema});
   }
   /**
    * sorts the the current list with highest number of mentions at the top

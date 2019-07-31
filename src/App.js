@@ -1,9 +1,8 @@
 import React, { Component } from 'react';
 import { observer } from 'mobx-react';
 
-import ButtonComponent from 'common-components/ButtonComponent';
+import MentionsListPage from 'pages/MentionsListPage';
 
-import ListComponent from 'components/ListComponent';
 import FooterComponent from 'components/FooterComponent';
 import LogoComponent from 'components/LogoComponent';
 
@@ -40,17 +39,7 @@ class App extends Component {
       >
         <LogoComponent />
 
-        <div className='flex-auto'>
-          <ButtonComponent
-            className='fsize-3 width-full talign-center flex-none mar-b-3'
-          >
-            Add New Mentionable
-          </ButtonComponent>
-
-          <ListComponent
-            organizedListModel={organizedListModel}
-          />
-        </div>
+        <MentionsListPage organizedListModel={organizedListModel} />
 
         <FooterComponent />
       </div>
