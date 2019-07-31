@@ -271,7 +271,9 @@ module.exports = function(webpackEnv) {
       alias: {
         'common-components': path.resolve(paths.appSrc, 'common-components'),
         components: path.resolve(paths.appSrc, components),
+        models: path.resolve(paths.appSrc, 'models'),
         styles: path.resolve(paths.appSrc, 'styles'),
+        utilities: path.resolve(paths.appSrc, 'utilities'),
 
         // Support React Native Web
         // https://www.smashingmagazine.com/2016/08/a-glimpse-into-the-future-with-react-native-for-web/
