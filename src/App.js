@@ -1,5 +1,4 @@
 import React from 'react';
-import './App.css';
 
 import ListComponent from 'common-components/ListComponent';
 
@@ -15,7 +14,7 @@ const demoList = [
 
 function App() {
   return (
-    <div className="App">
+    <div className="App bg-light-blue">
       <ListComponent list={demoList} />
     </div>
   );
