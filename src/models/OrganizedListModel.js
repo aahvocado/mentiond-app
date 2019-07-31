@@ -15,7 +15,7 @@ export default class OrganizedListModel extends Model {
     this.sortList();
   }
   /**
-   *
+   * sorts the the current list with highest number of mentions at the top
    */
   sortList() {
     const list = this.get('list');
@@ -26,5 +26,19 @@ export default class OrganizedListModel extends Model {
     });
 
     list.replace(sortedList);
+  }
+  /**
+   * @param {String} itemId
+   */
+  focusItem(itemId) {
+    const list = this.get('list');
+    list.forEach((item) => {
+      const willBeFocused = item.id === itemId;
+      if (willBeFocused) {
+        item.isFocused = true;
+      } else {
+        item.isFocused = false;
+      };
+    })
   }
 }

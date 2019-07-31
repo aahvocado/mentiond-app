@@ -25,12 +25,7 @@ class ListComponent extends Component {
     const list = organizedListModel.get('list');
 
     return (
-      <ul
-        className='borradius-3 bg-white'
-        style={{
-          boxShadow: '0 3px #a2a2a2',
-        }}
-      >
+      <ul className=''>
         { list.map((itemData, idx) => {
           return (
             <ListItemComponent
@@ -50,6 +45,9 @@ class ListComponent extends Component {
   onClickPlusItem(itemId) {
     const {organizedListModel} = this.props;
     const list = organizedListModel.get('list');
+
+    // mark the item as the focused one
+    organizedListModel.focusItem(itemId);
 
     // update the mentions count
     const foundItem = list.find((item) => item.id === itemId);

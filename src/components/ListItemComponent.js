@@ -7,6 +7,8 @@ export default class ListItemComponent extends PureComponent {
     mentions: 0,
     /** @type {Number} */
     index: -1,
+    /** @type {Boolean} */
+    isFocused: false,
     /** @type {String} */
     label: '',
     /** @type {Function} */
@@ -15,13 +17,16 @@ export default class ListItemComponent extends PureComponent {
   /** @override */
   render() {
     const {
+      isFocused,
       mentions,
       label,
       onClickPlus,
     } = this.props;
 
+    const modifierClassName = isFocused ? 'bor-2-tertiary' : 'bor-2-transparent';
+
     return (
-      <li className='flex-row aitems-center overflow-hidden fontfamily-primary color-grayest pad-2'>
+      <li className={`flex-row aitems-center overflow-hidden fontfamily-primary color-grayest boxszing-content bg-white borradius-2 pad-2 adjacent-mar-t-2 ${modifierClassName}`}>
         <div className='flex-auto text-ellipsis fsize-4 adjacent-mar-l-3'>{label}</div>
         <div className='flex-none fsize-3 adjacent-mar-l-3'>{`${mentions} mentions`}</div>
 
