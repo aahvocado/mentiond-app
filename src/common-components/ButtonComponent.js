@@ -6,7 +6,7 @@ export const BUTTON_THEME = {
   BASE: {
     base: 'boxszing-content bg-white borradius-2 pad-2',
     enabled: 'color-grayest hover:color-fourth focus:color-fourth',
-    disabled: 'color-grayer bg-gray',
+    disabled: 'color-grayer bg-light-gray',
   },
 }
 

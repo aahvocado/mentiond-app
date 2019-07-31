@@ -22,10 +22,15 @@ export default class OrganizedListModel extends Model {
   }
   /**
    * adds a new item to the list
+   *
+   * @param {Object} [newData] - any data to prepopulate the `itemSchema`
    */
-  addNew() {
+  addNew(newData = {}) {
     const list = this.get('list');
-    list.push({...itemSchema});
+    list.push({
+      ...itemSchema,
+      ...newData,
+    });
   }
   /**
    * sorts the the current list with highest number of mentions at the top
