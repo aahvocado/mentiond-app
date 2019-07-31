@@ -10,7 +10,7 @@ export default class LogoComponent extends PureComponent {
           textShadow: 'white 3px 3px',
         }}
       >
-        Mentiond
+        mentiond
       </h1>
     );
   }
