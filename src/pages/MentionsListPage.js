@@ -36,14 +36,18 @@ class MentionsListPage extends Component {
 
     return (
       <div className='flex-auto'>
+        <h2 className='fsize-6 color-secondary-darker fontfamily-secondary flex-none talign-center adjacent-mar-t-3'>
+          {organizedListModel.get('category')}
+        </h2>
 
-        <div className='flex-col bg-white borradius-2 flex-none mar-b-3'>
+        <div className='flex-col bg-white borradius-2 adjacent-mar-t-3'>
           <input
             className='fsize-4 width-full boxsizing-border talign-center pad-2 flex-none'
-            placeholder='name for a new mentionable'
+            placeholder='new mentionable name'
             value={newValue}
             onChange={this.onChangeNewValue}
           />
+
           <ButtonComponent
             className='fsize-3 width-full talign-center'
             disabled={newValue.length <= 0}
@@ -54,6 +58,7 @@ class MentionsListPage extends Component {
         </div>
 
         <ListComponent
+          className='adjacent-mar-t-3'
           organizedListModel={organizedListModel}
         />
       </div>

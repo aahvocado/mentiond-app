@@ -3,10 +3,16 @@ import { observer } from 'mobx-react';
 
 import ListItemComponent from 'components/ListItemComponent';
 
+import combineClassNames from 'utilities/combineClassNames';
+
 export default observer(
 class ListComponent extends Component {
   /** @override */
   static defaultProps = {
+    /** @type {String} */
+    baseClassName: '',
+    /** @type {String} */
+    className: '',
     /** @type {OrganizedListModel} */
     organizedListModel: [],
   };
@@ -19,13 +25,15 @@ class ListComponent extends Component {
   /** @override */
   render() {
     const {
+      baseClassName,
+      className,
       organizedListModel,
     } = this.props;
 
     const list = organizedListModel.get('list');
 
     return (
-      <ul className=''>
+      <ul className={combineClassNames(baseClassName, className)}>
         { list.map((itemData, idx) => {
           return (
             <ListItemComponent

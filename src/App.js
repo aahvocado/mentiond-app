@@ -24,6 +24,7 @@ const demoList = [
   }
 ]
 const organizedListModel = new OrganizedListModel({
+  category: 'movies',
   list: demoList,
 });
 

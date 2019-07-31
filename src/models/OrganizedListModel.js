@@ -11,7 +11,7 @@ export default class OrganizedListModel extends Model {
   constructor(newAttributes = {}) {
     super({
       /** @type {String} */
-      type: '',
+      category: '',
       /** @type {Array} */
       list: [],
       /** @type {Object} */
