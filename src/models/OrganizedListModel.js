@@ -1,5 +1,11 @@
 import Model from 'models/Model';
 
+const itemSchema = {
+  id: undefined,
+  label: '',
+  mentions: 0,
+};
+
 export default class OrganizedListModel extends Model {
   /** @override */
   constructor(newAttributes = {}) {
@@ -13,6 +19,13 @@ export default class OrganizedListModel extends Model {
     });
 
     this.sortList();
+  }
+  /**
+   * adds a new item to the list
+   */
+  addNew() {
+    const list = this.get('list');
+    list.push(...itemSchema);
   }
   /**
    * sorts the the current list with highest number of mentions at the top

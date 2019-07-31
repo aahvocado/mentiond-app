@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { observer } from 'mobx-react';
 
-import ListItemComponent from './ListItemComponent';
+import ListItemComponent from 'components/ListItemComponent';
 
 export default observer(
 class ListComponent extends Component {

@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import { observer } from 'mobx-react';
 
+import ButtonComponent from 'common-components/ButtonComponent';
+
 import ListComponent from 'components/ListComponent';
 import FooterComponent from 'components/FooterComponent';
 import LogoComponent from 'components/LogoComponent';
@@ -31,7 +33,7 @@ class App extends Component {
   render() {
     return (
       <div
-        className="App height-full boxsizing-border flex-col mar-h-auto pad-3"
+        className="App fontfamily-primary height-full boxsizing-border flex-col mar-h-auto pad-3"
         style={{
           maxWidth: 640,
         }}
@@ -39,6 +41,12 @@ class App extends Component {
         <LogoComponent />
 
         <div className='flex-auto'>
+          <ButtonComponent
+            className='fsize-3 width-full talign-center flex-none mar-b-3'
+          >
+            Add New Mentionable
+          </ButtonComponent>
+
           <ListComponent
             organizedListModel={organizedListModel}
           />
