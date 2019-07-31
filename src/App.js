@@ -1,7 +1,6 @@
 import React from 'react';
 
-import ListComponent from 'common-components/ListComponent';
-
+import ListComponent from 'components/ListComponent';
 import FooterComponent from 'components/FooterComponent';
 import LogoComponent from 'components/LogoComponent';
 
