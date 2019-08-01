@@ -4,6 +4,8 @@ import {HorizontalSlideGestureComponent} from 'common-components/SlideGestureCom
 
 import combineClassNames from 'utilities/combineClassNames';
 
+const BASE_HEIGHT = 60;
+const MIN_HEIGHT = 45;
 /**
  * Basic Mentionable List Item
  */
@@ -52,11 +54,13 @@ export default class MentionableListItemComponent extends PureComponent {
       onClickPlus,
     } = this.props;
 
+    const shouldShowMinVersion = isComplete || isHidden;
+
     return (
       <li
         className='position-relative adjacent-mar-t-2'
         style={{
-          height: 60,
+          height: shouldShowMinVersion ? MIN_HEIGHT : BASE_HEIGHT,
         }}
       >
         <HorizontalSlideGestureComponent
@@ -75,6 +79,8 @@ export default class MentionableListItemComponent extends PureComponent {
             label={label}
             mentions={mentions}
             onClick={onClickPlus}
+
+            shouldShowMinVersion={shouldShowMinVersion}
           />
         </HorizontalSlideGestureComponent>
 
@@ -134,6 +140,9 @@ class MentionableListItemBody extends PureComponent {
     mentions: 0,
     /** @type {Function} */
     onClickPlus: () => {},
+    //
+    /** @type {Boolean} */
+    shouldShowMinVersion: false,
   };
   /** @override */
   render() {
@@ -145,6 +154,7 @@ class MentionableListItemBody extends PureComponent {
       label,
       mentions,
       onClickPlus,
+      shouldShowMinVersion,
     } = this.props;
 
     const borderClassName = (() => {
@@ -165,18 +175,21 @@ class MentionableListItemBody extends PureComponent {
       <div
         className={combineClassNames(className, 'position-absolute color-grayest', borderClassName, hiddenClassName)}
         style={{
-          height: 60,
+          height: shouldShowMinVersion ? MIN_HEIGHT : BASE_HEIGHT,
         }}
       >
         <div className='flex-auto text-ellipsis fsize-4 adjacent-mar-l-3'>{label}</div>
         <div className='flex-none fsize-3 adjacent-mar-l-3'>{`${mentions} mentions`}</div>
-        <button
-          className='flex-none cursor-pointer fsize-4 pad-1 adjacent-mar-l-3'
-          disabled={isHidden || isComplete}
-          onClick={onClickPlus}
-        >
-          +
-        </button>
+
+        { !shouldShowMinVersion &&
+          <button
+            className='flex-none cursor-pointer fsize-4 pad-1 adjacent-mar-l-3'
+            disabled={isHidden || isComplete}
+            onClick={onClickPlus}
+          >
+            +
+          </button>
+        }
       </div>
 
     );
