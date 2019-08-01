@@ -4,11 +4,14 @@ import {HorizontalSlideGestureComponent} from 'common-components/SlideGestureCom
 
 import combineClassNames from 'utilities/combineClassNames';
 
-export default class ListItemComponent extends PureComponent {
+/**
+ * Basic Mentionable List Item
+ */
+export default class MentionableListItemComponent extends PureComponent {
   /** @override */
   static defaultProps = {
     /** @type {String} */
-    baseClassName: 'width-full boxsizing-border flex-row aitems-center overflow-hidden fontfamily-primary borradius-2 pad-2',
+    itemClassName: 'width-full boxsizing-border flex-row aitems-center overflow-hidden fontfamily-primary borradius-2 pad-2',
     /** @type {Number} */
     mentions: 0,
     /** @type {String} */
@@ -40,7 +43,7 @@ export default class ListItemComponent extends PureComponent {
   /** @override */
   render() {
     const {
-      baseClassName,
+      itemClassName,
       isComplete,
       isFocused,
       isHidden,
@@ -48,20 +51,6 @@ export default class ListItemComponent extends PureComponent {
       label,
       onClickPlus,
     } = this.props;
-
-    const borderClassName = (() => {
-      if (isComplete) {
-        return 'bor-2-green';
-      }
-
-      if (isFocused) {
-        return 'bor-2-tertiary';
-      }
-
-      return 'bor-2-transparent';
-    })();
-
-    const hiddenClassName = isHidden ? 'color-grayest bg-gray' : 'color-grayest bg-white';
 
     return (
       <li
@@ -78,24 +67,18 @@ export default class ListItemComponent extends PureComponent {
           onSlideMin={this.onSlideHide}
           onSlideMax={this.onSlideComplete}
         >
-          <div
-            className={combineClassNames(baseClassName, 'position-absolute color-grayest', borderClassName, hiddenClassName)}
-            style={{
-              height: 60,
-            }}
-          >
-            <div className='flex-auto text-ellipsis fsize-4 adjacent-mar-l-3'>{label}</div>
-            <div className='flex-none fsize-3 adjacent-mar-l-3'>{`${mentions} mentions`}</div>
-            <button
-              className='flex-none cursor-pointer fsize-4 pad-1 adjacent-mar-l-3'
-              onClick={onClickPlus}
-            >
-              +
-            </button>
-          </div>
+          <MentionableListItemBody
+            className={itemClassName}
+            isComplete={isComplete}
+            isFocused={isFocused}
+            isHidden={isHidden}
+            label={label}
+            mentions={mentions}
+            onClick={onClickPlus}
+          />
         </HorizontalSlideGestureComponent>
 
-        <div className={combineClassNames(baseClassName, 'height-full color-white')}
+        <div className={combineClassNames(itemClassName, 'height-full color-white')}
           style={{
             background: 'linear-gradient(90deg, rgba(0,255,1,1) 0%, rgba(204,255,0,1) 25%, rgba(255,139,0,1) 75%, rgba(255,0,0,1) 100%)',
           }}
@@ -129,5 +112,73 @@ export default class ListItemComponent extends PureComponent {
 
     gestureEvent.cancel();
     onHide(id, gestureEvent);
+  }
+}
+/**
+ * body of a mentionable list item
+ */
+class MentionableListItemBody extends PureComponent {
+  /** @override */
+  static defaultProps = {
+    /** @type {String} */
+    className: '',
+    /** @type {Boolean} */
+    isComplete: false,
+    /** @type {Boolean} */
+    isFocused: false,
+    /** @type {Boolean} */
+    isHidden: false,
+    /** @type {String} */
+    label: '',
+    /** @type {Number} */
+    mentions: 0,
+    /** @type {Function} */
+    onClickPlus: () => {},
+  };
+  /** @override */
+  render() {
+    const {
+      className,
+      isComplete,
+      isFocused,
+      isHidden,
+      label,
+      mentions,
+      onClickPlus,
+    } = this.props;
+
+    const borderClassName = (() => {
+      if (isComplete) {
+        return 'bor-2-green';
+      }
+
+      if (isFocused) {
+        return 'bor-2-tertiary';
+      }
+
+      return 'bor-2-transparent';
+    })();
+
+    const hiddenClassName = isHidden ? 'color-grayest bg-gray' : 'color-grayest bg-white';
+
+    return (
+      <div
+        className={combineClassNames(className, 'position-absolute color-grayest', borderClassName, hiddenClassName)}
+        style={{
+          height: 60,
+        }}
+      >
+        <div className='flex-auto text-ellipsis fsize-4 adjacent-mar-l-3'>{label}</div>
+        <div className='flex-none fsize-3 adjacent-mar-l-3'>{`${mentions} mentions`}</div>
+        <button
+          className='flex-none cursor-pointer fsize-4 pad-1 adjacent-mar-l-3'
+          disabled={isHidden || isComplete}
+          onClick={onClickPlus}
+        >
+          +
+        </button>
+      </div>
+
+    );
   }
 }
