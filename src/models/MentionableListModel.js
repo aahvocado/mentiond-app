@@ -8,6 +8,7 @@ import Model from 'models/Model';
  */
 const mentionableItemSchema = {
   id: undefined,
+  initialIndex: -1,
   index: -1,
   label: '',
   mentions: 0,
@@ -132,6 +133,7 @@ export default class MentionableListModel extends Model {
     list.push({
       ...mentionableItemSchema,
       ...newData,
+      initialIndex: list.length,
       index: list.length,
       id: uuid(),
     });

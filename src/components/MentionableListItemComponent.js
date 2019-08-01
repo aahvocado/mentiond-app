@@ -7,6 +7,7 @@ import combineClassNames from 'utilities/combineClassNames';
 
 const BASE_HEIGHT = 60;
 const MIN_HEIGHT = 45;
+
 /**
  * Basic Mentionable List Item
  */
@@ -46,6 +47,8 @@ export default class MentionableListItemComponent extends PureComponent {
   /** @override */
   render() {
     const {
+      index,
+      initialIndex,
       itemClassName,
       isComplete,
       isFocused,
@@ -60,40 +63,47 @@ export default class MentionableListItemComponent extends PureComponent {
 
     return (
       <animated.div
-        className='position-relative adjacent-mar-t-2'
+        className='position-absolute'
         style={{
-          height: shouldShowMinVersion ? MIN_HEIGHT : BASE_HEIGHT,
+          height: BASE_HEIGHT,
+          left: 0,
+          right: 0,
+          top: 0,
+          bottom: 0,
+          transform: `translateY(${(BASE_HEIGHT + 20) * index}px)`,
           ...style,
         }}
       >
-        <HorizontalSlideGestureComponent
-          className=''
-          enabled={!isHidden && !isComplete}
-          min={-110}
-          max={110}
-          onSlideMin={this.onSlideHide}
-          onSlideMax={this.onSlideComplete}
-        >
-          <MentionableListItemBody
-            className={itemClassName}
-            isComplete={isComplete}
-            isFocused={isFocused}
-            isHidden={isHidden}
-            label={label}
-            mentions={mentions}
-            onClick={onClickPlus}
+        <div className='position-relative'>
+          <HorizontalSlideGestureComponent
+            className=''
+            enabled={!isHidden && !isComplete}
+            min={-110}
+            max={110}
+            onSlideMin={this.onSlideHide}
+            onSlideMax={this.onSlideComplete}
+          >
+            <MentionableListItemBody
+              className={itemClassName}
+              isComplete={isComplete}
+              isFocused={isFocused}
+              isHidden={isHidden}
+              label={label}
+              mentions={mentions}
+              onClick={onClickPlus}
 
-            shouldShowMinVersion={shouldShowMinVersion}
-          />
-        </HorizontalSlideGestureComponent>
+              shouldShowMinVersion={shouldShowMinVersion}
+            />
+          </HorizontalSlideGestureComponent>
 
-        <div className={combineClassNames(itemClassName, 'height-full color-white')}
-          style={{
-            background: 'linear-gradient(90deg, rgba(0,255,1,1) 0%, rgba(204,255,0,1) 25%, rgba(255,139,0,1) 75%, rgba(255,0,0,1) 100%)',
-          }}
-        >
-          <div className='flex-auto talign-left'>Complete</div>
-          <div className='flex-auto talign-right'>Hide</div>
+          <div className={combineClassNames(itemClassName, 'height-full color-white')}
+            style={{
+              background: 'linear-gradient(90deg, rgba(0,255,1,1) 0%, rgba(204,255,0,1) 25%, rgba(255,139,0,1) 75%, rgba(255,0,0,1) 100%)',
+            }}
+          >
+            <div className='flex-auto talign-left'>Complete</div>
+            <div className='flex-auto talign-right'>Hide</div>
+          </div>
         </div>
       </animated.div>
     );
@@ -178,7 +188,7 @@ class MentionableListItemBody extends PureComponent {
       <div
         className={combineClassNames(className, 'position-absolute color-grayest', borderClassName, hiddenClassName)}
         style={{
-          height: shouldShowMinVersion ? MIN_HEIGHT : BASE_HEIGHT,
+          height: BASE_HEIGHT,
         }}
       >
         <div className='flex-auto text-ellipsis fsize-4 adjacent-mar-l-3'>{label}</div>

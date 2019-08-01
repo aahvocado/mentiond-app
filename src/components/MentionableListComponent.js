@@ -13,7 +13,7 @@ class MentionableListComponent extends Component {
   /** @override */
   static defaultProps = {
     /** @type {String} */
-    baseClassName: '',
+    baseClassName: 'position-relative',
     /** @type {String} */
     className: '',
     /** @type {MentionableListModel} */
