@@ -10,22 +10,23 @@ import MentionableListModel from 'models/MentionableListModel';
 
 const mentionableListModel = new MentionableListModel({
   category: 'movies',
-  list: [
-    {
-      label: 'In the Mood for Love',
-      id: 'a',
-      mentions: 2,
-    }, {
-      label: 'YiYi',
-      id: 'b',
-      mentions: 3,
-    }, {
-      label: 'Once Upon a Time in Hollywood',
-      id: 'c',
-      mentions: 1,
-    }
-  ],
 });
+mentionableListModel.addItem({
+  label: 'In the Mood for Love',
+  id: 'a',
+  mentions: 2,
+})
+mentionableListModel.addItem({
+  label: 'YiYi',
+  id: 'b',
+  mentions: 3,
+})
+mentionableListModel.addItem({
+  label: 'Once Upon a Time in Hollywood',
+  id: 'c',
+  mentions: 1,
+})
+mentionableListModel.sortList();
 
 export default observer(
 class App extends Component {

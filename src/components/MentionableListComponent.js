@@ -43,7 +43,7 @@ class MentionableListComponent extends Component {
               index={idx}
               onClickPlus={() => this.onClickPlusItem(itemData.id)}
               onComplete={this.onCompleteItem}
-              onHideItem={this.onHideItem}
+              onHide={this.onHideItem}
               {...itemData}
             />
           )
@@ -70,16 +70,24 @@ class MentionableListComponent extends Component {
   }
   /**
    * @param {String} itemId
+   * @param {GestureEvent} gestureEvent
    */
-  onCompleteItem(itemId) {
+  onCompleteItem(itemId, gestureEvent) {
     const {mentionableListModel} = this.props;
     mentionableListModel.toggleItemComplete(itemId, true);
+
+    // then resort
+    mentionableListModel.sortList();
   }
   /**
    * @param {String} itemId
+   * @param {GestureEvent} gestureEvent
    */
-  onHideItem(itemId) {
+  onHideItem(itemId, gestureEvent) {
     const {mentionableListModel} = this.props;
     mentionableListModel.toggleItemHidden(itemId, true);
+
+    // then resort
+    mentionableListModel.sortList();
   }
 });
