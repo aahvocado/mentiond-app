@@ -16,7 +16,11 @@ export default class ListItemComponent extends PureComponent {
     /** @type {Number} */
     index: -1,
     /** @type {Boolean} */
+    isComplete: false,
+    /** @type {Boolean} */
     isFocused: false,
+    /** @type {Boolean} */
+    isHidden: false,
     /** @type {String} */
     label: '',
     /** @type {Function} */
@@ -37,13 +41,27 @@ export default class ListItemComponent extends PureComponent {
   render() {
     const {
       baseClassName,
+      isComplete,
       isFocused,
+      isHidden,
       mentions,
       label,
       onClickPlus,
     } = this.props;
 
-    const modifierClassName = isFocused ? 'bor-2-tertiary' : 'bor-2-transparent';
+    const borderClassName = (() => {
+      if (isComplete) {
+        return 'bor-2-green';
+      }
+
+      if (isFocused) {
+        return 'bor-2-tertiary';
+      }
+
+      return 'bor-2-transparent';
+    })();
+
+    const hiddenClassName = isHidden ? 'color-grayest bg-gray' : 'color-grayest bg-white';
 
     return (
       <li
@@ -54,13 +72,14 @@ export default class ListItemComponent extends PureComponent {
       >
         <HorizontalSlideGestureComponent
           className=''
+          enabled={!isHidden && !isComplete}
           min={-110}
           max={110}
-          onSlideMin={this.onSlideComplete}
-          onSlideMax={this.onSlideHide}
+          onSlideMin={this.onSlideHide}
+          onSlideMax={this.onSlideComplete}
         >
           <div
-            className={combineClassNames(baseClassName, 'position-absolute color-grayest bg-white', modifierClassName)}
+            className={combineClassNames(baseClassName, 'position-absolute color-grayest', borderClassName, hiddenClassName)}
             style={{
               height: 60,
             }}
@@ -88,25 +107,27 @@ export default class ListItemComponent extends PureComponent {
     );
   }
   /**
-   *
+   * @param {GestureEvent} gestureEvent
    */
-  onSlideComplete() {
+  onSlideComplete(gestureEvent) {
     const {
       id,
       onComplete,
     } = this.props;
 
-    onComplete(id);
+    gestureEvent.cancel();
+    onComplete(id, gestureEvent);
   }
   /**
-   *
+   * @param {GestureEvent} gestureEvent
    */
-  onSlideHide() {
+  onSlideHide(gestureEvent) {
     const {
       id,
       onHide,
     } = this.props;
 
-    onHide(id);
+    gestureEvent.cancel();
+    onHide(id, gestureEvent);
   }
 }
