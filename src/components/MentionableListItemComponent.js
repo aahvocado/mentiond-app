@@ -30,6 +30,8 @@ export default class ListItemComponent extends PureComponent {
     return (
       <HorizontalSlideGestureComponent
         className='adjacent-mar-t-2'
+        min={-110}
+        max={110}
       >
         <li className={`flex-row aitems-center overflow-hidden fontfamily-primary color-grayest boxszing-content bg-white borradius-2 pad-2 ${modifierClassName}`}>
             <div className='flex-auto text-ellipsis fsize-4 adjacent-mar-l-3'>{label}</div>
