@@ -7,6 +7,7 @@ import Model from 'models/Model';
  */
 const mentionableItemSchema = {
   id: undefined,
+  index: -1,
   label: '',
   mentions: 0,
   isComplete: false,
@@ -73,6 +74,27 @@ function compareByComplete(itemOne, itemTwo) {
 
   return compareByMentions(itemOne, itemTwo);
 }
+// gets the sorted array
+function getSortedList(list) {
+  return list.sort((itemOne, itemTwo) => {
+    // both items are hidden and complete
+    if (itemOne.isComplete && itemOne.isHidden && itemOne.isComplete && itemOne.isHidden) {
+      return compareByMentions(itemOne, itemTwo);
+    }
+
+    // hidden
+    if (itemOne.isHidden || itemTwo.isHidden) {
+      return compareByHidden(itemOne, itemTwo);
+    }
+
+    // complete
+    if (itemOne.isComplete || itemTwo.isComplete) {
+      return compareByComplete(itemOne, itemTwo);
+    }
+
+    return compareByMentions(itemOne, itemTwo);
+  })
+}
 /**
  * manages list of Mentionables
  */
@@ -88,7 +110,7 @@ export default class MentionableListModel extends Model {
       ...newAttributes,
     });
 
-    this.sortList();
+    this.reorganizeList();
   }
   /**
    * finds an item by its `itemId`
@@ -109,6 +131,7 @@ export default class MentionableListModel extends Model {
     list.push({
       ...mentionableItemSchema,
       ...newData,
+      index: list.length,
     });
   }
   /**
@@ -124,6 +147,13 @@ export default class MentionableListModel extends Model {
     }
 
     list.splice(itemIdx, 1);
+  }
+  /**
+   * updates the `index` of each item in the list
+   */
+  updateIndices() {
+    const list = this.get('list');
+
   }
   /**
    * changes the state of completion of an item
@@ -164,29 +194,9 @@ export default class MentionableListModel extends Model {
   /**
    * sorts the the current list with highest number of mentions at the top
    */
-  sortList() {
+  reorganizeList() {
     const list = this.get('list');
-
-    // sort by mention count
-    const sortedList = list.slice().sort((itemOne, itemTwo) => {
-      // both items are hidden and complete
-      if (itemOne.isComplete && itemOne.isHidden && itemOne.isComplete && itemOne.isHidden) {
-        return compareByMentions(itemOne, itemTwo);
-      }
-
-      // hidden
-      if (itemOne.isHidden || itemTwo.isHidden) {
-        return compareByHidden(itemOne, itemTwo);
-      }
-
-      // complete
-      if (itemOne.isComplete || itemTwo.isComplete) {
-        return compareByComplete(itemOne, itemTwo);
-      }
-
-      return compareByMentions(itemOne, itemTwo);
-    });
-
+    const sortedList = getSortedList(list.slice());
     list.replace(sortedList);
   }
   /**

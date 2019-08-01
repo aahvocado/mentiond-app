@@ -1,9 +1,12 @@
-import React, { Component } from 'react';
+import React, { Component, useRef } from 'react';
+import { useSpring } from 'react-spring';
 import { observer } from 'mobx-react';
 
 import MentionableListItemComponent from 'components/MentionableListItemComponent';
 
 import combineClassNames from 'utilities/combineClassNames';
+
+const ITEM_HEIGHT = 100;
 
 export default observer(
 class MentionableListComponent extends Component {
@@ -35,7 +38,7 @@ class MentionableListComponent extends Component {
     const list = mentionableListModel.get('list');
 
     return (
-      <ul className={combineClassNames(baseClassName, className)}>
+      <div className={combineClassNames(baseClassName, className)}>
         { list.map((itemData, idx) => {
           return (
             <MentionableListItemComponent
@@ -48,7 +51,7 @@ class MentionableListComponent extends Component {
             />
           )
         })}
-      </ul>
+      </div>
     );
   }
   /**
@@ -66,7 +69,7 @@ class MentionableListComponent extends Component {
     foundItem.mentions += 1;
 
     // then resort
-    mentionableListModel.sortList();
+    mentionableListModel.reorganizeList();
   }
   /**
    * @param {String} itemId
@@ -77,7 +80,7 @@ class MentionableListComponent extends Component {
     mentionableListModel.toggleItemComplete(itemId, true);
 
     // then resort
-    mentionableListModel.sortList();
+    mentionableListModel.reorganizeList();
   }
   /**
    * @param {String} itemId
@@ -88,6 +91,6 @@ class MentionableListComponent extends Component {
     mentionableListModel.toggleItemHidden(itemId, true);
 
     // then resort
-    mentionableListModel.sortList();
+    mentionableListModel.reorganizeList();
   }
 });

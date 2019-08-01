@@ -1,4 +1,5 @@
 import React, { PureComponent } from 'react';
+import { animated } from 'react-spring';
 
 import {HorizontalSlideGestureComponent} from 'common-components/SlideGestureComponent';
 
@@ -51,16 +52,18 @@ export default class MentionableListItemComponent extends PureComponent {
       isHidden,
       mentions,
       label,
+      style,
       onClickPlus,
     } = this.props;
 
     const shouldShowMinVersion = isComplete || isHidden;
 
     return (
-      <li
+      <animated.div
         className='position-relative adjacent-mar-t-2'
         style={{
           height: shouldShowMinVersion ? MIN_HEIGHT : BASE_HEIGHT,
+          ...style,
         }}
       >
         <HorizontalSlideGestureComponent
@@ -92,7 +95,7 @@ export default class MentionableListItemComponent extends PureComponent {
           <div className='flex-auto talign-left'>Complete</div>
           <div className='flex-auto talign-right'>Hide</div>
         </div>
-      </li>
+      </animated.div>
     );
   }
   /**

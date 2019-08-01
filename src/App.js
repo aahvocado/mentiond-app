@@ -26,7 +26,7 @@ mentionableListModel.addItem({
   id: 'c',
   mentions: 1,
 })
-mentionableListModel.sortList();
+mentionableListModel.reorganizeList();
 
 export default observer(
 class App extends Component {
