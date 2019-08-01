@@ -19,14 +19,14 @@ export function HorizontalSlideGestureComponent(props) {
   const [{ xy }, set] = useSpring(() => ({ xy: [0, 0] }));
 
   // 1. we define the drag gesture logic using the useDrag hook
-  const bind = useDrag(({ cancel, down, delta }) => {
+  const bind = useDrag(({ cancel, down, delta, last }) => {
     // callback when hitting min
-    if (delta[0] <= min) {
+    if (last && delta[0] <= min) {
       onSlideMin({delta, cancel});
     };
 
     // callback when hitting max
-    if (delta[0] >= max) {
+    if (last && delta[0] >= max) {
       onSlideMax({delta, cancel});
     }
 
