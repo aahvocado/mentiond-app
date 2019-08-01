@@ -1,12 +1,13 @@
 import React from 'react';
 import { useSpring, animated } from 'react-spring';
-import { useGesture } from 'react-with-gesture';
+import { useDrag } from 'react-use-gesture';
 
 import clamp from 'utilities/clamp';
 
 export function HorizontalSlideGestureComponent(props) {
   const {
     className,
+    enabled = true,
     min = -1000,
     max = 1000,
     onSlideMin = () => {},
@@ -15,13 +16,10 @@ export function HorizontalSlideGestureComponent(props) {
     ...otherProps
   } = props;
 
-  const [{ xy }, set] = useSpring(() => ({ xy: [0, 0] }))
+  const [{ xy }, set] = useSpring(() => ({ xy: [0, 0] }));
 
-  // 1. we define the drag gesture logic using the useGesture hook
-  const bind = useGesture(({ down, delta, cancel }) => {
-    // keep x value within bounds
-    delta[0] = clamp(delta[0], min, max);
-
+  // 1. we define the drag gesture logic using the useDrag hook
+  const bind = useDrag(({ cancel, down, delta }) => {
     // callback when hitting min
     if (delta[0] <= min) {
       onSlideMin({delta, cancel});
@@ -32,9 +30,14 @@ export function HorizontalSlideGestureComponent(props) {
       onSlideMax({delta, cancel});
     }
 
+    // keep x value within bounds
+    delta[0] = clamp(delta[0], min, max);
+
     // done
     set({ xy: down ? delta : [0, 0] });
-  })
+  }, {
+    enabled: enabled,
+  });
 
   return (
     <animated.div
