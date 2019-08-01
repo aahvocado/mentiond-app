@@ -7,8 +7,10 @@ import clamp from 'utilities/clamp';
 export function HorizontalSlideGestureComponent(props) {
   const {
     className,
-    min = -5000,
-    max = 5000,
+    min = -1000,
+    max = 1000,
+    onSlideMin = () => {},
+    onSlideMax = () => {},
     style,
     ...otherProps
   } = props;
@@ -16,8 +18,21 @@ export function HorizontalSlideGestureComponent(props) {
   const [{ xy }, set] = useSpring(() => ({ xy: [0, 0] }))
 
   // 1. we define the drag gesture logic using the useGesture hook
-  const bind = useGesture(({ down, delta }) => {
+  const bind = useGesture(({ down, delta, cancel }) => {
+    // keep x value within bounds
     delta[0] = clamp(delta[0], min, max);
+
+    // callback when hitting min
+    if (delta[0] <= min) {
+      onSlideMin({delta, cancel});
+    };
+
+    // callback when hitting max
+    if (delta[0] >= max) {
+      onSlideMax({delta, cancel});
+    }
+
+    // done
     set({ xy: down ? delta : [0, 0] });
   })
 

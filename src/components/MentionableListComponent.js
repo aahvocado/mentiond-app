@@ -21,6 +21,8 @@ class MentionableListComponent extends Component {
     super(props);
 
     this.onClickPlusItem = this.onClickPlusItem.bind(this);
+    this.onCompleteItem = this.onCompleteItem.bind(this);
+    this.onHideItem = this.onHideItem.bind(this);
   }
   /** @override */
   render() {
@@ -40,6 +42,8 @@ class MentionableListComponent extends Component {
               key={`list-item-${itemData.id}-key`}
               index={idx}
               onClickPlus={() => this.onClickPlusItem(itemData.id)}
+              onComplete={this.onCompleteItem}
+              onHideItem={this.onHideItem}
               {...itemData}
             />
           )
@@ -48,7 +52,7 @@ class MentionableListComponent extends Component {
     );
   }
   /**
-   *
+   * @param {String} itemId
    */
   onClickPlusItem(itemId) {
     const {mentionableListModel} = this.props;
@@ -63,5 +67,19 @@ class MentionableListComponent extends Component {
 
     // then resort
     mentionableListModel.sortList();
+  }
+  /**
+   * @param {String} itemId
+   */
+  onCompleteItem(itemId) {
+    const {mentionableListModel} = this.props;
+    mentionableListModel.toggleItemComplete(itemId, true);
+  }
+  /**
+   * @param {String} itemId
+   */
+  onHideItem(itemId) {
+    const {mentionableListModel} = this.props;
+    mentionableListModel.toggleItemHidden(itemId, true);
   }
 });

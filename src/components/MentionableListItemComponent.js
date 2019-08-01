@@ -11,6 +11,8 @@ export default class ListItemComponent extends PureComponent {
     baseClassName: 'width-full boxsizing-border flex-row aitems-center overflow-hidden fontfamily-primary borradius-2 pad-2',
     /** @type {Number} */
     mentions: 0,
+    /** @type {String} */
+    id: undefined,
     /** @type {Number} */
     index: -1,
     /** @type {Boolean} */
@@ -19,7 +21,18 @@ export default class ListItemComponent extends PureComponent {
     label: '',
     /** @type {Function} */
     onClickPlus: () => {},
+    /** @type {Function} */
+    onComplete: () => {},
+    /** @type {Function} */
+    onHide: () => {},
   };
+  /** @override */
+  constructor(props) {
+    super(props);
+
+    this.onSlideComplete = this.onSlideComplete.bind(this);
+    this.onSlideHide = this.onSlideHide.bind(this);
+  }
   /** @override */
   render() {
     const {
@@ -43,6 +56,8 @@ export default class ListItemComponent extends PureComponent {
           className=''
           min={-110}
           max={110}
+          onSlideMin={this.onSlideComplete}
+          onSlideMax={this.onSlideHide}
         >
           <div
             className={combineClassNames(baseClassName, 'position-absolute color-grayest bg-white', modifierClassName)}
@@ -66,10 +81,32 @@ export default class ListItemComponent extends PureComponent {
             background: 'linear-gradient(90deg, rgba(0,255,1,1) 0%, rgba(204,255,0,1) 25%, rgba(255,139,0,1) 75%, rgba(255,0,0,1) 100%)',
           }}
         >
-          <div className='flex-auto talign-left'>Left</div>
-          <div className='flex-auto talign-right'>Right</div>
+          <div className='flex-auto talign-left'>Complete</div>
+          <div className='flex-auto talign-right'>Hide</div>
         </div>
       </li>
     );
+  }
+  /**
+   *
+   */
+  onSlideComplete() {
+    const {
+      id,
+      onComplete,
+    } = this.props;
+
+    onComplete(id);
+  }
+  /**
+   *
+   */
+  onSlideHide() {
+    const {
+      id,
+      onHide,
+    } = this.props;
+
+    onHide(id);
   }
 }
