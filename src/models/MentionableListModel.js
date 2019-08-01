@@ -10,8 +10,69 @@ const mentionableItemSchema = {
   label: '',
   mentions: 0,
   isComplete: false,
+  isFocused: false,
   isHidden: false,
 };
+/**
+ * the order is a little unintuitive since -1 means earlier in the array,
+ * so this rank should help keep it consistent
+ *
+ * @typedef {Number} Rank
+ */
+const RANK = {
+  HIGHER: -1,
+  LOWER: 1,
+  EQUAL: 0,
+}
+
+// simple comparison of which item has more mentions
+function compareByMentions(itemOne, itemTwo) {
+  if (itemOne.mentions > itemTwo.mentions) {
+    return RANK.HIGHER;
+  }
+
+  if (itemOne.mentions < itemTwo.mentions) {
+    return RANK.LOWER;
+  }
+
+  return RANK.EQUAL;
+}
+// hidden item will be the lowest in the list
+function compareByHidden(itemOne, itemTwo) {
+  if (itemOne.isHidden && itemTwo.isHidden) {
+    return compareByMentions(itemOne, itemTwo);
+  }
+
+  if (itemOne.isHidden && !itemTwo.isHidden) {
+    return RANK.LOWER;
+  }
+
+  if (!itemOne.isHidden && itemTwo.isHidden) {
+    return RANK.HIGHER;
+  }
+
+  return compareByMentions(itemOne, itemTwo);
+}
+// complete item will be lower than incomplete, but higher than hidden
+function compareByComplete(itemOne, itemTwo) {
+  if (itemOne.isComplete && !itemOne.isHidden && !itemOne.isComplete && itemOne.isHidden) {
+    return RANK.HIGHER;
+  }
+
+  if (itemOne.isComplete && itemTwo.isComplete) {
+    return compareByMentions(itemOne, itemTwo);
+  }
+
+  if (itemOne.isComplete && !itemTwo.isComplete) {
+    return RANK.LOWER;
+  }
+
+  if (!itemOne.isComplete && itemTwo.isComplete) {
+    return RANK.HIGHER;
+  }
+
+  return compareByMentions(itemOne, itemTwo);
+}
 /**
  * manages list of Mentionables
  */
@@ -108,7 +169,22 @@ export default class MentionableListModel extends Model {
 
     // sort by mention count
     const sortedList = list.slice().sort((itemOne, itemTwo) => {
-      return itemTwo.mentions - itemOne.mentions;
+      // both items are hidden and complete
+      if (itemOne.isComplete && itemOne.isHidden && itemOne.isComplete && itemOne.isHidden) {
+        return compareByMentions(itemOne, itemTwo);
+      }
+
+      // hidden
+      if (itemOne.isHidden || itemTwo.isHidden) {
+        return compareByHidden(itemOne, itemTwo);
+      }
+
+      // complete
+      if (itemOne.isComplete || itemTwo.isComplete) {
+        return compareByComplete(itemOne, itemTwo);
+      }
+
+      return compareByMentions(itemOne, itemTwo);
     });
 
     list.replace(sortedList);
