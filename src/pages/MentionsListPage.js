@@ -83,7 +83,7 @@ class MentionsListPage extends Component {
     } = this.state;
 
     // add to list
-    mentionableListModel.addNew({label: newValue});
+    mentionableListModel.addItem({label: newValue});
 
     // reset value
     this.setState({newValue: ''});
