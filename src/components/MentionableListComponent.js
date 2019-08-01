@@ -1,20 +1,20 @@
 import React, { Component } from 'react';
 import { observer } from 'mobx-react';
 
-import ListItemComponent from 'components/ListItemComponent';
+import MentionableListItemComponent from 'components/MentionableListItemComponent';
 
 import combineClassNames from 'utilities/combineClassNames';
 
 export default observer(
-class ListComponent extends Component {
+class MentionableListComponent extends Component {
   /** @override */
   static defaultProps = {
     /** @type {String} */
     baseClassName: '',
     /** @type {String} */
     className: '',
-    /** @type {OrganizedListModel} */
-    organizedListModel: [],
+    /** @type {MentionableListModel} */
+    mentionableListModel: [],
   };
   /** @override */
   constructor(props) {
@@ -27,16 +27,16 @@ class ListComponent extends Component {
     const {
       baseClassName,
       className,
-      organizedListModel,
+      mentionableListModel,
     } = this.props;
 
-    const list = organizedListModel.get('list');
+    const list = mentionableListModel.get('list');
 
     return (
       <ul className={combineClassNames(baseClassName, className)}>
         { list.map((itemData, idx) => {
           return (
-            <ListItemComponent
+            <MentionableListItemComponent
               key={`list-item-${itemData.id}-key`}
               index={idx}
               onClickPlus={() => this.onClickPlusItem(itemData.id)}
@@ -51,17 +51,17 @@ class ListComponent extends Component {
    *
    */
   onClickPlusItem(itemId) {
-    const {organizedListModel} = this.props;
-    const list = organizedListModel.get('list');
+    const {mentionableListModel} = this.props;
+    const list = mentionableListModel.get('list');
 
     // mark the item as the focused one
-    organizedListModel.focusItem(itemId);
+    mentionableListModel.focusItem(itemId);
 
     // update the mentions count
     const foundItem = list.find((item) => item.id === itemId);
     foundItem.mentions += 1;
 
     // then resort
-    organizedListModel.sortList();
+    mentionableListModel.sortList();
   }
 });

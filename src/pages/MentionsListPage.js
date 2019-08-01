@@ -3,14 +3,14 @@ import { observer } from 'mobx-react';
 
 import ButtonComponent from 'common-components/ButtonComponent';
 
-import ListComponent from 'components/ListComponent';
+import MentionableListComponent from 'components/MentionableListComponent';
 
 export default observer(
 class MentionsListPage extends Component {
   /** @override */
   static defaultProps = {
-    /** @type {OrganizedListModel} */
-    organizedListModel: [],
+    /** @type {MentionableListModel} */
+    mentionableListModel: [],
   };
   /** @override */
   constructor(props) {
@@ -27,7 +27,7 @@ class MentionsListPage extends Component {
   /** @override */
   render() {
     const {
-      organizedListModel,
+      mentionableListModel,
     } = this.props;
 
     const {
@@ -37,7 +37,7 @@ class MentionsListPage extends Component {
     return (
       <div className='flex-auto'>
         <h2 className='fsize-6 color-secondary-darker fontfamily-secondary flex-none talign-center adjacent-mar-t-3'>
-          {organizedListModel.get('category')}
+          {mentionableListModel.get('category')}
         </h2>
 
         <div className='flex-col bg-white borradius-2 adjacent-mar-t-3'>
@@ -57,9 +57,9 @@ class MentionsListPage extends Component {
           </ButtonComponent>
         </div>
 
-        <ListComponent
+        <MentionableListComponent
           className='adjacent-mar-t-3'
-          organizedListModel={organizedListModel}
+          mentionableListModel={mentionableListModel}
         />
       </div>
     );
@@ -75,7 +75,7 @@ class MentionsListPage extends Component {
    */
   onClickAdd() {
     const {
-      organizedListModel,
+      mentionableListModel,
     } = this.props;
 
     const {
@@ -83,7 +83,7 @@ class MentionsListPage extends Component {
     } = this.state;
 
     // add to list
-    organizedListModel.addNew({label: newValue});
+    mentionableListModel.addNew({label: newValue});
 
     // reset value
     this.setState({newValue: ''});

@@ -6,9 +6,9 @@ import MentionsListPage from 'pages/MentionsListPage';
 import FooterComponent from 'components/FooterComponent';
 import LogoComponent from 'components/LogoComponent';
 
-import OrganizedListModel from 'models/OrganizedListModel';
+import MentionableListModel from 'models/MentionableListModel';
 
-const organizedListModel = new OrganizedListModel({
+const mentionableListModel = new MentionableListModel({
   category: 'movies',
   list: [
     {
@@ -39,7 +39,7 @@ class App extends Component {
       >
         <LogoComponent />
 
-        <MentionsListPage organizedListModel={organizedListModel} />
+        <MentionsListPage mentionableListModel={mentionableListModel} />
 
         <FooterComponent />
       </div>

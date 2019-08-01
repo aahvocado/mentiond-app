@@ -6,7 +6,7 @@ const itemSchema = {
   mentions: 0,
 };
 
-export default class OrganizedListModel extends Model {
+export default class MentionableListModel extends Model {
   /** @override */
   constructor(newAttributes = {}) {
     super({
