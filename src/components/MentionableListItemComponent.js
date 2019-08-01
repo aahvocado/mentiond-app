@@ -2,9 +2,13 @@ import React, { PureComponent } from 'react';
 
 import {HorizontalSlideGestureComponent} from 'common-components/SlideGestureComponent';
 
+import combineClassNames from 'utilities/combineClassNames';
+
 export default class ListItemComponent extends PureComponent {
   /** @override */
   static defaultProps = {
+    /** @type {String} */
+    baseClassName: 'width-full boxsizing-border flex-row aitems-center overflow-hidden fontfamily-primary borradius-2 pad-2',
     /** @type {Number} */
     mentions: 0,
     /** @type {Number} */
@@ -19,6 +23,7 @@ export default class ListItemComponent extends PureComponent {
   /** @override */
   render() {
     const {
+      baseClassName,
       isFocused,
       mentions,
       label,
@@ -28,12 +33,23 @@ export default class ListItemComponent extends PureComponent {
     const modifierClassName = isFocused ? 'bor-2-tertiary' : 'bor-2-transparent';
 
     return (
-      <HorizontalSlideGestureComponent
-        className='adjacent-mar-t-2'
-        min={-110}
-        max={110}
+      <li
+        className='position-relative adjacent-mar-t-2'
+        style={{
+          height: 60,
+        }}
       >
-        <li className={`flex-row aitems-center overflow-hidden fontfamily-primary color-grayest boxszing-content bg-white borradius-2 pad-2 ${modifierClassName}`}>
+        <HorizontalSlideGestureComponent
+          className=''
+          min={-110}
+          max={110}
+        >
+          <div
+            className={combineClassNames(baseClassName, 'position-absolute color-grayest bg-white', modifierClassName)}
+            style={{
+              height: 60,
+            }}
+          >
             <div className='flex-auto text-ellipsis fsize-4 adjacent-mar-l-3'>{label}</div>
             <div className='flex-none fsize-3 adjacent-mar-l-3'>{`${mentions} mentions`}</div>
             <button
@@ -42,8 +58,18 @@ export default class ListItemComponent extends PureComponent {
             >
               +
             </button>
-        </li>
-      </HorizontalSlideGestureComponent>
+          </div>
+        </HorizontalSlideGestureComponent>
+
+        <div className={combineClassNames(baseClassName, 'height-full color-white')}
+          style={{
+            background: 'linear-gradient(90deg, rgba(0,255,1,1) 0%, rgba(204,255,0,1) 25%, rgba(255,139,0,1) 75%, rgba(255,0,0,1) 100%)',
+          }}
+        >
+          <div className='flex-auto talign-left'>Left</div>
+          <div className='flex-auto talign-right'>Right</div>
+        </div>
+      </li>
     );
   }
 }

@@ -9,6 +9,7 @@ export function HorizontalSlideGestureComponent(props) {
     className,
     min = -5000,
     max = 5000,
+    style,
     ...otherProps
   } = props;
 
@@ -26,6 +27,7 @@ export function HorizontalSlideGestureComponent(props) {
       // 2. we bind the result of the hook to our component
       {...bind()}
       style={{
+        ...style,
         userSelect: 'none',
         transform: xy.interpolate((x, y) => `translate3D(${x}px, 0, 0)`),
       }}
