@@ -69,7 +69,7 @@ class MentionableListComponent extends Component {
     foundItem.mentions += 1;
 
     // then resort
-    mentionableListModel.reorganizeList();
+    mentionableListModel.updateIndices();
   }
   /**
    * @param {String} itemId
@@ -80,7 +80,7 @@ class MentionableListComponent extends Component {
     mentionableListModel.toggleItemComplete(itemId, true);
 
     // then resort
-    mentionableListModel.reorganizeList();
+    mentionableListModel.updateIndices();
   }
   /**
    * @param {String} itemId
@@ -91,6 +91,6 @@ class MentionableListComponent extends Component {
     mentionableListModel.toggleItemHidden(itemId, true);
 
     // then resort
-    mentionableListModel.reorganizeList();
+    mentionableListModel.updateIndices();
   }
 });

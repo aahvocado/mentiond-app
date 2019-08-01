@@ -1,3 +1,4 @@
+import uuid from 'uuid/v4';
 import Model from 'models/Model';
 
 /**
@@ -110,7 +111,7 @@ export default class MentionableListModel extends Model {
       ...newAttributes,
     });
 
-    this.reorganizeList();
+    this.updateIndices();
   }
   /**
    * finds an item by its `itemId`
@@ -132,6 +133,7 @@ export default class MentionableListModel extends Model {
       ...mentionableItemSchema,
       ...newData,
       index: list.length,
+      id: uuid(),
     });
   }
   /**
@@ -153,7 +155,13 @@ export default class MentionableListModel extends Model {
    */
   updateIndices() {
     const list = this.get('list');
+    const sortedList = getSortedList(list.slice());
 
+    // use current list and update the index of our the items to matching sorted order
+    list.forEach((item) => {
+      const sortedIdx = sortedList.findIndex((sortedItem) => sortedItem.id === item.id);
+      item.index = sortedIdx;
+    });
   }
   /**
    * changes the state of completion of an item
@@ -197,6 +205,7 @@ export default class MentionableListModel extends Model {
   reorganizeList() {
     const list = this.get('list');
     const sortedList = getSortedList(list.slice());
+    sortedList.forEach((item, idx) => item.index = idx);
     list.replace(sortedList);
   }
   /**

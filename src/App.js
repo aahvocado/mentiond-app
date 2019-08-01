@@ -13,20 +13,17 @@ const mentionableListModel = new MentionableListModel({
 });
 mentionableListModel.addItem({
   label: 'In the Mood for Love',
-  id: 'a',
   mentions: 2,
 })
 mentionableListModel.addItem({
   label: 'YiYi',
-  id: 'b',
   mentions: 3,
 })
 mentionableListModel.addItem({
   label: 'Once Upon a Time in Hollywood',
-  id: 'c',
   mentions: 1,
 })
-mentionableListModel.reorganizeList();
+mentionableListModel.updateIndices();
 
 export default observer(
 class App extends Component {
