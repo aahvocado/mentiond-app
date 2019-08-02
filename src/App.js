@@ -6,24 +6,7 @@ import MentionsListPage from 'pages/MentionsListPage';
 import FooterComponent from 'components/FooterComponent';
 import LogoComponent from 'components/LogoComponent';
 
-import MentionableListModel from 'models/MentionableListModel';
-
-const mentionableListModel = new MentionableListModel({
-  category: 'movies',
-});
-mentionableListModel.addItem({
-  label: 'In the Mood for Love',
-  mentions: 2,
-})
-mentionableListModel.addItem({
-  label: 'YiYi',
-  mentions: 3,
-})
-mentionableListModel.addItem({
-  label: 'Once Upon a Time in Hollywood',
-  mentions: 1,
-})
-mentionableListModel.updateIndices();
+import appState from 'state/appState';
 
 export default observer(
 class App extends Component {
@@ -37,7 +20,9 @@ class App extends Component {
       >
         <LogoComponent />
 
-        <MentionsListPage mentionableListModel={mentionableListModel} />
+        <MentionsListPage
+          mentionableListModel={appState.get('currentListModel')}
+        />
 
         <FooterComponent />
       </div>

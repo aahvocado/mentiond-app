@@ -273,6 +273,7 @@ module.exports = function(webpackEnv) {
         components: path.resolve(paths.appSrc, 'components'),
         models: path.resolve(paths.appSrc, 'models'),
         pages: path.resolve(paths.appSrc, 'pages'),
+        state: path.resolve(paths.appSrc, 'state'),
         styles: path.resolve(paths.appSrc, 'styles'),
         utilities: path.resolve(paths.appSrc, 'utilities'),
 
