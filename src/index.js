@@ -3,6 +3,8 @@ import ReactDOM from 'react-dom';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
 
+import 'data/storageController';
+
 import './styles/css-reset.css';
 import './build/app.css';
 
