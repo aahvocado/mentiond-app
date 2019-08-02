@@ -5,9 +5,6 @@ import {HorizontalSlideGestureComponent} from 'common-components/SlideGestureCom
 
 import combineClassNames from 'utilities/combineClassNames';
 
-const BASE_HEIGHT = 60;
-const MIN_HEIGHT = 45;
-
 /**
  * Basic Mentionable List Item
  */
@@ -47,8 +44,6 @@ export default class MentionableListItemComponent extends PureComponent {
   /** @override */
   render() {
     const {
-      index,
-      initialIndex,
       itemClassName,
       isComplete,
       isFocused,
@@ -65,7 +60,6 @@ export default class MentionableListItemComponent extends PureComponent {
       <animated.div
         className='position-absolute'
         style={{
-          height: BASE_HEIGHT,
           left: 0,
           right: 0,
           top: 0,
@@ -73,9 +67,16 @@ export default class MentionableListItemComponent extends PureComponent {
           ...style,
         }}
       >
-        <div className='height-full position-relative'>
+        <div className='position-relative width-full height-full'>
           <HorizontalSlideGestureComponent
-            className=''
+            className='position-absolute'
+            style={{
+              left: 0,
+              right: 0,
+              top: 0,
+              bottom: 0,
+              zIndex: 2,
+            }}
             enabled={!isHidden && !isComplete}
             min={-110}
             max={110}
@@ -95,8 +96,13 @@ export default class MentionableListItemComponent extends PureComponent {
             />
           </HorizontalSlideGestureComponent>
 
-          <div className={combineClassNames(itemClassName, 'height-full text-stroke color-white')}
+          <div className={combineClassNames(itemClassName, 'position-absolute text-stroke color-white')}
             style={{
+              left: 0,
+              right: 0,
+              top: 0,
+              bottom: 0,
+              zIndex: 1,
               background: 'linear-gradient(90deg, rgba(0,255,1,1) 0%, rgba(204,255,0,1) 25%, rgba(255,139,0,1) 75%, rgba(255,0,0,1) 100%)',
             }}
           >
@@ -185,10 +191,7 @@ class MentionableListItemBody extends PureComponent {
 
     return (
       <div
-        className={combineClassNames(className, 'position-absolute color-grayest', borderClassName, hiddenClassName)}
-        style={{
-          height: BASE_HEIGHT,
-        }}
+        className={combineClassNames(className, 'height-full color-grayest', borderClassName, hiddenClassName)}
       >
         <div className='flex-auto text-ellipsis fsize-4 adjacent-mar-l-3'>{label}</div>
         <div className='flex-none fsize-3 adjacent-mar-l-3'>{`${mentions} mentions`}</div>

@@ -1,12 +1,14 @@
-import React, { Component, useRef } from 'react';
-import { useSprings, useTransition, animated } from 'react-spring';
+import React, { Component } from 'react';
+import { useTransition } from 'react-spring';
 import { observer } from 'mobx-react';
 
 import MentionableListItemComponent from 'components/MentionableListItemComponent';
 
 import combineClassNames from 'utilities/combineClassNames';
 
+const BASE_HEIGHT = 60;
 const ITEM_Y = 70;
+
 function AnimatedList(props) {
   const {
     list,
@@ -24,20 +26,23 @@ function AnimatedList(props) {
   );
 
   return (
-    <div className=''>
+    <div className='overflow-hidden'>
       { animatedItems.map(({item, props}) => {
         return (
-          <animated.div
-            key={`animated-item-${item.id}-key`}
+          <div
+            key={`list-item-${item.id}-key`}
             style={{
-              transform: props.y.interpolate(y => `translateY(${y}px)`),
+              height: ITEM_Y,
             }}
           >
             <MentionableListItemComponent
-              key={`list-item-${item.id}-key`}
+              style={{
+                height: BASE_HEIGHT,
+                transform: props.y.interpolate(y => `translateY(${y}px)`),
+              }}
               {...item}
             />
-          </animated.div>
+          </div>
         )
       })}
     </div>
