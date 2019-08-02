@@ -1,12 +1,48 @@
 import React, { Component, useRef } from 'react';
-import { useSpring } from 'react-spring';
+import { useSprings, useTransition, animated } from 'react-spring';
 import { observer } from 'mobx-react';
 
 import MentionableListItemComponent from 'components/MentionableListItemComponent';
 
 import combineClassNames from 'utilities/combineClassNames';
 
-const ITEM_HEIGHT = 100;
+const ITEM_Y = 80;
+function AnimatedList(props) {
+  const {
+    list,
+  } = props;
+
+  const animatedItems = useTransition(
+    list,
+    item => item.id,
+    {
+      from: (item) => ({ y: item.index * ITEM_Y }),
+      leave: { y: 0 },
+      enter: (item) => ({y: item.index * ITEM_Y}),
+      update: (item) => ({y: item.index * ITEM_Y}),
+    }
+  );
+
+  return (
+    <div className=''>
+      { animatedItems.map(({item, props}) => {
+        return (
+          <animated.div
+            key={`animated-item-${item.id}-key`}
+            style={{
+              transform: props.y.interpolate(y => `translateY(${y}px)`),
+            }}
+          >
+            <MentionableListItemComponent
+              key={`list-item-${item.id}-key`}
+              {...item}
+            />
+          </animated.div>
+        )
+      })}
+    </div>
+  );
+}
 
 export default observer(
 class MentionableListComponent extends Component {
@@ -36,21 +72,18 @@ class MentionableListComponent extends Component {
     } = this.props;
 
     const list = mentionableListModel.get('list');
+    const boundList = list.map((item) => ({
+      ...item,
+      onClickPlus: () => this.onClickPlusItem(item.id),
+      onComplete: this.onCompleteItem,
+      onHide: this.onHideItem,
+    }));
 
     return (
       <div className={combineClassNames(baseClassName, className)}>
-        { list.map((itemData, idx) => {
-          return (
-            <MentionableListItemComponent
-              key={`list-item-${itemData.id}-key`}
-              index={idx}
-              onClickPlus={() => this.onClickPlusItem(itemData.id)}
-              onComplete={this.onCompleteItem}
-              onHide={this.onHideItem}
-              {...itemData}
-            />
-          )
-        })}
+        <AnimatedList
+          list={boundList}
+        />
       </div>
     );
   }
