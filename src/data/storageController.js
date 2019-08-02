@@ -52,7 +52,7 @@ class StorageController {
    */
   getItem(keyName) {
     try {
-      this.localStorage.getItem(keyName);
+      return this.localStorage.getItem(keyName);
     } catch (e) {
       console.error(e);
     }

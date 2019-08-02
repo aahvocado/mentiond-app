@@ -1,3 +1,5 @@
+import storageController from 'data/storageController';
+
 import MentionableListModel from 'models/MentionableListModel';
 import Model from 'models/Model';
 
@@ -34,13 +36,18 @@ mentionableListModel.addItem({
 })
 mentionableListModel.updateIndices();
 
+storageController.clear();
+storageController.setItem('currentCategory', 'movies');
+
 /**
- *
+ * holds the highest level information of the state
  */
 export class AppState extends Model {
   /** @override */
   constructor(newAttributes = {}) {
     super({
+      /** @type {String} */
+      currentCategory: storageController.getItem('currentCategory'),
       /** @type {MentionableListModel} */
       currentListModel: mentionableListModel,
       /** @type {Object} */
@@ -49,7 +56,9 @@ export class AppState extends Model {
   }
 };
 /**
+ * instantiate and export state singleton
  *
+ * @type {AppState}
  */
 const appState = new AppState();
 export default appState;
