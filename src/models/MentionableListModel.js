@@ -1,6 +1,8 @@
 import uuid from 'uuid/v4';
 import Model from 'models/Model';
 
+import * as mentionableUtils from 'utilities/mentionableUtils';
+
 /**
  * data structure of a mentionable item
  *
@@ -16,87 +18,6 @@ const mentionableItemSchema = {
   isFocused: false,
   isHidden: false,
 };
-/**
- * the order is a little unintuitive since -1 means earlier in the array,
- * so this rank should help keep it consistent
- *
- * @typedef {Number} Rank
- */
-const RANK = {
-  HIGHER: -1,
-  LOWER: 1,
-  EQUAL: 0,
-}
-
-// simple comparison of which item has more mentions
-function compareByMentions(itemOne, itemTwo) {
-  if (itemOne.mentions > itemTwo.mentions) {
-    return RANK.HIGHER;
-  }
-
-  if (itemOne.mentions < itemTwo.mentions) {
-    return RANK.LOWER;
-  }
-
-  return RANK.EQUAL;
-}
-// hidden item will be the lowest in the list
-function compareByHidden(itemOne, itemTwo) {
-  if (itemOne.isHidden && itemTwo.isHidden) {
-    return compareByMentions(itemOne, itemTwo);
-  }
-
-  if (itemOne.isHidden && !itemTwo.isHidden) {
-    return RANK.LOWER;
-  }
-
-  if (!itemOne.isHidden && itemTwo.isHidden) {
-    return RANK.HIGHER;
-  }
-
-  return compareByMentions(itemOne, itemTwo);
-}
-// complete item will be lower than incomplete, but higher than hidden
-function compareByComplete(itemOne, itemTwo) {
-  if (itemOne.isComplete && !itemOne.isHidden && !itemOne.isComplete && itemOne.isHidden) {
-    return RANK.HIGHER;
-  }
-
-  if (itemOne.isComplete && itemTwo.isComplete) {
-    return compareByMentions(itemOne, itemTwo);
-  }
-
-  if (itemOne.isComplete && !itemTwo.isComplete) {
-    return RANK.LOWER;
-  }
-
-  if (!itemOne.isComplete && itemTwo.isComplete) {
-    return RANK.HIGHER;
-  }
-
-  return compareByMentions(itemOne, itemTwo);
-}
-// gets the sorted array
-function getSortedList(list) {
-  return list.sort((itemOne, itemTwo) => {
-    // both items are hidden and complete
-    if (itemOne.isComplete && itemOne.isHidden && itemOne.isComplete && itemOne.isHidden) {
-      return compareByMentions(itemOne, itemTwo);
-    }
-
-    // hidden
-    if (itemOne.isHidden || itemTwo.isHidden) {
-      return compareByHidden(itemOne, itemTwo);
-    }
-
-    // complete
-    if (itemOne.isComplete || itemTwo.isComplete) {
-      return compareByComplete(itemOne, itemTwo);
-    }
-
-    return compareByMentions(itemOne, itemTwo);
-  })
-}
 /**
  * manages list of Mentionables
  */
@@ -159,7 +80,7 @@ export default class MentionableListModel extends Model {
    */
   updateIndices() {
     const list = this.get('list');
-    const sortedList = getSortedList(list.slice());
+    const sortedList = mentionableUtils.getSortedList(list.slice());
 
     // use current list and update the index of our the items to matching sorted order
     list.forEach((item) => {
@@ -208,7 +129,7 @@ export default class MentionableListModel extends Model {
    */
   reorganizeList() {
     const list = this.get('list');
-    const sortedList = getSortedList(list.slice());
+    const sortedList = mentionableUtils.getSortedList(list.slice());
     sortedList.forEach((item, idx) => item.index = idx);
     list.replace(sortedList);
   }
