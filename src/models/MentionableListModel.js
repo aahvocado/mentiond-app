@@ -106,6 +106,8 @@ export default class MentionableListModel extends Model {
     super({
       /** @type {String} */
       category: '',
+      /** @type {String} */
+      id: uuid(),
       /** @type {Array} */
       list: [],
       /** @type {Object} */

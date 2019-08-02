@@ -1,0 +1,36 @@
+[
+  {
+    "category": "movies",
+    "id": "asdf",
+    "list": [
+      {
+        "label": "In the Mood for Love",
+        "mentions": 2
+      },
+      {
+        "label": "The Farewell",
+        "mentions": 5
+      },
+      {
+        "label": "Once Upon a Time in Hollywood",
+        "mentions": 3
+      },
+      {
+        "label": "YiYi",
+        "mentions": 1
+      },
+      {
+        "label": "Toy Story 4",
+        "mentions": 0
+      },
+      {
+        "label": "The Lion King",
+        "mentions": 0
+      },
+      {
+        "label": "Stuber",
+        "mentions": 0
+      }
+    ]
+  }
+]
