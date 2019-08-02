@@ -6,7 +6,7 @@ import MentionableListItemComponent from 'components/MentionableListItemComponen
 
 import combineClassNames from 'utilities/combineClassNames';
 
-const ITEM_Y = 80;
+const ITEM_Y = 70;
 function AnimatedList(props) {
   const {
     list,
@@ -18,8 +18,8 @@ function AnimatedList(props) {
     {
       from: (item) => ({ y: item.index * ITEM_Y }),
       leave: { y: 0 },
-      enter: (item) => ({y: item.index * ITEM_Y}),
-      update: (item) => ({y: item.index * ITEM_Y}),
+      enter: (item) => ({ y: item.index * ITEM_Y }),
+      update: (item) => ({ y: item.index * ITEM_Y }),
     }
   );
 

@@ -73,7 +73,7 @@ export default class MentionableListItemComponent extends PureComponent {
           ...style,
         }}
       >
-        <div className='position-relative'>
+        <div className='height-full position-relative'>
           <HorizontalSlideGestureComponent
             className=''
             enabled={!isHidden && !isComplete}
@@ -95,7 +95,7 @@ export default class MentionableListItemComponent extends PureComponent {
             />
           </HorizontalSlideGestureComponent>
 
-          <div className={combineClassNames(itemClassName, 'height-full color-white')}
+          <div className={combineClassNames(itemClassName, 'height-full text-stroke color-white')}
             style={{
               background: 'linear-gradient(90deg, rgba(0,255,1,1) 0%, rgba(204,255,0,1) 25%, rgba(255,139,0,1) 75%, rgba(255,0,0,1) 100%)',
             }}
