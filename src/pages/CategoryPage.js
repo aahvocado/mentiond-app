@@ -10,7 +10,7 @@ class CategoryPage extends Component {
   /** @override */
   static defaultProps = {
     /** @type {CategoryModel} */
-    mentionableListModel: undefined,
+    categoryModel: undefined,
   };
   /** @override */
   constructor(props) {
@@ -27,21 +27,21 @@ class CategoryPage extends Component {
   /** @override */
   render() {
     const {
-      mentionableListModel,
+      categoryModel,
     } = this.props;
 
     const {
       newValue,
     } = this.state;
 
-    if (mentionableListModel === undefined) {
+    if (categoryModel === undefined) {
       return <div>Loading</div>
     }
 
     return (
       <div className='flex-auto'>
         <h2 className='fsize-6 color-secondary-darker fontfamily-secondary flex-none talign-center adjacent-mar-t-3'>
-          {mentionableListModel.get('category')}
+          {categoryModel.get('category')}
         </h2>
 
         <div className='flex-col bg-white borradius-2 adjacent-mar-t-3'>
@@ -63,7 +63,7 @@ class CategoryPage extends Component {
 
         <CategoryListComponent
           className='adjacent-mar-t-3'
-          mentionableListModel={mentionableListModel}
+          categoryModel={categoryModel}
         />
       </div>
     );
@@ -79,7 +79,7 @@ class CategoryPage extends Component {
    */
   onClickAdd() {
     const {
-      mentionableListModel,
+      categoryModel,
     } = this.props;
 
     const {
@@ -87,7 +87,7 @@ class CategoryPage extends Component {
     } = this.state;
 
     // add to list
-    mentionableListModel.addItem({label: newValue});
+    categoryModel.addItem({label: newValue});
 
     // reset value
     this.setState({newValue: ''});

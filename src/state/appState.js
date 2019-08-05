@@ -19,7 +19,7 @@ export class AppState extends Model {
       /** @type {Boolean} */
       isOpenNavMenu: false,
       /** @type {CategoryModel} */
-      currentListModel: undefined,
+      currentCategoryModel: undefined,
 
       // -- cache attributes
       /** @type {Array<CategoryModel>} */
@@ -74,7 +74,7 @@ export class AppState extends Model {
     }
 
     this.set({
-      currentListModel: categoryModel,
+      currentCategoryModel: categoryModel,
     });
   }
 };

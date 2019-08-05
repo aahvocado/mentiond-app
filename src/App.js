@@ -25,7 +25,7 @@ class App extends Component {
         <LogoComponent />
 
         <CategoryPage
-          mentionableListModel={appState.get('currentListModel')}
+          categoryModel={appState.get('currentCategoryModel')}
         />
 
         <FooterComponent />

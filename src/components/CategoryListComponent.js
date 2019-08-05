@@ -58,7 +58,7 @@ class CategoryListComponent extends Component {
     /** @type {String} */
     className: '',
     /** @type {CategoryModel} */
-    mentionableListModel: [],
+    categoryModel: [],
   };
   /** @override */
   constructor(props) {
@@ -73,10 +73,10 @@ class CategoryListComponent extends Component {
     const {
       baseClassName,
       className,
-      mentionableListModel,
+      categoryModel,
     } = this.props;
 
-    const list = mentionableListModel.get('list');
+    const list = categoryModel.get('list');
     const boundList = list.map((item) => ({
       ...item,
       onClickPlus: () => this.onClickPlusItem(item.id),
@@ -96,39 +96,39 @@ class CategoryListComponent extends Component {
    * @param {String} itemId
    */
   onClickPlusItem(itemId) {
-    const {mentionableListModel} = this.props;
-    const list = mentionableListModel.get('list');
+    const {categoryModel} = this.props;
+    const list = categoryModel.get('list');
 
     // mark the item as the focused one
-    mentionableListModel.focusItem(itemId);
+    categoryModel.focusItem(itemId);
 
     // update the mentions count
     const foundItem = list.find((item) => item.id === itemId);
     foundItem.mentions += 1;
 
     // then resort
-    mentionableListModel.updateIndices();
+    categoryModel.updateIndices();
   }
   /**
    * @param {String} itemId
    * @param {GestureEvent} gestureEvent
    */
   onCompleteItem(itemId, gestureEvent) {
-    const {mentionableListModel} = this.props;
-    mentionableListModel.toggleItemComplete(itemId, true);
+    const {categoryModel} = this.props;
+    categoryModel.toggleItemComplete(itemId, true);
 
     // then resort
-    mentionableListModel.updateIndices();
+    categoryModel.updateIndices();
   }
   /**
    * @param {String} itemId
    * @param {GestureEvent} gestureEvent
    */
   onHideItem(itemId, gestureEvent) {
-    const {mentionableListModel} = this.props;
-    mentionableListModel.toggleItemHidden(itemId, true);
+    const {categoryModel} = this.props;
+    categoryModel.toggleItemHidden(itemId, true);
 
     // then resort
-    mentionableListModel.updateIndices();
+    categoryModel.updateIndices();
   }
 });
