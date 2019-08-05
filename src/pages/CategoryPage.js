@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { observer } from 'mobx-react';
 
-import ButtonComponent from 'common-components/ButtonComponent';
+import ButtonComponent, {BUTTON_THEME} from 'common-components/ButtonComponent';
 
 import CategoryListComponent from 'components/CategoryListComponent';
 
@@ -40,26 +40,39 @@ class CategoryPage extends Component {
 
     return (
       <div className='flex-auto'>
-        <h2 className='fsize-6 color-secondary-darker fontfamily-secondary flex-none talign-center adjacent-mar-t-3'>
-          {categoryModel.get('category')}
-        </h2>
+        {/* header bar */}
+        <div className='flex-row-center width-full adjacent-mar-t-3'>
+          <ButtonComponent
+            className='fsize-6 pad-h-2 pad-v-1'
+            theme={BUTTON_THEME.TRANSPARENT_SECONDARY}
+          >
+            =
+          </ButtonComponent>
 
-        <div className='flex-col bg-white borradius-2 adjacent-mar-t-3'>
+          <h2 className='fsize-6 color-secondary-darker fontfamily-secondary flex-auto talign-center'>
+            {categoryModel.get('category')}
+          </h2>
+        </div>
+
+        <form
+          className='flex-row adjacent-mar-t-3'
+          onSubmit={this.onClickAdd}
+        >
           <input
-            className='fsize-4 width-full boxsizing-border talign-center pad-2 flex-none'
-            placeholder='new mentionable name'
+            className='fsize-3 bg-white borradius-l-2 flex-auto boxsizing-border talign-center pad-1'
+            placeholder='Add a Mentionable...'
             value={newValue}
             onChange={this.onChangeNewValue}
           />
 
           <ButtonComponent
-            className='fsize-3 width-full talign-center'
+            className='fsize-3 flex-none borradius-r-2 talign-center'
             disabled={newValue.length <= 0}
             onClick={this.onClickAdd}
           >
-            Add New Mentionable
+            Add
           </ButtonComponent>
-        </div>
+        </form>
 
         <CategoryListComponent
           className='adjacent-mar-t-3'
