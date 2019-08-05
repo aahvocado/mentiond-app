@@ -4,9 +4,19 @@ import combineClassNames from 'utilities/combineClassNames';
 
 export const BUTTON_THEME = {
   BASE: {
-    base: 'boxszing-content bg-white borradius-2 pad-2',
-    enabled: 'color-grayest hover:color-fourth focus:color-fourth',
+    base: 'borwidth-1 talign-center bg-white pad-2',
+    enabled: 'color-grayest hover:color-grayer focus:color-grayer',
     disabled: 'color-grayer bg-light-gray',
+  },
+  TRANSPARENT_SECONDARY: {
+    base: 'bg-transparent bor-1-secondary-darker',
+    enabled: 'color-secondary-darker hover:bor-1-secondary focus:bor-1-secondary',
+    disabled: 'color-secondary',
+  },
+  TRANSPARENT_WHITE: {
+    base: 'bg-transparent bor-3-white',
+    enabled: 'color-white hover:color-grayer focus:color-grayer',
+    disabled: 'color-grayest bor-3-grayest',
   },
 }
 
@@ -15,8 +25,6 @@ export const BUTTON_THEME = {
  */
 export default class ButtonComponent extends PureComponent {
   static defaultProps = {
-    /** @type {String} */
-    baseClassName: 'borwidth-1 talign-center pad-2',
     /** @type {String} */
     className: '',
     /** @type {Boolean} */
@@ -30,7 +38,6 @@ export default class ButtonComponent extends PureComponent {
   /** @override */
   render() {
     const {
-      baseClassName,
       className,
       disabled,
       theme,
@@ -42,7 +49,7 @@ export default class ButtonComponent extends PureComponent {
 
     return (
       <button
-        className={combineClassNames(baseClassName, className, cursorClassName, theme.base, themeClassName)}
+        className={combineClassNames(className, cursorClassName, theme.base, themeClassName)}
         disabled={disabled}
         {...otherProps}
       />
