@@ -17,7 +17,7 @@ export class AppState extends Model {
       /** @type {Boolean} */
       isLoading: true,
       /** @type {Boolean} */
-      isOpenNavMenu: true,
+      isOpenNavMenu: false,
       /** @type {CategoryModel} */
       currentListModel: undefined,
 

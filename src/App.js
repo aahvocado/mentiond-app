@@ -14,13 +14,12 @@ class App extends Component {
   render() {
     return (
       <div
-        className="App fontfamily-primary height-full boxsizing-border flex-col mar-h-auto pad-3"
+        className="App position-relative fontfamily-primary height-full boxsizing-border flex-col mar-h-auto pad-3"
         style={{
           maxWidth: 640,
         }}
       >
         <NavigationMenu
-          isActive={appState.get('isOpenNavMenu')}
         />
 
         <LogoComponent />
