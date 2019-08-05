@@ -10,6 +10,8 @@ export default function SlideGestureComponent(props) {
     className,
     /** @type {Boolean} */
     enabled = true,
+    /** @type {Array} default [x, y] translation */
+    base = [0, 0],
     /** @type {Array} minimum distance allowed to slide [left, up] */
     min = [-1000, -1000],
     /** @type {Array} maximum distance allowed to slide [right, down] */
@@ -69,7 +71,7 @@ export default function SlideGestureComponent(props) {
       style={{
         ...style,
         userSelect: 'none',
-        transform: xy.interpolate((x, y) => `translate3D(${x}px, ${y}px, 0)`),
+        transform: xy.interpolate((x, y) => `translate3D(${base[0] + x}px, ${base[1] + y}px, 0)`),
       }}
       {...otherProps}
     />

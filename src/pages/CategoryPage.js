@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { observer } from 'mobx-react';
 
 import ButtonComponent from 'common-components/ButtonComponent';
+import SlideGestureComponent from 'common-components/SlideGestureComponent';
 
 import CategoryListComponent from 'components/CategoryListComponent';
 
@@ -73,6 +74,27 @@ class CategoryPage extends Component {
           className='adjacent-mar-t-3'
           categoryModel={categoryModel}
         />
+
+        <SlideGestureComponent
+          className='bg-white position-fixed borradius-3 pad-2'
+          style={{
+            boxShadow: '0 0 5px grey',
+            right: 50,
+            bottom: 0,
+            zIndex: 2,
+            width: 120,
+            height: 250,
+          }}
+          base={[0, 200]}
+          min={[0, -150]}
+          max={[0, 0]}
+        >
+          <div
+            className='talign-center'
+          >
+            New Category
+          </div>
+        </SlideGestureComponent>
       </div>
     );
   }
