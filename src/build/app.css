@@ -6593,7 +6593,9 @@
   z-index: 0;
 }
 body {
-  background: lightblue;
+  background-image: url("../images/tic-tac-toe.png");
+  background-repeat: repeat;
+  background-blend-mode: multiply;
 }
 html {
   min-height: 100%;

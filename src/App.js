@@ -5,7 +5,7 @@ import CategoryPage from 'pages/CategoryPage';
 
 import FooterComponent from 'components/FooterComponent';
 import LogoComponent from 'components/LogoComponent';
-import NavigationMenu from 'components/NavigationMenu';
+// import NavigationMenu from 'components/NavigationMenu';
 
 import appState from 'state/appState';
 
@@ -14,14 +14,12 @@ class App extends Component {
   render() {
     return (
       <div
-        className="App position-relative fontfamily-primary height-full boxsizing-border flex-col mar-h-auto pad-3"
+        className="App position-relative bg-secondary fontfamily-primary height-full boxsizing-border flex-col mar-h-auto pad-3"
         style={{
           maxWidth: 640,
+          boxShadow: '0 0 10px 2px #b3c1c5',
         }}
       >
-        <NavigationMenu
-        />
-
         <LogoComponent />
 
         <CategoryPage
