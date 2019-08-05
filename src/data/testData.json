@@ -1,7 +1,7 @@
 [
   {
     "category": "movies",
-    "id": "asdf",
+    "id": "test-category-id",
     "list": [
       {
         "label": "In the Mood for Love",

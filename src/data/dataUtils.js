@@ -5,8 +5,8 @@ import MentionableListModel from 'models/MentionableListModel';
 /**
  * @returns {Array}
  */
-export function fetchData() {
-  return testData;
+export async function fetchData() {
+  return await testData;
 }
 /**
  *
