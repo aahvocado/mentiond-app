@@ -1,4 +1,5 @@
 import {
+  extendObservable,
   get,
   observable,
   reaction,
@@ -49,6 +50,15 @@ export class Model {
    */
   set(changes) {
     set(this.attributes, changes);
+  }
+  /**
+   * adds additional observable properties
+   * @see https://mobx.js.org/refguide/extend-observable.html
+   *
+   * @param {Object} extendedAttributes
+   */
+  extendObservable(extendedAttributes) {
+    extendObservable(this.attributes, extendedAttributes);
   }
   /**
    * wrapper for watching for a change for a specific property
