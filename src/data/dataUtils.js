@@ -1,6 +1,6 @@
 import testData from 'data/testData.json';
 
-import MentionableListModel from 'models/MentionableListModel';
+import CategoryModel from 'models/CategoryModel';
 
 /**
  * @returns {Array}
@@ -11,7 +11,7 @@ export async function fetchData() {
 /**
  *
  * @param {Object} data
- * @returns {MentionableListModel}
+ * @returns {CategoryModel}
  */
 export function parseData(data) {
   const {
@@ -20,7 +20,7 @@ export function parseData(data) {
   } = data;
 
   // create a model with the attributes
-  const newMentionableModel = new MentionableListModel(attributes);
+  const newMentionableModel = new CategoryModel(attributes);
 
   // add each item individually
   list.forEach((item) => {
@@ -34,7 +34,7 @@ export function parseData(data) {
 /**
  *
  * @param {Array<Object>} dataList
- * @returns {Array<MentionableListModel>}
+ * @returns {Array<CategoryModel>}
  */
 export function parseAllData(dataList) {
   return dataList.map((data) => parseData(data));

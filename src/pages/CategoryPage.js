@@ -3,13 +3,13 @@ import { observer } from 'mobx-react';
 
 import ButtonComponent from 'common-components/ButtonComponent';
 
-import MentionableListComponent from 'components/MentionableListComponent';
+import CategoryListComponent from 'components/CategoryListComponent';
 
 export default observer(
-class MentionsListPage extends Component {
+class CategoryPage extends Component {
   /** @override */
   static defaultProps = {
-    /** @type {MentionableListModel} */
+    /** @type {CategoryModel} */
     mentionableListModel: undefined,
   };
   /** @override */
@@ -61,7 +61,7 @@ class MentionsListPage extends Component {
           </ButtonComponent>
         </div>
 
-        <MentionableListComponent
+        <CategoryListComponent
           className='adjacent-mar-t-3'
           mentionableListModel={mentionableListModel}
         />

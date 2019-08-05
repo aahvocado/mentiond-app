@@ -21,7 +21,7 @@ const mentionableItemSchema = {
 /**
  * manages list of Mentionables
  */
-export default class MentionableListModel extends Model {
+export default class CategoryModel extends Model {
   /** @override */
   constructor(newAttributes = {}) {
     super({

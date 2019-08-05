@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { useTransition } from 'react-spring';
 import { observer } from 'mobx-react';
 
-import MentionableListItemComponent from 'components/MentionableListItemComponent';
+import CategoryListItemComponent from 'components/CategoryListItemComponent';
 
 import combineClassNames from 'utilities/combineClassNames';
 
@@ -35,7 +35,7 @@ function AnimatedList(props) {
               height: ITEM_Y,
             }}
           >
-            <MentionableListItemComponent
+            <CategoryListItemComponent
               style={{
                 height: BASE_HEIGHT,
                 transform: props.y.interpolate(y => `translateY(${y}px)`),
@@ -50,14 +50,14 @@ function AnimatedList(props) {
 }
 
 export default observer(
-class MentionableListComponent extends Component {
+class CategoryListComponent extends Component {
   /** @override */
   static defaultProps = {
     /** @type {String} */
     baseClassName: 'position-relative',
     /** @type {String} */
     className: '',
-    /** @type {MentionableListModel} */
+    /** @type {CategoryModel} */
     mentionableListModel: [],
   };
   /** @override */

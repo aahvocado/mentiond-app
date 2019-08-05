@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { observer } from 'mobx-react';
 
-import MentionsListPage from 'pages/MentionsListPage';
+import CategoryPage from 'pages/CategoryPage';
 
 import FooterComponent from 'components/FooterComponent';
 import LogoComponent from 'components/LogoComponent';
@@ -20,7 +20,7 @@ class App extends Component {
       >
         <LogoComponent />
 
-        <MentionsListPage
+        <CategoryPage
           mentionableListModel={appState.get('currentListModel')}
         />
 

@@ -16,14 +16,13 @@ export class AppState extends Model {
       // -- state attributes
       /** @type {Boolean} */
       isLoading: true,
-
-      // -- list attributes
-      /** @type {MentionableListModel} */
+      /** @type {CategoryModel} */
       currentListModel: undefined,
 
       // -- cache attributes
-      /** @type {Array<MentionableListModel>} */
+      /** @type {Array<CategoryModel>} */
       mentionableCollection: [],
+
       /** @type {Object} */
       ...newAttributes,
     });

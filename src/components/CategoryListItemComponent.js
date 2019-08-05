@@ -8,7 +8,7 @@ import combineClassNames from 'utilities/combineClassNames';
 /**
  * Basic Mentionable List Item
  */
-export default class MentionableListItemComponent extends PureComponent {
+export default class CategoryListItemComponent extends PureComponent {
   /** @override */
   static defaultProps = {
     /** @type {String} */
@@ -83,7 +83,7 @@ export default class MentionableListItemComponent extends PureComponent {
             onSlideMin={this.onSlideHide}
             onSlideMax={this.onSlideComplete}
           >
-            <MentionableListItemBody
+            <CategoryListItemBodyComponent
               className={itemClassName}
               isComplete={isComplete}
               isFocused={isFocused}
@@ -141,7 +141,7 @@ export default class MentionableListItemComponent extends PureComponent {
 /**
  * body of a mentionable list item
  */
-class MentionableListItemBody extends PureComponent {
+class CategoryListItemBodyComponent extends PureComponent {
   /** @override */
   static defaultProps = {
     /** @type {String} */
