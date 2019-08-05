@@ -4,14 +4,25 @@ import { useDrag } from 'react-use-gesture';
 
 import clamp from 'utilities/clamp';
 
-export function HorizontalSlideGestureComponent(props) {
+export default function SlideGestureComponent(props) {
   const {
+    /** @type {String} */
     className,
+    /** @type {Boolean} */
     enabled = true,
-    min = -1000,
-    max = 1000,
-    onSlideMin = () => {},
-    onSlideMax = () => {},
+    /** @type {Array} minimum distance allowed to slide [left, up] */
+    min = [-1000, -1000],
+    /** @type {Array} maximum distance allowed to slide [right, down] */
+    max = [1000, 1000],
+    /** @type {Function} */
+    onSlideXMin = () => {},
+    /** @type {Function} */
+    onSlideXMax = () => {},
+    /** @type {Function} */
+    onSlideYMin = () => {},
+    /** @type {Function} */
+    onSlideYMax = () => {},
+    /** @type {Object} */
     style,
     ...otherProps
   } = props;
@@ -20,18 +31,29 @@ export function HorizontalSlideGestureComponent(props) {
 
   // 1. we define the drag gesture logic using the useDrag hook
   const bind = useDrag(({ cancel, down, delta, last }) => {
-    // callback when hitting min
-    if (last && delta[0] <= min) {
-      onSlideMin({delta, cancel});
+    // callback when hitting horizontal min
+    if (last && delta[0] <= min[0]) {
+      onSlideXMin({delta, cancel});
     };
 
-    // callback when hitting max
-    if (last && delta[0] >= max) {
-      onSlideMax({delta, cancel});
+    // callback when hitting horizontal max
+    if (last && delta[0] >= max[0]) {
+      onSlideXMax({delta, cancel});
+    }
+
+    // callback when hitting vertical min
+    if (last && delta[1] <= min[1]) {
+      onSlideYMin({delta, cancel});
+    };
+
+    // callback when hitting vertical max
+    if (last && delta[1] >= max[1]) {
+      onSlideYMax({delta, cancel});
     }
 
     // keep x value within bounds
-    delta[0] = clamp(delta[0], min, max);
+    delta[0] = clamp(delta[0], min[0], max[0]);
+    delta[1] = clamp(delta[1], min[1], max[1]);
 
     // done
     set({ xy: down ? delta : [0, 0] });
@@ -47,7 +69,7 @@ export function HorizontalSlideGestureComponent(props) {
       style={{
         ...style,
         userSelect: 'none',
-        transform: xy.interpolate((x, y) => `translate3D(${x}px, 0, 0)`),
+        transform: xy.interpolate((x, y) => `translate3D(${x}px, ${y}px, 0)`),
       }}
       {...otherProps}
     />

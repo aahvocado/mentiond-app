@@ -1,7 +1,7 @@
 import React, { PureComponent } from 'react';
 import { animated } from 'react-spring';
 
-import {HorizontalSlideGestureComponent} from 'common-components/SlideGestureComponent';
+import SlideGestureComponent from 'common-components/SlideGestureComponent';
 
 import combineClassNames from 'utilities/combineClassNames';
 
@@ -68,7 +68,7 @@ export default class CategoryListItemComponent extends PureComponent {
         }}
       >
         <div className='position-relative width-full height-full'>
-          <HorizontalSlideGestureComponent
+          <SlideGestureComponent
             className='position-absolute'
             style={{
               left: 0,
@@ -78,10 +78,10 @@ export default class CategoryListItemComponent extends PureComponent {
               zIndex: 2,
             }}
             enabled={!isHidden && !isComplete}
-            min={-110}
-            max={110}
-            onSlideMin={this.onSlideHide}
-            onSlideMax={this.onSlideComplete}
+            min={[-110, 0]}
+            max={[110, 0]}
+            onSlideXMin={this.onSlideHide}
+            onSlideXMax={this.onSlideComplete}
           >
             <CategoryListItemBodyComponent
               className={itemClassName}
@@ -94,16 +94,16 @@ export default class CategoryListItemComponent extends PureComponent {
 
               shouldShowMinVersion={shouldShowMinVersion}
             />
-          </HorizontalSlideGestureComponent>
+          </SlideGestureComponent>
 
-          <div className={combineClassNames(itemClassName, 'position-absolute text-stroke color-white')}
+          <div className={combineClassNames(itemClassName, 'position-absolute color-white')}
             style={{
               left: 0,
               right: 0,
               top: 0,
               bottom: 0,
               zIndex: 1,
-              background: 'linear-gradient(90deg, rgba(0,255,1,1) 0%, rgba(204,255,0,1) 25%, rgba(255,139,0,1) 75%, rgba(255,0,0,1) 100%)',
+              background: 'linear-gradient(90deg, rgba(0,179,1,1) 0%, rgba(204,255,0,1) 25%, rgba(255,139,0,1) 75%, rgba(255,0,0,1) 100%)',
             }}
           >
             <div className='flex-auto talign-left'>Complete</div>
