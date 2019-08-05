@@ -1,11 +1,7 @@
 import storageController from 'data/storageController';
 import * as dataUtils from 'data/dataUtils';
 
-import MentionableListModel from 'models/MentionableListModel';
 import Model from 'models/Model';
-
-const data = dataUtils.fetchData();
-const firstMentionable = dataUtils.parseData(data[0]);
 
 // storageController.clear();
 // storageController.setItem('currentCategory', 'movies');
@@ -17,13 +13,39 @@ export class AppState extends Model {
   /** @override */
   constructor(newAttributes = {}) {
     super({
+      // -- state attributes
+      /** @type {Boolean} */
+      isLoading: true,
+
+      // -- list attributes
       /** @type {String} */
       currentCategory: storageController.getItem('currentCategory'),
       /** @type {MentionableListModel} */
-      currentListModel: firstMentionable,
+      currentListModel: undefined,
+
+      // -- cache attributes
+      /** @type {Array<MentionableListModel>} */
+      mentionableCollection: [],
       /** @type {Object} */
       ...newAttributes,
     });
+
+    this.onInitialized();
+  }
+  /**
+   * state has initialized, now need to set up data
+   */
+  async onInitialized() {
+    this.set({isLoading: true});
+
+    const dataList = await dataUtils.fetchData();
+    const mentionableCollection = dataUtils.parseAllData(dataList);
+
+    this.set({
+      mentionableCollection: mentionableCollection,
+      currentListModel: mentionableCollection[0],
+      isLoading: false,
+    })
   }
 };
 /**

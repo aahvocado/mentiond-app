@@ -10,7 +10,7 @@ class MentionsListPage extends Component {
   /** @override */
   static defaultProps = {
     /** @type {MentionableListModel} */
-    mentionableListModel: [],
+    mentionableListModel: undefined,
   };
   /** @override */
   constructor(props) {
@@ -33,6 +33,10 @@ class MentionsListPage extends Component {
     const {
       newValue,
     } = this.state;
+
+    if (mentionableListModel === undefined) {
+      return <div>Loading</div>
+    }
 
     return (
       <div className='flex-auto'>

@@ -31,3 +31,11 @@ export function parseData(data) {
   newMentionableModel.updateIndices();
   return newMentionableModel;
 }
+/**
+ *
+ * @param {Array<Object>} dataList
+ * @returns {Array<MentionableListModel>}
+ */
+export function parseAllData(dataList) {
+  return dataList.map((data) => parseData(data));
+}
