@@ -5,6 +5,7 @@ import CategoryPage from 'pages/CategoryPage';
 
 import FooterComponent from 'components/FooterComponent';
 import LogoComponent from 'components/LogoComponent';
+import NavigationMenu from 'components/NavigationMenu';
 
 import appState from 'state/appState';
 
@@ -18,6 +19,10 @@ class App extends Component {
           maxWidth: 640,
         }}
       >
+        <NavigationMenu
+          isActive={appState.get('isOpenNavMenu')}
+        />
+
         <LogoComponent />
 
         <CategoryPage
