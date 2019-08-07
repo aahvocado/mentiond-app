@@ -6,8 +6,10 @@ import CategoryListItemComponent from 'components/CategoryListItemComponent';
 
 import combineClassNames from 'utilities/combineClassNames';
 
-const BASE_HEIGHT = 60;
-const ITEM_Y = 70;
+const CONTAINER_HEIGHT = '60vh';
+const ITEM_PADDING = 10;
+const ITEM_HEIGHT = 60;
+const ITEM_WRAPPER_HEIGHT = ITEM_HEIGHT + ITEM_PADDING;
 
 function AnimatedList(props) {
   const {
@@ -19,31 +21,30 @@ function AnimatedList(props) {
     list,
     item => item.id,
     {
-      from: (item) => ({ y: item.index * ITEM_Y }),
+      from: (item) => ({ y: item.index * ITEM_WRAPPER_HEIGHT }),
       leave: { y: 0 },
-      enter: (item) => ({ y: item.index * ITEM_Y }),
-      update: (item) => ({ y: item.index * ITEM_Y }),
+      enter: (item) => ({ y: item.index * ITEM_WRAPPER_HEIGHT }),
+      update: (item) => ({ y: item.index * ITEM_WRAPPER_HEIGHT }),
     }
   );
 
   return (
-    <div className={combineClassNames(className)}>
+    <div
+      className={combineClassNames('overflow-auto', className)}
+      style={{
+        height: CONTAINER_HEIGHT,
+      }}
+    >
       { animatedItems.map(({item, props}) => {
         return (
-          <div
+          <CategoryListItemComponent
             key={`list-item-${item.id}-key`}
             style={{
-              height: ITEM_Y,
+              height: ITEM_HEIGHT,
+              transform: props.y.interpolate(y => `translateY(${y}px)`),
             }}
-          >
-            <CategoryListItemComponent
-              style={{
-                height: BASE_HEIGHT,
-                transform: props.y.interpolate(y => `translateY(${y}px)`),
-              }}
-              {...item}
-            />
-          </div>
+            {...item}
+          />
         )
       })}
     </div>

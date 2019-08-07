@@ -96,13 +96,8 @@ export default class CategoryListItemComponent extends PureComponent {
             />
           </SlideGestureComponent>
 
-          <div className={combineClassNames(itemClassName, 'position-absolute color-white')}
+          <div className={combineClassNames(itemClassName, 'height-full color-white')}
             style={{
-              left: 0,
-              right: 0,
-              top: 0,
-              bottom: 0,
-              zIndex: 1,
               background: 'linear-gradient(90deg, rgba(0,179,1,1) 0%, rgba(204,255,0,1) 25%, rgba(255,139,0,1) 75%, rgba(255,0,0,1) 100%)',
             }}
           >

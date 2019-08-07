@@ -6,10 +6,14 @@ import SlideGestureComponent from 'common-components/SlideGestureComponent';
 
 import CategoryListComponent from 'components/CategoryListComponent';
 
+import combineClassNames from 'utilities/combineClassNames';
+
 export default observer(
 class CategoryPage extends Component {
   /** @override */
   static defaultProps = {
+    /** @type {String} */
+    className: '',
     /** @type {CategoryModel} */
     categoryModel: undefined,
   };
@@ -28,6 +32,7 @@ class CategoryPage extends Component {
   /** @override */
   render() {
     const {
+      className,
       categoryModel,
     } = this.props;
 
@@ -40,7 +45,9 @@ class CategoryPage extends Component {
     }
 
     return (
-      <div className='flex-auto flex-col'>
+      <div
+        className={combineClassNames('flex-col', className)}
+      >
         {/* header bar */}
         <div className='flex-none flex-row-center width-full adjacent-mar-t-3'>
           <h2 className='fsize-6 color-secondary-darker fontfamily-secondary flex-auto'>
@@ -74,35 +81,6 @@ class CategoryPage extends Component {
           className='flex-auto adjacent-mar-t-3'
           categoryModel={categoryModel}
         />
-
-        {/* footer menu */}
-        <div
-          className='position-relative flex-none adjacent-mar-t-3'
-          style={{
-            height: 100,
-          }}
-        >
-          <SlideGestureComponent
-            className='bg-white borradius-3 pad-2 flex-row position-fixed'
-            style={{
-              boxShadow: '0 0 5px grey',
-              right: 50,
-              top: 0,
-              zIndex: 2,
-              width: 120,
-              height: 250,
-            }}
-            base={[0, -200]}
-            min={[0, 0]}
-            max={[0, 150]}
-          >
-            <div
-              className='talign-center flex-auto aself-end'
-            >
-              New Category
-            </div>
-          </SlideGestureComponent>
-        </div>
       </div>
     );
   }

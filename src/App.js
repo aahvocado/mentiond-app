@@ -24,10 +24,13 @@ class App extends Component {
         <LogoComponent />
 
         <CategoryPage
+          className='flex-shrink-only'
           categoryModel={appState.get('currentCategoryModel')}
         />
 
-        <FooterComponent />
+        <FooterComponent
+          className='flex-none'
+        />
       </div>
     );
   };
