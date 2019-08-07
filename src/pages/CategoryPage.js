@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import { observer } from 'mobx-react';
 
 import ButtonComponent from 'common-components/ButtonComponent';
-import SlideGestureComponent from 'common-components/SlideGestureComponent';
 
 import CategoryListComponent from 'components/CategoryListComponent';
 
