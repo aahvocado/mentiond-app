@@ -26,7 +26,7 @@ export default class CategoryModel extends Model {
   constructor(newAttributes = {}) {
     super({
       /** @type {String} */
-      category: '',
+      name: '',
       /** @type {String} */
       id: uuid(),
       /** @type {Array} */

@@ -1,6 +1,6 @@
 [
   {
-    "category": "movies",
+    "name": "movies",
     "id": "test-category-id",
     "list": [
       {

@@ -51,7 +51,7 @@ class CategoryPage extends Component {
         {/* header bar */}
         <div className='flex-none flex-row-center width-full adjacent-mar-t-3'>
           <CategoryNameComponent
-            value={categoryModel.get('category')}
+            value={categoryModel.get('name')}
           />
         </div>
 

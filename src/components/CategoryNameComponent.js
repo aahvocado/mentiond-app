@@ -25,6 +25,7 @@ export default class CategoryNameComponent extends PureComponent {
   render() {
     const {
       className,
+      ...otherProps
     } = this.props;
 
     const {
@@ -33,6 +34,7 @@ export default class CategoryNameComponent extends PureComponent {
 
     return (
       <input
+        {...otherProps}
         className={combineClassNames('white-text-shadow text-ellipsis fsize-6 talign-center color-primary-darker fontfamily-primary flex-auto bor-2-transparent focus:borcolor-white', className)}
         placeholder='Category name...'
         value={value}
