@@ -50,7 +50,7 @@ class CategoryPage extends Component {
       >
         {/* header bar */}
         <div className='flex-none flex-row-center width-full adjacent-mar-t-3'>
-          <h2 className='fsize-6 color-secondary-darker fontfamily-secondary flex-auto'>
+          <h2 className='fsize-6 talign-center color-secondary-darker fontfamily-secondary flex-auto'>
             {categoryModel.get('category')}
           </h2>
         </div>

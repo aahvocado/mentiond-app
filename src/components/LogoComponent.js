@@ -1,11 +1,22 @@
 import React, { PureComponent } from 'react';
 
+import combineClassNames from 'utilities/combineClassNames';
+
 export default class LogoComponent extends PureComponent {
   /** @override */
+  static defaultProps = {
+    /** @type {String} */
+    className: '',
+  };
+  /** @override */
   render() {
+    const {
+      className,
+    } = this.props;
+
     return (
       <h1
-        className='fsize-8 fontfamily-secondary talign-center pad-2 color-secondary-darker flex-none'
+        className={combineClassNames('fsize-4 fontfamily-secondary talign-left color-secondary-darker flex-none', className)}
         style={{
           textShadow: 'white 3px 3px',
         }}
