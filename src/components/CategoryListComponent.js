@@ -30,7 +30,7 @@ function AnimatedList(props) {
 
   return (
     <div
-      className={combineClassNames('overflow-auto', className)}
+      className={combineClassNames('', className)}
       style={{
         height: CONTAINER_HEIGHT,
       }}

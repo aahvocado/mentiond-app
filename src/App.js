@@ -3,7 +3,7 @@ import { observer } from 'mobx-react';
 
 import CategoryPage from 'pages/CategoryPage';
 
-import FooterComponent from 'components/FooterComponent';
+import ActionbarComponent from 'components/ActionbarComponent';
 import LogoComponent from 'components/LogoComponent';
 // import NavigationMenu from 'components/NavigationMenu';
 
@@ -21,17 +21,25 @@ class App extends Component {
           boxShadow: '0 0 10px 2px #b3c1c5',
         }}
       >
+        {/* header */}
         <LogoComponent
           className='pad-h-3 mar-t-2 adjacent-mar-t-2'
         />
 
-        <CategoryPage
-          className='pad-h-3 flex-auto adjacent-mar-t-2'
-          categoryModel={appState.get('currentCategoryModel')}
-        />
+        {/* body */}
+        <div
+          id='app-body'
+          className='overflow-auto pad-h-3 flex-col flex-auto adjacent-mar-t-2'
+        >
+          <CategoryPage
+            className='flex-auto'
+            categoryModel={appState.get('currentCategoryModel')}
+          />
+        </div>
 
-        <FooterComponent
-          className='flex-none adjacent-mar-t-2'
+        {/* footer */}
+        <ActionbarComponent
+          className='pad-h-3 pad-v-1 flex-none'
         />
       </div>
     );

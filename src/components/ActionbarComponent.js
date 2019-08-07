@@ -4,7 +4,7 @@ import ButtonComponent, {BUTTON_THEME} from 'common-components/ButtonComponent';
 
 import combineClassNames from 'utilities/combineClassNames';
 
-export default class FooterComponent extends PureComponent {
+export default class ActionbarComponent extends PureComponent {
   /** @override */
   static defaultProps = {
     /** @type {String} */
@@ -24,6 +24,7 @@ export default class FooterComponent extends PureComponent {
         }}
       >
         <ButtonComponent
+          className='pad-2'
           theme={BUTTON_THEME.TRANSPARENT_SECONDARY}
         >
           Add Category
