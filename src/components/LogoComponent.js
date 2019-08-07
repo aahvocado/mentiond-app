@@ -5,7 +5,7 @@ export default class LogoComponent extends PureComponent {
   render() {
     return (
       <h1
-        className='fsize-8 fontfamily-secondary talign-center pad-2 color-secondary-darker'
+        className='fsize-8 fontfamily-secondary talign-center pad-2 color-secondary-darker flex-none'
         style={{
           textShadow: 'white 3px 3px',
         }}

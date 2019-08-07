@@ -5,7 +5,7 @@ export default class LogoComponent extends PureComponent {
   render() {
     return (
       <div
-        className='fsize-3 color-grayer'
+        className='flex-none fsize-3 color-grayer'
       >
         created by Daniel Xiao
       </div>

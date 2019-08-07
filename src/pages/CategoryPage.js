@@ -40,9 +40,9 @@ class CategoryPage extends Component {
     }
 
     return (
-      <div className='flex-auto'>
+      <div className='flex-auto flex-col'>
         {/* header bar */}
-        <div className='flex-row-center width-full adjacent-mar-t-3'>
+        <div className='flex-none flex-row-center width-full adjacent-mar-t-3'>
           <h2 className='fsize-6 color-secondary-darker fontfamily-secondary flex-auto'>
             {categoryModel.get('category')}
           </h2>
@@ -50,7 +50,7 @@ class CategoryPage extends Component {
 
         {/* new mentionable form */}
         <form
-          className='flex-row adjacent-mar-t-3'
+          className='flex-none flex-row adjacent-mar-t-3'
           onSubmit={this.onClickAdd}
         >
           <input
@@ -71,30 +71,9 @@ class CategoryPage extends Component {
 
         {/* the list */}
         <CategoryListComponent
-          className='adjacent-mar-t-3'
+          className='flex-auto adjacent-mar-t-3'
           categoryModel={categoryModel}
         />
-
-        <SlideGestureComponent
-          className='bg-white position-fixed borradius-3 pad-2'
-          style={{
-            boxShadow: '0 0 5px grey',
-            right: 50,
-            bottom: 0,
-            zIndex: 2,
-            width: 120,
-            height: 250,
-          }}
-          base={[0, 200]}
-          min={[0, -150]}
-          max={[0, 0]}
-        >
-          <div
-            className='talign-center'
-          >
-            New Category
-          </div>
-        </SlideGestureComponent>
       </div>
     );
   }

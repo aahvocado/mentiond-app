@@ -11,6 +11,7 @@ const ITEM_Y = 70;
 
 function AnimatedList(props) {
   const {
+    className,
     list,
   } = props;
 
@@ -26,7 +27,7 @@ function AnimatedList(props) {
   );
 
   return (
-    <div className='overflow-hidden'>
+    <div className={combineClassNames(className)}>
       { animatedItems.map(({item, props}) => {
         return (
           <div
@@ -54,7 +55,7 @@ class CategoryListComponent extends Component {
   /** @override */
   static defaultProps = {
     /** @type {String} */
-    baseClassName: 'position-relative',
+    baseClassName: 'position-relative flex-col',
     /** @type {String} */
     className: '',
     /** @type {CategoryModel} */
@@ -85,11 +86,10 @@ class CategoryListComponent extends Component {
     }));
 
     return (
-      <div className={combineClassNames(baseClassName, className)}>
-        <AnimatedList
-          list={boundList}
-        />
-      </div>
+      <AnimatedList
+        className={combineClassNames(baseClassName, className)}
+        list={boundList}
+      />
     );
   }
   /**

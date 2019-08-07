@@ -14,9 +14,10 @@ class App extends Component {
   render() {
     return (
       <div
-        className="App position-relative bg-secondary fontfamily-primary height-full boxsizing-border flex-col mar-h-auto pad-3"
+        className="App overflow-auto position-relative bg-secondary fontfamily-primary boxsizing-border flex-col mar-h-auto pad-3"
         style={{
           maxWidth: 640,
+          height: '100vh',
           boxShadow: '0 0 10px 2px #b3c1c5',
         }}
       >
