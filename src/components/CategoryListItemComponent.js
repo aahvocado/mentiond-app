@@ -12,7 +12,7 @@ export default class CategoryListItemComponent extends PureComponent {
   /** @override */
   static defaultProps = {
     /** @type {String} */
-    itemClassName: 'width-full boxsizing-border flex-row aitems-center overflow-hidden fontfamily-primary borradius-2 pad-2',
+    itemClassName: 'width-full boxsizing-border flex-row aitems-center overflow-hidden fontfamily-secondary borradius-2 pad-2',
     /** @type {Number} */
     mentions: 0,
     /** @type {String} */

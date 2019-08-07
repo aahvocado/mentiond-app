@@ -1,6 +1,6 @@
 import React, { PureComponent } from 'react';
 
-import ButtonComponent from 'common-components/ButtonComponent';
+import ButtonComponent, {BUTTON_THEME} from 'common-components/ButtonComponent';
 
 import combineClassNames from 'utilities/combineClassNames';
 
@@ -18,12 +18,14 @@ export default class FooterComponent extends PureComponent {
 
     return (
       <div
-        className={combineClassNames('flex-row width-full', className)}
+        className={combineClassNames('flex-row width-full bor-t-2-primary-darker', className)}
         style={{
           bottom: 0,
         }}
       >
-        <ButtonComponent>
+        <ButtonComponent
+          theme={BUTTON_THEME.TRANSPARENT_SECONDARY}
+        >
           Add Category
         </ButtonComponent>
       </div>

@@ -16,7 +16,7 @@ export default class LogoComponent extends PureComponent {
 
     return (
       <h1
-        className={combineClassNames('fsize-4 fontfamily-secondary talign-left color-secondary-darker flex-none', className)}
+        className={combineClassNames('fsize-4 fontfamily-primary talign-left color-primary-darker flex-none', className)}
         style={{
           textShadow: 'white 3px 3px',
         }}

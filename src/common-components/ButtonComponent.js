@@ -9,9 +9,9 @@ export const BUTTON_THEME = {
     disabled: 'color-grayer bg-light-gray',
   },
   TRANSPARENT_SECONDARY: {
-    base: 'bg-transparent bor-1-secondary-darker',
-    enabled: 'color-secondary-darker hover:bor-1-secondary focus:bor-1-secondary',
-    disabled: 'color-secondary',
+    base: 'bg-transparent',
+    enabled: 'color-primary-darker hover:bor-2-primary focus:bor-2-primary',
+    disabled: 'color-primary',
   },
   TRANSPARENT_WHITE: {
     base: 'bg-transparent bor-3-white',
