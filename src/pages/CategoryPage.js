@@ -74,6 +74,35 @@ class CategoryPage extends Component {
           className='flex-auto adjacent-mar-t-3'
           categoryModel={categoryModel}
         />
+
+        {/* footer menu */}
+        <div
+          className='position-relative flex-none adjacent-mar-t-3'
+          style={{
+            height: 100,
+          }}
+        >
+          <SlideGestureComponent
+            className='bg-white borradius-3 pad-2 flex-row position-fixed'
+            style={{
+              boxShadow: '0 0 5px grey',
+              right: 50,
+              top: 0,
+              zIndex: 2,
+              width: 120,
+              height: 250,
+            }}
+            base={[0, -200]}
+            min={[0, 0]}
+            max={[0, 150]}
+          >
+            <div
+              className='talign-center flex-auto aself-end'
+            >
+              New Category
+            </div>
+          </SlideGestureComponent>
+        </div>
       </div>
     );
   }
