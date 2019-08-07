@@ -5,6 +5,8 @@ import ButtonComponent from 'common-components/ButtonComponent';
 
 import CategoryListComponent from 'components/CategoryListComponent';
 
+import appState from 'state/appState';
+
 import combineClassNames from 'utilities/combineClassNames';
 
 export default observer(
@@ -13,8 +15,6 @@ class CategoryPage extends Component {
   static defaultProps = {
     /** @type {String} */
     className: '',
-    /** @type {CategoryModel} */
-    categoryModel: undefined,
   };
   /** @override */
   constructor(props) {
@@ -32,20 +32,20 @@ class CategoryPage extends Component {
   render() {
     const {
       className,
-      categoryModel,
     } = this.props;
 
     const {
       newValue,
     } = this.state;
 
+    const categoryModel = appState.get('currentCategoryModel');
     if (categoryModel === undefined) {
       return <div>Loading</div>
     }
 
     return (
       <div
-        className={combineClassNames('flex-col', className)}
+        className={combineClassNames('flex-auto flex-col', className)}
       >
         {/* header bar */}
         <div className='flex-none flex-row-center width-full adjacent-mar-t-3'>
@@ -93,9 +93,7 @@ class CategoryPage extends Component {
    *
    */
   onClickAdd() {
-    const {
-      categoryModel,
-    } = this.props;
+    const categoryModel = appState.get('currentCategoryModel');
 
     const {
       newValue,
