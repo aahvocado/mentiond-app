@@ -4,10 +4,11 @@ import { observer } from 'mobx-react';
 import {
   BrowserRouter,
   Route,
-  withRouter,
+  // withRouter,
 } from 'react-router-dom';
 
 import CategoryPage from 'pages/CategoryPage';
+import NewCategoryPage from 'pages/NewCategoryPage';
 
 import ActionbarComponent from 'components/ActionbarComponent';
 import LogoComponent from 'components/LogoComponent';
@@ -39,6 +40,8 @@ class App extends Component {
             className='overflow-auto pad-h-3 flex-col flex-auto adjacent-mar-t-2'
           >
             <Route exact path="/" component={CategoryPage} />
+
+            <Route path="/new" component={NewCategoryPage} />
           </div>
 
           {/* footer */}

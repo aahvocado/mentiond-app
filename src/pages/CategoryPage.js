@@ -4,6 +4,7 @@ import { observer } from 'mobx-react';
 import ButtonComponent from 'common-components/ButtonComponent';
 
 import CategoryListComponent from 'components/CategoryListComponent';
+import CategoryNameComponent from 'components/CategoryNameComponent';
 
 import appState from 'state/appState';
 
@@ -25,7 +26,7 @@ class CategoryPage extends Component {
 
     this.state = {
       /** @type {String} */
-      newValue: '',
+      categoryValue: '',
     }
   }
   /** @override */
@@ -35,7 +36,7 @@ class CategoryPage extends Component {
     } = this.props;
 
     const {
-      newValue,
+      categoryValue,
     } = this.state;
 
     const categoryModel = appState.get('currentCategoryModel');
@@ -49,9 +50,9 @@ class CategoryPage extends Component {
       >
         {/* header bar */}
         <div className='flex-none flex-row-center width-full adjacent-mar-t-3'>
-          <h2 className='white-text-shadow fsize-6 talign-center color-primary-darker fontfamily-primary flex-auto'>
-            {categoryModel.get('category')}
-          </h2>
+          <CategoryNameComponent
+            value={categoryModel.get('category')}
+          />
         </div>
 
         {/* new mentionable form */}
@@ -62,13 +63,13 @@ class CategoryPage extends Component {
           <input
             className='fsize-3 bg-white borradius-l-2 flex-auto boxsizing-border pad-v-1 pad-h-2'
             placeholder='Add a Mentionable...'
-            value={newValue}
+            value={categoryValue}
             onChange={this.onChangeNewValue}
           />
 
           <ButtonComponent
             className='fsize-3 flex-none borradius-r-2 talign-center'
-            disabled={newValue.length <= 0}
+            disabled={categoryValue.length <= 0}
             onClick={this.onClickAdd}
           >
             Add
@@ -87,7 +88,7 @@ class CategoryPage extends Component {
    * @param {InputEvent} evt
    */
   onChangeNewValue(evt) {
-    this.setState({newValue: evt.target.value});
+    this.setState({categoryValue: evt.target.value});
   }
   /**
    *
@@ -96,13 +97,13 @@ class CategoryPage extends Component {
     const categoryModel = appState.get('currentCategoryModel');
 
     const {
-      newValue,
+      categoryValue,
     } = this.state;
 
     // add to list
-    categoryModel.addItem({label: newValue});
+    categoryModel.addItem({label: categoryValue});
 
     // reset value
-    this.setState({newValue: ''});
+    this.setState({categoryValue: ''});
   }
 });
