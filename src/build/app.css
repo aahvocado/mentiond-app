@@ -6592,6 +6592,9 @@
 .zindex-0 {
   z-index: 0;
 }
+.white-text-shadow {
+  text-shadow: white 3px 3px;
+}
 body {
   background-image: url("../images/tic-tac-toe.png");
   background-repeat: repeat;
