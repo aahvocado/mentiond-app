@@ -18,14 +18,11 @@ export default class ActionbarComponent extends PureComponent {
 
     return (
       <div
-        className={combineClassNames('flex-row width-full bor-t-2-primary-darker', className)}
-        style={{
-          bottom: 0,
-        }}
+        className={combineClassNames('flex-row bor-t-1-primary-darker', className)}
       >
         <ButtonComponent
           className='pad-2'
-          theme={BUTTON_THEME.TRANSPARENT_SECONDARY}
+          theme={BUTTON_THEME.TRANSPARENT_PRIMARY}
         >
           Add Category
         </ButtonComponent>

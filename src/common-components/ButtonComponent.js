@@ -8,14 +8,14 @@ export const BUTTON_THEME = {
     enabled: 'color-grayest hover:color-grayer focus:color-grayer',
     disabled: 'color-grayer bg-light-gray',
   },
-  TRANSPARENT_SECONDARY: {
-    base: 'bg-transparent',
+  TRANSPARENT_PRIMARY: {
+    base: 'bg-transparent color-primary-darkest',
     enabled: 'color-primary-darker hover:bor-2-primary focus:bor-2-primary',
     disabled: 'color-primary',
   },
   TRANSPARENT_WHITE: {
-    base: 'bg-transparent bor-3-white',
-    enabled: 'color-white hover:color-grayer focus:color-grayer',
+    base: 'bg-transparent color-white',
+    enabled: 'color-white hover:color-white focus:color-white',
     disabled: 'color-grayest bor-3-grayest',
   },
 }
