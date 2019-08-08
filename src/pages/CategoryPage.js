@@ -21,12 +21,16 @@ class CategoryPage extends Component {
   constructor(props) {
     super(props);
 
-    this.onChangeNewValue = this.onChangeNewValue.bind(this);
-    this.onClickAdd = this.onClickAdd.bind(this);
+    this.onClickAddItem = this.onClickAddItem.bind(this);
+
+    const categoryModel = appState.get('currentCategoryModel');
+    const categoryName = categoryModel && categoryModel.get('name');
 
     this.state = {
       /** @type {String} */
-      categoryValue: '',
+      categoryName: categoryName,
+      /** @type {String} */
+      searchValue: '',
     }
   }
   /** @override */
@@ -36,7 +40,8 @@ class CategoryPage extends Component {
     } = this.props;
 
     const {
-      categoryValue,
+      categoryName,
+      searchValue,
     } = this.state;
 
     const categoryModel = appState.get('currentCategoryModel');
@@ -51,26 +56,27 @@ class CategoryPage extends Component {
         {/* header bar */}
         <div className='flex-none flex-row-center width-full adjacent-mar-t-3'>
           <CategoryNameComponent
-            value={categoryModel.get('name')}
+            value={categoryName}
+            onChange={(newValue) => this.setState({categoryName: newValue})}
           />
         </div>
 
         {/* new mentionable form */}
         <form
           className='flex-none flex-row adjacent-mar-t-3'
-          onSubmit={this.onClickAdd}
+          onSubmit={this.onClickAddItem}
         >
           <input
             className='fsize-3 bg-white borradius-l-2 flex-auto boxsizing-border pad-v-1 pad-h-2'
             placeholder='Add a Mentionable...'
-            value={categoryValue}
-            onChange={this.onChangeNewValue}
+            value={searchValue}
+            onChange={(evt) => this.setState({searchValue: evt.target.value})}
           />
 
           <ButtonComponent
             className='fsize-3 flex-none borradius-r-2 talign-center'
-            disabled={categoryValue.length <= 0}
-            onClick={this.onClickAdd}
+            disabled={searchValue.length <= 0}
+            onClick={this.onClickAddItem}
           >
             Add
           </ButtonComponent>
@@ -85,25 +91,19 @@ class CategoryPage extends Component {
     );
   }
   /**
-   * @param {InputEvent} evt
-   */
-  onChangeNewValue(evt) {
-    this.setState({categoryValue: evt.target.value});
-  }
-  /**
    *
    */
-  onClickAdd() {
+  onClickAddItem() {
     const categoryModel = appState.get('currentCategoryModel');
 
     const {
-      categoryValue,
+      searchValue,
     } = this.state;
 
     // add to list
-    categoryModel.addItem({label: categoryValue});
+    categoryModel.addItem({label: searchValue});
 
     // reset value
-    this.setState({categoryValue: ''});
+    this.setState({searchValue: ''});
   }
 });
