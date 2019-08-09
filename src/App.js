@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import { observer } from 'mobx-react';
 
+import { faTrashAlt } from '@fortawesome/free-solid-svg-icons';
+
 import {
   BrowserRouter,
   Route,
@@ -8,6 +10,8 @@ import {
 } from 'react-router-dom';
 
 import CategoryPage from 'pages/CategoryPage';
+
+import IconButtonComponent, { ICON_BUTTON_THEME } from 'common-components/IconButtonComponent';
 
 import ActionbarComponent from 'components/ActionbarComponent';
 import LogoComponent from 'components/LogoComponent';
@@ -30,12 +34,18 @@ class App extends Component {
         >
           {/* header */}
           <div id='app-header'
-            className='zindex-1 pad-h-3 pad-v-2'
+            className='zindex-1 flex-row aitems-center pad-h-3 pad-v-2'
             style={{
               boxShadow:'rgba(212, 227, 232, 1) 0 1px 10px 0',
             }}
           >
-            <LogoComponent />
+            <LogoComponent className='flex-auto' />
+
+            <IconButtonComponent
+              className='pad-1 flex-none'
+              icon={faTrashAlt}
+              theme={ICON_BUTTON_THEME.TRANSPARENT_PRIMARY}
+            />
           </div>
 
           {/* body */}

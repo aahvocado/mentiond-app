@@ -1,35 +1,32 @@
 import React, { PureComponent } from 'react';
 
-import combineClassNames from 'utilities/combineClassNames';
+import ButtonComponent, { BUTTON_THEME } from 'common-components/ButtonComponent';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+
+export const ICON_BUTTON_THEME = BUTTON_THEME;
 
 /**
  *
  */
 export default class IconButtonComponent extends PureComponent {
   static defaultProps = {
-    /** @type {String} */
-    baseClassName: 'pad-1 fsize-2 color-grayer hover:color-tertiary cursor-pointer',
-    /** @type {String} */
-    className: 'bor-1-gray borradius-1 bg-white',
+    /** @type {@fortawesome/Icon} */
+    icon: undefined,
   };
   /** @override */
   render() {
     const {
-      baseClassName,
-      className,
       icon,
       ...otherProps
     } = this.props;
 
     return (
-      <button
-        className={combineClassNames(baseClassName, className)}
+      <ButtonComponent
         {...otherProps}
       >
         <FontAwesomeIcon style={{padding: '2px'}} icon={icon} />
-      </button>
+      </ButtonComponent>
     )
   }
 }

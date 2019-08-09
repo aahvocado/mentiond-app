@@ -16,7 +16,7 @@ export default class LogoComponent extends PureComponent {
 
     return (
       <h1
-        className={combineClassNames('fsize-4 fontfamily-primary talign-left color-primary-darker flex-none', className)}
+        className={combineClassNames('fsize-4 fontfamily-primary talign-left color-primary-darker', className)}
       >
         mentiond
       </h1>
