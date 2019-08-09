@@ -22,6 +22,13 @@ export default class CategoryNameComponent extends PureComponent {
     }
   }
   /** @override */
+  componentDidUpdate(prevProps, prevState) {
+    // if received a new default value
+    if (prevProps.value !== this.props.value) {
+      this.setState({value: this.props.value});
+    }
+  }
+  /** @override */
   render() {
     const {
       className,
@@ -46,10 +53,8 @@ export default class CategoryNameComponent extends PureComponent {
    * @param {InputEvent} evt
    */
   onChangeNewValue(evt) {
-    const value = evt.target.value;
-
     this.setState({value: evt.target.value});
 
-    this.props.onChange(value);
+    this.props.onChange(evt);
   }
 };

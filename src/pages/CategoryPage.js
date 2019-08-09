@@ -22,13 +22,9 @@ class CategoryPage extends Component {
     super(props);
 
     this.onClickAddItem = this.onClickAddItem.bind(this);
-
-    const categoryModel = appState.get('currentCategoryModel');
-    const categoryName = categoryModel && categoryModel.get('name');
+    this.onChangeCategoryName = this.onChangeCategoryName.bind(this);
 
     this.state = {
-      /** @type {String} */
-      categoryName: categoryName,
       /** @type {String} */
       searchValue: '',
     }
@@ -40,7 +36,6 @@ class CategoryPage extends Component {
     } = this.props;
 
     const {
-      categoryName,
       searchValue,
     } = this.state;
 
@@ -56,8 +51,8 @@ class CategoryPage extends Component {
         {/* header bar */}
         <div className='flex-none flex-row-center width-full adjacent-mar-t-3'>
           <CategoryNameComponent
-            value={categoryName}
-            onChange={(newValue) => this.setState({categoryName: newValue})}
+            value={categoryModel.get('name')}
+            onBlur={this.onChangeCategoryName}
           />
         </div>
 
@@ -94,16 +89,26 @@ class CategoryPage extends Component {
    *
    */
   onClickAddItem() {
-    const categoryModel = appState.get('currentCategoryModel');
-
     const {
       searchValue,
     } = this.state;
 
     // add to list
+    const categoryModel = appState.get('currentCategoryModel');
     categoryModel.addItem({label: searchValue});
 
     // reset value
     this.setState({searchValue: ''});
+  }
+  /**
+   * @param {Event} evt
+   */
+  onChangeCategoryName(evt) {
+    const categoryModel = appState.get('currentCategoryModel');
+    if (categoryModel === undefined) {
+      return;
+    }
+
+    categoryModel.set({name: evt.target.value});
   }
 });
