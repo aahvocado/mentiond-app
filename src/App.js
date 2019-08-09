@@ -1,21 +1,15 @@
 import React, { Component } from 'react';
 import { observer } from 'mobx-react';
 
-import { faTrashAlt } from '@fortawesome/free-solid-svg-icons';
-
 import {
   BrowserRouter,
   Route,
   // withRouter,
 } from 'react-router-dom';
 
-import IconButtonComponent, { ICON_BUTTON_THEME } from 'common-components/IconButtonComponent';
-
 import ActionbarComponent from 'components/ActionbarComponent';
 import LogoComponent from 'components/LogoComponent';
 import NavigationMenu from 'components/NavigationMenu';
-
-import storageController from 'data/storageController';
 
 import CategoryPage from 'pages/CategoryPage';
 
@@ -45,15 +39,6 @@ class App extends Component {
             <NavigationMenu />
 
             <LogoComponent className='flex-auto' />
-
-            { appState.get('isDebugMode') &&
-              <IconButtonComponent
-                className='pad-1 flex-none'
-                icon={faTrashAlt}
-                theme={ICON_BUTTON_THEME.TRANSPARENT_PRIMARY}
-                onClick={() => storageController.clear()}
-              />
-            }
           </div>
 
           {/* body */}

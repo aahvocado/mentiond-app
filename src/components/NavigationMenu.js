@@ -1,13 +1,16 @@
 import React, { Component, Fragment } from 'react';
 import { observer } from 'mobx-react';
 
-import { faBars } from '@fortawesome/free-solid-svg-icons';
+import { faBars, faTrashAlt } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 import ButtonComponent, { BUTTON_THEME } from 'common-components/ButtonComponent';
 import IconButtonComponent from 'common-components/IconButtonComponent';
 import FixedMenuComponent from 'common-components/FixedMenuComponent';
 
 import CategoryButtonComponent from 'components/CategoryButtonComponent';
+
+import storageController from 'data/storageController';
 
 // import CategoryListComponent from 'components/CategoryListComponent';
 import appState from 'state/appState';
@@ -52,24 +55,40 @@ class NavigationMenu extends Component {
           shouldUseOverlay={true}
           onClickOverlay={() => appState.set({isOpenNavMenu: false})}
         >
-          <ButtonComponent
-            className='width-full'
-            onClick={() => appState.set({isOpenNavMenu: false})}
-          >
-            Close
-          </ButtonComponent>
+          {/* primary menu */}
+          <div className='flex-auto width-full adjacent-mar-t-2'>
+            <ButtonComponent
+              className='talign-left borradius-2 width-full fsize-3 pad-2 adjacent-mar-t-2'
+              onClick={() => appState.set({isOpenNavMenu: false})}
+            >
+              <FontAwesomeIcon className='mar-r-2' icon={faBars} /> Close
+            </ButtonComponent>
 
-          Navigation Menu
+            <h3 className='color-grayer adjacent-mar-t-2'>
+              Categories
+            </h3>
 
-          <div className='flex-col mar-t-3 width-full'>
-            { categoryCollection.map((categoryModel) => (
-              <CategoryButtonComponent
-                key={`category-item-${categoryModel.get('id')}-key`}
-                categoryModel={categoryModel}
-                onClick={() => this.onClickCategory(categoryModel.get('id'))}
-              />
-            ))}
+            <div className='flex-col mar-t-3 width-full adjacent-mar-t-2'>
+              { categoryCollection.map((categoryModel) => (
+                <CategoryButtonComponent
+                  key={`category-item-${categoryModel.get('id')}-key`}
+                  categoryModel={categoryModel}
+                  onClick={() => this.onClickCategory(categoryModel.get('id'))}
+                />
+              ))}
+            </div>
           </div>
+
+          {/* secret menu options */}
+          { appState.get('isDebugMode') &&
+            <div className='flex-none width-full adjacent-mar-t-2'>
+              <IconButtonComponent
+                className='pad-1 flex-none'
+                icon={faTrashAlt}
+                onClick={() => storageController.clear()}
+              />
+            </div>
+          }
         </FixedMenuComponent>
       </Fragment>
     );

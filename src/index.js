@@ -28,18 +28,13 @@ window.addEventListener('keydown', (evt) => {
     return;
   }
 
-  // m
-  if (evt.keyCode === keycodes.m) {
+  // backquote
+  if (evt.keyCode === keycodes.backquote) {
     appState.set({isOpenNavMenu: !appState.get('isOpenNavMenu')});
   }
 
   // only devs get super cool hotkeys
   if (!appState.get('isDevMode')) {
     return;
-  }
-
-  // backquote
-  if (evt.keyCode === keycodes.backquote) {
-    appState.set({isDebugMode: !appState.get('isDebugMode')});
   }
 });

@@ -3,6 +3,11 @@ import React, { PureComponent } from 'react';
 import combineClassNames from 'utilities/combineClassNames';
 
 export const BUTTON_THEME = {
+  NONE: {
+    base: '',
+    enabled: '',
+    disabled: '',
+  },
   BASE: {
     base: 'borwidth-1 talign-center bg-white pad-2',
     enabled: 'color-grayest hover:color-grayer focus:color-grayer',

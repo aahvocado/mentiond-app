@@ -1,6 +1,6 @@
 import React, { PureComponent } from 'react';
 
-import ButtonComponent from 'common-components/ButtonComponent';
+import ButtonComponent, {BUTTON_THEME} from 'common-components/ButtonComponent';
 /**
  *
  */
@@ -19,7 +19,8 @@ export default class CategoryButtonComponent extends PureComponent {
 
     return (
       <ButtonComponent
-        className='borradius-2 bor-1-gray pad-3 adjacent-mar-t-2'
+        className='borradius-2 bor-1-gray pad-2 adjacent-mar-t-2'
+        theme={BUTTON_THEME.NONE}
         {...otherProps}
       >
         {categoryModel.get('name')}
