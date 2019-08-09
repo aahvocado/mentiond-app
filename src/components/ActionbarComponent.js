@@ -11,6 +11,8 @@ export default class ActionbarComponent extends PureComponent {
   static defaultProps = {
     /** @type {String} */
     className: '',
+    /** @type {Boolean} */
+    canAddNewCategory: false,
   };
   /** @override */
   constructor(props) {
@@ -22,6 +24,7 @@ export default class ActionbarComponent extends PureComponent {
   render() {
     const {
       className,
+      canAddNewCategory,
     } = this.props;
 
     return (
@@ -34,7 +37,7 @@ export default class ActionbarComponent extends PureComponent {
         <ButtonComponent
           className='pad-2'
           theme={BUTTON_THEME.TRANSPARENT_SECONDARY_DARKER}
-          disabled={appState.get('isViewingNewCategory')}
+          disabled={!canAddNewCategory}
           onClick={this.onClickAddCategory}
         >
           Add Category

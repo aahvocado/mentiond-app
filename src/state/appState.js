@@ -30,6 +30,30 @@ export class AppState extends Model {
       ...newAttributes,
     });
 
+    const _this = this;
+    this.extendObservable({
+      /** @type {Boolean} */
+      get isViewingNewCategory() {
+        const currentCategoryModel = _this.get('currentCategoryModel');
+        if (currentCategoryModel === undefined) {
+          return false;
+        }
+
+        // categories with items are not new
+        if (currentCategoryModel.get('list').length > 0) {
+          return false;
+        }
+
+        // named categories are not new
+        const currentName = currentCategoryModel.get('name');
+        if (currentName !== '') {
+          return false;
+        }
+
+        return true;
+      },
+    })
+
     this.onInitialized();
   }
   /**

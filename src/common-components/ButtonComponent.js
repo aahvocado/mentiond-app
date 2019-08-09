@@ -16,7 +16,7 @@ export const BUTTON_THEME = {
   TRANSPARENT_SECONDARY_DARKER: {
     base: 'bg-transparent',
     enabled: 'color-secondary-darker hover:bor-2-secondary focus:bor-2-secondary',
-    disabled: 'color-secondary-lighter',
+    disabled: 'color-secondary',
   },
   TRANSPARENT_WHITE: {
     base: 'bg-transparent',

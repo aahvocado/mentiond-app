@@ -13,7 +13,7 @@ import ActionbarComponent from 'components/ActionbarComponent';
 import LogoComponent from 'components/LogoComponent';
 // import NavigationMenu from 'components/NavigationMenu';
 
-// import appState from 'state/appState';
+import appState from 'state/appState';
 
 export default observer(
 class App extends Component {
@@ -49,6 +49,7 @@ class App extends Component {
           {/* footer */}
           <ActionbarComponent
             className='zindex-1 pad-h-3 pad-v-1 flex-none'
+            canAddNewCategory={!appState.get('isViewingNewCategory')}
           />
         </div>
       </BrowserRouter>
