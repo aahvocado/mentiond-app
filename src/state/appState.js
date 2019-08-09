@@ -2,6 +2,7 @@ import storageController from 'data/storageController';
 import * as dataUtils from 'data/dataUtils';
 
 import Model from 'models/Model';
+import CategoryModel from 'models/CategoryModel';
 
 // storageController.clear();
 // storageController.setItem('currentCategoryId', 'test-category-id');
@@ -60,7 +61,16 @@ export class AppState extends Model {
       return;
     }
   }
-  // -- utility functions
+  // -- category functions
+  /**
+   * @param {Object} [newAttributes]
+   * @returns {CategoryModel}
+   */
+  createCategory(newAttributes = {}) {
+    const newCategoryModel = new CategoryModel(newAttributes);
+    this.get('mentionableCollection').push(newCategoryModel);
+    return newCategoryModel;
+  }
   /**
    * change currently viewed category
    *
