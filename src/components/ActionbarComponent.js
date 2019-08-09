@@ -30,7 +30,7 @@ export default class ActionbarComponent extends PureComponent {
       >
         <ButtonComponent
           className='pad-2'
-          theme={BUTTON_THEME.TRANSPARENT_PRIMARY}
+          theme={BUTTON_THEME.TRANSPARENT_SECONDARY}
           onClick={this.onClickAddCategory}
         >
           Add Category

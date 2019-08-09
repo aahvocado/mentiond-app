@@ -97,3 +97,7 @@ textarea
 a {
     text-decoration: none;
 }
+
+input::placeholder {
+    color: #a8c1ca;
+}
