@@ -1,7 +1,10 @@
 import React, { Component, Fragment } from 'react';
 import { observer } from 'mobx-react';
 
-import ButtonComponent from 'common-components/ButtonComponent';
+import { faBars } from '@fortawesome/free-solid-svg-icons';
+
+import ButtonComponent, { BUTTON_THEME } from 'common-components/ButtonComponent';
+import IconButtonComponent from 'common-components/IconButtonComponent';
 import FixedMenuComponent from 'common-components/FixedMenuComponent';
 
 // import CategoryListComponent from 'components/CategoryListComponent';
@@ -30,16 +33,18 @@ class NavigationMenu extends Component {
 
     return (
       <Fragment>
-        <ButtonComponent
-          className='position-absolute mar-3'
+        <IconButtonComponent
+          className='pad-2'
           style={{
             top: 0,
             left: 0,
           }}
+          theme={BUTTON_THEME.TRANSPARENT_PRIMARY}
+          icon={faBars}
           onClick={() => appState.set({isOpenNavMenu: true})}
         >
           Menu
-        </ButtonComponent>
+        </IconButtonComponent>
 
         <FixedMenuComponent
           className='bg-white overflow-auto boxsizing-border flex-col aitems-center height-full talign-center'

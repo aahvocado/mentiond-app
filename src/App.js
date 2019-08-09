@@ -13,8 +13,8 @@ import IconButtonComponent, { ICON_BUTTON_THEME } from 'common-components/IconBu
 
 import ActionbarComponent from 'components/ActionbarComponent';
 import LogoComponent from 'components/LogoComponent';
-// import NavigationMenu from 'components/NavigationMenu';
-//
+import NavigationMenu from 'components/NavigationMenu';
+
 import storageController from 'data/storageController';
 
 import CategoryPage from 'pages/CategoryPage';
@@ -36,12 +36,14 @@ class App extends Component {
         >
           {/* header */}
           <div id='app-header'
-            className='zindex-1 flex-row aitems-center pad-h-3 pad-v-2 boxsizing-border'
+            className='zindex-2 flex-row aitems-center pad-h-3 pad-v-2 boxsizing-border'
             style={{
               height: 55,
               boxShadow:'rgba(212, 227, 232, 1) 0 1px 10px 0',
             }}
           >
+            <NavigationMenu />
+
             <LogoComponent className='flex-auto' />
 
             { appState.get('isDebugMode') &&
