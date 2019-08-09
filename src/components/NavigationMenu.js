@@ -7,6 +7,8 @@ import ButtonComponent, { BUTTON_THEME } from 'common-components/ButtonComponent
 import IconButtonComponent from 'common-components/IconButtonComponent';
 import FixedMenuComponent from 'common-components/FixedMenuComponent';
 
+import CategoryButtonComponent from 'components/CategoryButtonComponent';
+
 // import CategoryListComponent from 'components/CategoryListComponent';
 import appState from 'state/appState';
 
@@ -30,6 +32,7 @@ class NavigationMenu extends Component {
     } = this.props;
 
     const isActive = appState.get('isOpenNavMenu');
+    const categoryCollection = appState.get('categoryCollection');
 
     return (
       <Fragment>
@@ -66,6 +69,15 @@ class NavigationMenu extends Component {
           </ButtonComponent>
 
           Navigation Menu
+
+          <div className='flex-col mar-t-3 width-full'>
+            { categoryCollection.map((categoryModel) => (
+              <CategoryButtonComponent
+                key={`category-item-${categoryModel.get('id')}-key`}
+                categoryModel={categoryModel}
+              />
+            ))}
+          </div>
         </FixedMenuComponent>
       </Fragment>
     );
