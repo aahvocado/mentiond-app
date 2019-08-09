@@ -9,13 +9,15 @@ import {
   // withRouter,
 } from 'react-router-dom';
 
-import CategoryPage from 'pages/CategoryPage';
-
 import IconButtonComponent, { ICON_BUTTON_THEME } from 'common-components/IconButtonComponent';
 
 import ActionbarComponent from 'components/ActionbarComponent';
 import LogoComponent from 'components/LogoComponent';
 // import NavigationMenu from 'components/NavigationMenu';
+//
+import storageController from 'data/storageController';
+
+import CategoryPage from 'pages/CategoryPage';
 
 import appState from 'state/appState';
 
@@ -45,6 +47,7 @@ class App extends Component {
               className='pad-1 flex-none'
               icon={faTrashAlt}
               theme={ICON_BUTTON_THEME.TRANSPARENT_PRIMARY}
+              onClick={() => storageController.clear()}
             />
           </div>
 

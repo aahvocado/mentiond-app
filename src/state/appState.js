@@ -4,9 +4,6 @@ import * as dataUtils from 'data/dataUtils';
 import Model from 'models/Model';
 import CategoryModel from 'models/CategoryModel';
 
-// storageController.clear();
-// storageController.setItem('currentCategoryId', 'test-category-id');
-
 /**
  * holds the highest level information of the state
  */

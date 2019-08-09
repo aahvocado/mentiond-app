@@ -10,7 +10,7 @@ export async function fetchData() {
   const categoryCollection = JSON.parse(storageController.getItem('categoryCollection'));
 
   // use demo data if no existing data
-  if (categoryCollection === undefined) {
+  if (categoryCollection === undefined || categoryCollection === null) {
     return await testData;
   }
 
