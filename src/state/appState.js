@@ -11,6 +11,10 @@ export class AppState extends Model {
   /** @override */
   constructor(newAttributes = {}) {
     super({
+      /** @type {Boolean} */
+      isDevMode: true,
+      /** @type {Boolean} */
+      isDebugMode: true,
       // -- state attributes
       /** @type {Boolean} */
       isLoading: true,

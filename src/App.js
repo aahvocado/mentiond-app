@@ -36,19 +36,22 @@ class App extends Component {
         >
           {/* header */}
           <div id='app-header'
-            className='zindex-1 flex-row aitems-center pad-h-3 pad-v-2'
+            className='zindex-1 flex-row aitems-center pad-h-3 pad-v-2 boxsizing-border'
             style={{
+              height: 55,
               boxShadow:'rgba(212, 227, 232, 1) 0 1px 10px 0',
             }}
           >
             <LogoComponent className='flex-auto' />
 
-            <IconButtonComponent
-              className='pad-1 flex-none'
-              icon={faTrashAlt}
-              theme={ICON_BUTTON_THEME.TRANSPARENT_PRIMARY}
-              onClick={() => storageController.clear()}
-            />
+            { appState.get('isDebugMode') &&
+              <IconButtonComponent
+                className='pad-1 flex-none'
+                icon={faTrashAlt}
+                theme={ICON_BUTTON_THEME.TRANSPARENT_PRIMARY}
+                onClick={() => storageController.clear()}
+              />
+            }
           </div>
 
           {/* body */}
