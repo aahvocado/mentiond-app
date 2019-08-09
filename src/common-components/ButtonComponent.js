@@ -9,12 +9,17 @@ export const BUTTON_THEME = {
     disabled: 'color-gray bg-light-gray',
   },
   TRANSPARENT_SECONDARY: {
-    base: 'bg-transparent color-secondary',
+    base: 'bg-transparent',
+    enabled: 'color-secondary hover:bor-2-secondary focus:bor-2-secondary',
+    disabled: 'color-secondary-lighter',
+  },
+  TRANSPARENT_SECONDARY_DARKER: {
+    base: 'bg-transparent',
     enabled: 'color-secondary-darker hover:bor-2-secondary focus:bor-2-secondary',
-    disabled: 'color-secondary',
+    disabled: 'color-secondary-lighter',
   },
   TRANSPARENT_WHITE: {
-    base: 'bg-transparent color-white',
+    base: 'bg-transparent',
     enabled: 'color-white hover:color-white focus:color-white',
     disabled: 'color-grayest bor-3-grayest',
   },

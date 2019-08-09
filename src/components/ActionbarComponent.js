@@ -26,11 +26,15 @@ export default class ActionbarComponent extends PureComponent {
 
     return (
       <div
-        className={combineClassNames('flex-row bor-t-1-primary-darker', className)}
+        className={combineClassNames('flex-row bg-primary-darker', className)}
+        style={{
+          boxShadow:'0 -1px 10px #80959c',
+        }}
       >
         <ButtonComponent
           className='pad-2'
-          theme={BUTTON_THEME.TRANSPARENT_SECONDARY}
+          theme={BUTTON_THEME.TRANSPARENT_SECONDARY_DARKER}
+          disabled={appState.get('isViewingNewCategory')}
           onClick={this.onClickAddCategory}
         >
           Add Category
