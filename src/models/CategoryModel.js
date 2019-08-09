@@ -1,4 +1,7 @@
 import uuid from 'uuid/v4';
+
+import storageController from 'data/storageController';
+
 import Model from 'models/Model';
 
 import * as mentionableUtils from 'utilities/mentionableUtils';
@@ -60,6 +63,8 @@ export default class CategoryModel extends Model {
       index: list.length,
       id: uuid(),
     });
+
+    this.save();
   }
   /**
    * removes an a new item to the list
@@ -74,6 +79,8 @@ export default class CategoryModel extends Model {
     }
 
     list.splice(itemIdx, 1);
+
+    this.save();
   }
   /**
    * updates the `index` of each item in the list
@@ -105,6 +112,8 @@ export default class CategoryModel extends Model {
     } else {
       item.isComplete = !item.isComplete;
     }
+
+    this.save();
   }
   /**
    * changes the state of completion of an item
@@ -123,6 +132,8 @@ export default class CategoryModel extends Model {
     } else {
       item.isHidden = !item.isHidden;
     }
+
+    this.save();
   }
   /**
    * sorts the the current list with highest number of mentions at the top
@@ -132,6 +143,8 @@ export default class CategoryModel extends Model {
     const sortedList = mentionableUtils.getSortedList(list.slice());
     sortedList.forEach((item, idx) => item.index = idx);
     list.replace(sortedList);
+
+    this.save();
   }
   /**
    * @param {String} itemId
@@ -146,5 +159,13 @@ export default class CategoryModel extends Model {
         item.isFocused = false;
       };
     })
+  }
+  // -- storage utility functions
+  /**
+   * saves this category into storage
+   */
+  save() {
+    const data = this.export();
+    storageController.setItem(this.get('id'), JSON.stringify(data));
   }
 }

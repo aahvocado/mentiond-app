@@ -7,6 +7,8 @@ import CategoryModel from 'models/CategoryModel';
 // storageController.clear();
 // storageController.setItem('currentCategoryId', 'test-category-id');
 
+console.log(window.localStorage);
+
 /**
  * holds the highest level information of the state
  */
@@ -93,6 +95,9 @@ export class AppState extends Model {
   createCategory(newAttributes = {}) {
     const newCategoryModel = new CategoryModel(newAttributes);
     this.get('mentionableCollection').push(newCategoryModel);
+
+    this.save();
+
     return newCategoryModel;
   }
   /**
@@ -110,6 +115,22 @@ export class AppState extends Model {
     this.set({
       currentCategoryModel: categoryModel,
     });
+
+    this.save();
+  }
+  // -- storage functions
+  /**
+   * saves the collection and category into storage
+   */
+  save() {
+    const collection = this.get('mentionableCollection');
+
+    // first save a list of categories
+    const mentionableIdList = collection.map((categoryModel) => categoryModel.get('id'));
+    storageController.setItem('mentionableCollection', JSON.stringify(mentionableIdList));
+
+    // save each category
+    collection.forEach((categoryModel) => categoryModel.save());
   }
 };
 /**
