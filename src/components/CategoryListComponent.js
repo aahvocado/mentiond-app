@@ -21,10 +21,10 @@ function AnimatedList(props) {
     list,
     item => item.id,
     {
-      from: (item) => ({ y: item.index * ITEM_WRAPPER_HEIGHT, opacity: 1}),
+      from: (item) => ({ y: item.index * ITEM_WRAPPER_HEIGHT, opacity: 0}),
       leave: { opacity: 0 },
-      enter: (item) => ({ y: item.index * ITEM_WRAPPER_HEIGHT }),
-      update: (item) => ({ y: item.index * ITEM_WRAPPER_HEIGHT }),
+      enter: (item) => ({ y: item.index * ITEM_WRAPPER_HEIGHT, opacity: 1 }),
+      update: (item) => ({ y: item.index * ITEM_WRAPPER_HEIGHT, opacity: 1 }),
     }
   );
 

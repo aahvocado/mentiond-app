@@ -23,7 +23,7 @@ class NavigationMenu extends Component {
   constructor(props) {
     super(props);
 
-    // this.onClickOverlay = this.onClickOverlay.bind(this);
+    this.onClickCategory = this.onClickCategory.bind(this);
   }
   /** @override */
   render() {
@@ -75,6 +75,7 @@ class NavigationMenu extends Component {
               <CategoryButtonComponent
                 key={`category-item-${categoryModel.get('id')}-key`}
                 categoryModel={categoryModel}
+                onClick={() => this.onClickCategory(categoryModel.get('id'))}
               />
             ))}
           </div>
@@ -82,5 +83,11 @@ class NavigationMenu extends Component {
       </Fragment>
     );
   }
-
+  /**
+   * @param {CategoryId} categoryId
+   */
+  onClickCategory(categoryId) {
+    appState.switchCategory(categoryId);
+    appState.set({isOpenNavMenu: false});
+  }
 });
