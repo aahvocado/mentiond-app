@@ -1,3 +1,4 @@
+import storageController from 'data/storageController';
 import testData from 'data/testData.json';
 
 import CategoryModel from 'models/CategoryModel';
@@ -6,7 +7,16 @@ import CategoryModel from 'models/CategoryModel';
  * @returns {Array}
  */
 export async function fetchData() {
-  return await testData;
+  const categoryCollection = JSON.parse(storageController.getItem('categoryCollection'));
+
+  // use demo data if no existing data
+  if (categoryCollection === undefined) {
+    return await testData;
+  }
+
+  return categoryCollection.map((categoryId) => {
+    return JSON.parse(storageController.getItem(categoryId));
+  })
 }
 /**
  *

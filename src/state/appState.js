@@ -7,8 +7,6 @@ import CategoryModel from 'models/CategoryModel';
 // storageController.clear();
 // storageController.setItem('currentCategoryId', 'test-category-id');
 
-console.log(window.localStorage);
-
 /**
  * holds the highest level information of the state
  */
@@ -26,7 +24,7 @@ export class AppState extends Model {
 
       // -- cache attributes
       /** @type {Array<CategoryModel>} */
-      mentionableCollection: [],
+      categoryCollection: [],
 
       /** @type {Object} */
       ...newAttributes,
@@ -65,11 +63,11 @@ export class AppState extends Model {
     this.set({isLoading: true});
 
     const dataList = await dataUtils.fetchData();
-    const mentionableCollection = dataUtils.parseAllData(dataList);
+    const categoryCollection = dataUtils.parseAllData(dataList);
 
     // cache fetched data
     this.set({
-      mentionableCollection: mentionableCollection,
+      categoryCollection: categoryCollection,
       isLoading: false,
     });
 
@@ -81,8 +79,8 @@ export class AppState extends Model {
     }
 
     // otherwise it can just be the first item in the list
-    if (mentionableCollection.length > 0) {
-      const firstCategoryModel = mentionableCollection[0];
+    if (categoryCollection.length > 0) {
+      const firstCategoryModel = categoryCollection[0];
       this.switchCategory(firstCategoryModel.get('id'));
       return;
     }
@@ -94,7 +92,7 @@ export class AppState extends Model {
    */
   createCategory(newAttributes = {}) {
     const newCategoryModel = new CategoryModel(newAttributes);
-    this.get('mentionableCollection').push(newCategoryModel);
+    this.get('categoryCollection').push(newCategoryModel);
 
     this.save();
 
@@ -106,7 +104,7 @@ export class AppState extends Model {
    * @param {String} categoryId
    */
   switchCategory(categoryId) {
-    const collection = this.get('mentionableCollection');
+    const collection = this.get('categoryCollection');
     const categoryModel = collection.find((model) => model.get('id') === categoryId);
     if (categoryModel === undefined) {
       return;
@@ -123,11 +121,11 @@ export class AppState extends Model {
    * saves the collection and category into storage
    */
   save() {
-    const collection = this.get('mentionableCollection');
+    const collection = this.get('categoryCollection');
 
     // first save a list of categories
     const mentionableIdList = collection.map((categoryModel) => categoryModel.get('id'));
-    storageController.setItem('mentionableCollection', JSON.stringify(mentionableIdList));
+    storageController.setItem('categoryCollection', JSON.stringify(mentionableIdList));
 
     // save each category
     collection.forEach((categoryModel) => categoryModel.save());
