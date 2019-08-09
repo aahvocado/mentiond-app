@@ -29,9 +29,14 @@ class App extends Component {
           }}
         >
           {/* header */}
-          <LogoComponent
-            className='pad-h-3 mar-t-2 adjacent-mar-t-2'
-          />
+          <div id='app-header'
+            className='zindex-1 pad-h-3 pad-v-2'
+            style={{
+              boxShadow:'rgba(212, 227, 232, 1) 0 1px 10px 0',
+            }}
+          >
+            <LogoComponent />
+          </div>
 
           {/* body */}
           <div

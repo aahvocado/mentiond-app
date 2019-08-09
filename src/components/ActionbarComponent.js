@@ -28,7 +28,7 @@ export default class ActionbarComponent extends PureComponent {
       <div
         className={combineClassNames('flex-row bg-primary-darker', className)}
         style={{
-          boxShadow:'0 -1px 10px #80959c',
+          boxShadow:'0 -5px 10px rgba(212, 227, 232, 1)',
         }}
       >
         <ButtonComponent
