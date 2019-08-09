@@ -21,8 +21,8 @@ function AnimatedList(props) {
     list,
     item => item.id,
     {
-      from: (item) => ({ y: item.index * ITEM_WRAPPER_HEIGHT }),
-      leave: { y: 0 },
+      from: (item) => ({ y: item.index * ITEM_WRAPPER_HEIGHT, opacity: 1}),
+      leave: { opacity: 0 },
       enter: (item) => ({ y: item.index * ITEM_WRAPPER_HEIGHT }),
       update: (item) => ({ y: item.index * ITEM_WRAPPER_HEIGHT }),
     }
@@ -42,6 +42,7 @@ function AnimatedList(props) {
             style={{
               height: ITEM_HEIGHT,
               transform: props.y.interpolate(y => `translateY(${y}px)`),
+              opacity: props.opacity,
             }}
             {...item}
           />
