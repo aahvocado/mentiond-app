@@ -68,7 +68,7 @@ class NavigationMenu extends Component {
               Categories
             </h3>
 
-            <div className='flex-col mar-t-3 width-full adjacent-mar-t-2'>
+            <div className='flex-col overflow-auto mar-t-3 width-full adjacent-mar-t-2'>
               { categoryCollection.map((categoryModel) => (
                 <CategoryButtonComponent
                   key={`category-item-${categoryModel.get('id')}-key`}

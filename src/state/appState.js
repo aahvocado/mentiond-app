@@ -100,9 +100,8 @@ export class AppState extends Model {
       return;
     }
 
-    this.set({
-      currentCategoryModel: categoryModel,
-    });
+    this.set({currentCategoryModel: categoryModel});
+    storageController.setItem('currentCategoryId', categoryId);
 
     this.save();
   }
