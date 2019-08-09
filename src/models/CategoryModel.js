@@ -38,6 +38,25 @@ export default class CategoryModel extends Model {
       ...newAttributes,
     });
 
+    const _this = this;
+    this.extendObservable({
+      /** @type {Boolean} */
+      get isNew() {
+        // categories with items are not new
+        if (_this.get('list').length > 0) {
+          return false;
+        }
+
+        // named categories are not new
+        const currentName = _this.get('name');
+        if (currentName !== '') {
+          return false;
+        }
+
+        return true;
+      },
+    });
+
     this.updateIndices();
   }
   /**

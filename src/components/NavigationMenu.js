@@ -15,11 +15,6 @@ import appState from 'state/appState';
 export default observer(
 class NavigationMenu extends Component {
   /** @override */
-  static defaultProps = {
-    /** @type {Boolean} */
-    // isActive: false,
-  };
-  /** @override */
   constructor(props) {
     super(props);
 
@@ -27,12 +22,8 @@ class NavigationMenu extends Component {
   }
   /** @override */
   render() {
-    const {
-      // isActive,
-    } = this.props;
-
     const isActive = appState.get('isOpenNavMenu');
-    const categoryCollection = appState.get('categoryCollection');
+    const categoryCollection = appState.get('categoryCollection').filter((categoryModel) => !categoryModel.get('isNew'));
 
     return (
       <Fragment>

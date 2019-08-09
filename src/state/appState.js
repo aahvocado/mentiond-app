@@ -40,20 +40,9 @@ export class AppState extends Model {
           return false;
         }
 
-        // categories with items are not new
-        if (currentCategoryModel.get('list').length > 0) {
-          return false;
-        }
-
-        // named categories are not new
-        const currentName = currentCategoryModel.get('name');
-        if (currentName !== '') {
-          return false;
-        }
-
-        return true;
+        return currentCategoryModel.get('isNew');
       },
-    })
+    });
 
     this.onInitialized();
   }
@@ -123,13 +112,14 @@ export class AppState extends Model {
    */
   save() {
     const collection = this.get('categoryCollection');
+    const cleanCollection = collection.filter((categoryModel) => !categoryModel.get('isNew'));
 
     // first save a list of categories
-    const mentionableIdList = collection.map((categoryModel) => categoryModel.get('id'));
+    const mentionableIdList = cleanCollection.map((categoryModel) => categoryModel.get('id'));
     storageController.setItem('categoryCollection', JSON.stringify(mentionableIdList));
 
     // save each category
-    collection.forEach((categoryModel) => categoryModel.save());
+    cleanCollection.forEach((categoryModel) => categoryModel.save());
   }
 };
 /**

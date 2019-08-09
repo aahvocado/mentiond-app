@@ -28,6 +28,11 @@ window.addEventListener('keydown', (evt) => {
     return;
   }
 
+  // m
+  if (evt.keyCode === keycodes.m) {
+    appState.set({isOpenNavMenu: !appState.get('isOpenNavMenu')});
+  }
+
   // only devs get super cool hotkeys
   if (!appState.get('isDevMode')) {
     return;
