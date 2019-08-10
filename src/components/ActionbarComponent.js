@@ -29,7 +29,7 @@ export default class ActionbarComponent extends PureComponent {
 
     return (
       <div
-        className={combineClassNames('flex-row bg-primary-darker', className)}
+        className={combineClassNames('flex-row jcontent-end bg-primary-darker', className)}
         style={{
           boxShadow:'0 -5px 10px rgba(212, 227, 232, 1)',
         }}
@@ -40,7 +40,7 @@ export default class ActionbarComponent extends PureComponent {
           disabled={!canAddNewCategory}
           onClick={this.onClickAddCategory}
         >
-          Add Category
+          New Category
         </ButtonComponent>
       </div>
     );

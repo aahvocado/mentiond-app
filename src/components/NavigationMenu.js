@@ -6,6 +6,7 @@ import {
   faCode,
   faCodeBranch,
   faEnvelope,
+  faTrash,
   faTrashAlt,
  } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -27,7 +28,8 @@ class NavigationMenu extends Component {
   constructor(props) {
     super(props);
 
-    this.onClickCategory = this.onClickCategory.bind(this);
+    this.onClickRemoveCategory = this.onClickRemoveCategory.bind(this);
+    this.onClickSelectCategory = this.onClickSelectCategory.bind(this);
 
     this.state = {
       /** @type {Boolean} */
@@ -85,10 +87,11 @@ class NavigationMenu extends Component {
 
             <div className='flex-col overflow-auto mar-t-3 width-full adjacent-mar-t-2'>
               { categoryCollection.map((categoryModel) => (
-                <CategoryButtonComponent
+                <CategoryButtonListItem
                   key={`category-item-${categoryModel.get('id')}-key`}
                   categoryModel={categoryModel}
-                  onClick={() => this.onClickCategory(categoryModel.get('id'))}
+                  onClickRemove={() => this.onClickRemoveCategory(categoryModel.get('id'))}
+                  onClickSelect={() => this.onClickSelectCategory(categoryModel.get('id'))}
                 />
               ))}
             </div>
@@ -150,8 +153,44 @@ class NavigationMenu extends Component {
   /**
    * @param {CategoryId} categoryId
    */
-  onClickCategory(categoryId) {
+  onClickRemoveCategory(categoryId) {
+    // appState.switchCategory(categoryId);
+    // appState.set({isOpenNavMenu: false});
+  }
+  /**
+   * @param {CategoryId} categoryId
+   */
+  onClickSelectCategory(categoryId) {
     appState.switchCategory(categoryId);
     appState.set({isOpenNavMenu: false});
   }
 });
+/**
+ *
+ */
+class CategoryButtonListItem extends Component {
+  /** @override */
+  render() {
+    const {
+      categoryModel,
+      onClickRemove,
+      onClickSelect,
+    } = this.props;
+
+    return (
+      <div className='flex-row adjacent-mar-t-1'>
+        <IconButtonComponent
+          className='borradius-2 bor-1-gray pad-h-2 pad-v-1 flex-none mar-r-1'
+          icon={faTrash}
+          onClick={onClickRemove}
+        />
+
+        <CategoryButtonComponent
+          key={`category-item-${categoryModel.get('id')}-key`}
+          categoryModel={categoryModel}
+          onClick={onClickSelect}
+        />
+      </div>
+    );
+  }
+}

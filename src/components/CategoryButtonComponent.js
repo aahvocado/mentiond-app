@@ -19,7 +19,7 @@ export default class CategoryButtonComponent extends PureComponent {
 
     return (
       <ButtonComponent
-        className='borradius-2 bor-1-gray pad-2 adjacent-mar-t-1'
+        className='flex-auto borradius-2 bor-1-gray pad-2'
         theme={BUTTON_THEME.NONE}
         {...otherProps}
       >
