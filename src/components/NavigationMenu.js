@@ -1,7 +1,13 @@
 import React, { Component, Fragment } from 'react';
 import { observer } from 'mobx-react';
 
-import { faBars, faTrashAlt } from '@fortawesome/free-solid-svg-icons';
+import {
+  faBars,
+  faCode,
+  faCodeBranch,
+  faEnvelope,
+  faTrashAlt,
+ } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 import ButtonComponent, { BUTTON_THEME } from 'common-components/ButtonComponent';
@@ -22,9 +28,18 @@ class NavigationMenu extends Component {
     super(props);
 
     this.onClickCategory = this.onClickCategory.bind(this);
+
+    this.state = {
+      /** @type {Boolean} */
+      isShowingEmail: false,
+    }
   }
   /** @override */
   render() {
+    const {
+      isShowingEmail,
+    } = this.state;
+
     const isActive = appState.get('isOpenNavMenu');
     const categoryCollection = appState.get('categoryCollection').filter((categoryModel) => !categoryModel.get('isNew'));
 
@@ -77,6 +92,45 @@ class NavigationMenu extends Component {
                 />
               ))}
             </div>
+          </div>
+
+          {/* info section */}
+          <div className='flex-none width-full adjacent-mar-t-2'>
+            <div className='fsize-3 adjacent-mar-t-1'>
+              Daniel Xiao made this
+            </div>
+
+            { isShowingEmail &&
+              <div className='fsize-3 adjacent-mar-t-1'
+              >
+                daniel.b.xiao@gmail.com
+              </div>
+            }
+
+            <div className='flex-row-center adjacent-mar-t-1'>
+              <IconButtonComponent
+                className='adjacent-mar-l-2'
+                icon={faCodeBranch}
+                onClick={() => {
+                  window.open('https://github.com/aahvocado/mentiond-app', '_blank');
+                }}
+              />
+
+              <IconButtonComponent
+                className='adjacent-mar-l-2'
+                icon={faCode}
+                onClick={() => {
+                  window.open('http://elementten.com/', '_blank');
+                }}
+              />
+
+              <IconButtonComponent
+                className='adjacent-mar-l-2'
+                icon={faEnvelope}
+                onClick={() => this.setState({isShowingEmail: !isShowingEmail})}
+              />
+            </div>
+
           </div>
 
           {/* secret menu options */}
