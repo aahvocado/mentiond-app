@@ -67,6 +67,7 @@ class CategoryListComponent extends Component {
     super(props);
 
     this.onClickItem = this.onClickItem.bind(this);
+    this.onDoubleClickItem = this.onDoubleClickItem.bind(this);
     this.onClickPlusItem = this.onClickPlusItem.bind(this);
     this.onCompleteItem = this.onCompleteItem.bind(this);
     this.onUnCompleteItem = this.onUnCompleteItem.bind(this);
@@ -84,12 +85,13 @@ class CategoryListComponent extends Component {
     const list = categoryModel.get('list');
     const boundList = list.map((item) => ({
       ...item,
-      onClickItem: () => this.onClickItem(item.id),
-      onClickPlus: () => this.onClickPlusItem(item.id),
-      onComplete: this.onCompleteItem,
-      onUnComplete: this.onUnCompleteItem,
-      onHide: this.onHideItem,
-      onUnHide: this.onUnHideItem,
+      onClickItem: () => this.onClickItem(item),
+      onDoubleClickItem: () => this.onDoubleClickItem(item),
+      onClickPlus: () => this.onClickPlusItem(item),
+      onComplete: (gestureEvent) => this.onCompleteItem(item, gestureEvent),
+      onUnComplete: (gestureEvent) => this.onUnCompleteItem(item, gestureEvent),
+      onHide: (gestureEvent) => this.onHideItem(item, gestureEvent),
+      onUnHide: (gestureEvent) => this.onUnHideItem(item, gestureEvent),
     }));
 
     return (
@@ -100,71 +102,78 @@ class CategoryListComponent extends Component {
     );
   }
   /**
-   * @param {String} itemId
+   * @param {Object} item
    */
-  onClickItem(itemId) {
+  onClickItem(item) {
     const {categoryModel} = this.props;
 
     // mark the item as the focused one
-    categoryModel.focusItem(itemId);
+    categoryModel.focusItem(item.id);
   }
   /**
-   * @param {String} itemId
+   * @param {Object} item
    */
-  onClickPlusItem(itemId) {
+  onDoubleClickItem(item) {
+    const {categoryModel} = this.props;
+    console.log('onDoubleClickItem()');
+  }
+  /**
+   * @param {Object} item
+   */
+  onClickPlusItem(item) {
     const {categoryModel} = this.props;
     const list = categoryModel.get('list');
 
     // mark the item as the focused one
-    categoryModel.focusItem(itemId);
+    categoryModel.focusItem(item.id);
 
     // update the mentions count
-    const foundItem = list.find((item) => item.id === itemId);
+    const foundItem = list.find((listItem) => listItem.id === item.id);
     foundItem.mentions += 1;
 
     // then reupdate indices
     categoryModel.updateIndices();
   }
   /**
-   * @param {String} itemId
+   * @param {Object} item
    * @param {GestureEvent} gestureEvent
    */
-  onCompleteItem(itemId, gestureEvent) {
+  onCompleteItem(item, gestureEvent) {
     const {categoryModel} = this.props;
-    categoryModel.toggleItemComplete(itemId, true);
+    categoryModel.toggleItemComplete(item.id, true);
 
     // then reupdate indices
     categoryModel.updateIndices();
   }
   /**
-   * @param {String} itemId
+   * @param {Object} item
    * @param {GestureEvent} gestureEvent
    */
-  onUnCompleteItem(itemId, gestureEvent) {
+  onUnCompleteItem(item, gestureEvent) {
     const {categoryModel} = this.props;
-    categoryModel.toggleItemComplete(itemId, false);
+    categoryModel.toggleItemComplete(item.id, false);
 
     // then reupdate indices
     categoryModel.updateIndices();
   }
   /**
-   * @param {String} itemId
+   * @param {Object} item
    * @param {GestureEvent} gestureEvent
    */
-  onHideItem(itemId, gestureEvent) {
+  onHideItem(item, gestureEvent) {
     const {categoryModel} = this.props;
-    categoryModel.toggleItemHidden(itemId, true);
+    categoryModel.toggleItemHidden(item.id, true);
 
     // then reupdate indices
     categoryModel.updateIndices();
   }
   /**
-   * @param {String} itemId
+   * @param {Object} item
    * @param {GestureEvent} gestureEvent
    */
-  onUnHideItem(itemId, gestureEvent) {
+  onUnHideItem(item, gestureEvent) {
     const {categoryModel} = this.props;
-    categoryModel.toggleItemHidden(itemId, false);
+    categoryModel.toggleItemHidden(item.id, false);
 
     // then reupdate indices
     categoryModel.updateIndices();

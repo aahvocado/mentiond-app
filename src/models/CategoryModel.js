@@ -145,7 +145,6 @@ export default class CategoryModel extends Model {
     if (item === undefined) {
       return;
     }
-    console.log('toggleItemHidden', willBeHidden);
 
     if (willBeHidden !== undefined) {
       item.isHidden = Boolean(willBeHidden);

@@ -30,6 +30,8 @@ export default class CategoryListItemComponent extends PureComponent {
     /** @type {Function} */
     onClickItem: () => {},
     /** @type {Function} */
+    onDoubleClickItem: () => {},
+    /** @type {Function} */
     onClickPlus: () => {},
     /** @type {Function} */
     onComplete: () => {},
@@ -58,6 +60,7 @@ export default class CategoryListItemComponent extends PureComponent {
       label,
       style,
       onClickItem,
+      onDoubleClickItem,
       onClickPlus,
     } = this.props;
 
@@ -101,6 +104,7 @@ export default class CategoryListItemComponent extends PureComponent {
               label={label}
               mentions={mentions}
               onClickItem={onClickItem}
+              onDoubleClickItem={onDoubleClickItem}
               onClickPlus={onClickPlus}
 
               shouldShowMinVersion={shouldShowMinVersion}
@@ -124,7 +128,6 @@ export default class CategoryListItemComponent extends PureComponent {
    */
   onSlideRight(gestureEvent) {
     const {
-      id,
       isComplete,
       onComplete,
       onUnComplete,
@@ -132,9 +135,9 @@ export default class CategoryListItemComponent extends PureComponent {
 
     gestureEvent.cancel();
     if (isComplete) {
-      onUnComplete(id, gestureEvent);
+      onUnComplete(gestureEvent);
     } else {
-      onComplete(id, gestureEvent);
+      onComplete(gestureEvent);
     }
   }
   /**
@@ -142,7 +145,6 @@ export default class CategoryListItemComponent extends PureComponent {
    */
   onSlideLeft(gestureEvent) {
     const {
-      id,
       isHidden,
       onHide,
       onUnHide,
@@ -151,9 +153,9 @@ export default class CategoryListItemComponent extends PureComponent {
     gestureEvent.cancel();
 
     if (isHidden) {
-      onUnHide(id, gestureEvent);
+      onUnHide(gestureEvent);
     } else {
-      onHide(id, gestureEvent);
+      onHide(gestureEvent);
     }
   }
 }
@@ -178,6 +180,8 @@ class CategoryListItemBodyComponent extends PureComponent {
     /** @type {Function} */
     onClickItem: () => {},
     /** @type {Function} */
+    onDoubleClickItem: () => {},
+    /** @type {Function} */
     onClickPlus: () => {},
     //
     /** @type {Boolean} */
@@ -194,6 +198,7 @@ class CategoryListItemBodyComponent extends PureComponent {
       mentions,
       onClickItem,
       onClickPlus,
+      onDoubleClickItem,
       shouldShowMinVersion,
     } = this.props;
 
@@ -219,6 +224,7 @@ class CategoryListItemBodyComponent extends PureComponent {
         <div
           className='flex-row-center height-full flex-auto boxsizing-border pad-2 adjacent-mar-l-3'
           onClick={onClickItem}
+          onDoubleClick={onDoubleClickItem}
         >
           <div className='flex-auto text-ellipsis fsize-4 adjacent-mar-l-3'>{label}</div>
           <div className='flex-none fsize-3 adjacent-mar-l-3'>{`${mentions} mentions`}</div>
