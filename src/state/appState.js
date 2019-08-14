@@ -89,6 +89,20 @@ export class AppState extends Model {
     return newCategoryModel;
   }
   /**
+   * @param {String} categoryId
+   */
+  deleteCategory(categoryId) {
+    const collection = this.get('categoryCollection');
+    const categoryIdx = collection.findIndex((model) => model.get('id') === categoryId);
+    if (categoryIdx === undefined) {
+      return;
+    }
+
+    collection.splice(categoryIdx, 1);
+
+    this.save();
+  }
+  /**
    * change currently viewed category
    *
    * @param {String} categoryId

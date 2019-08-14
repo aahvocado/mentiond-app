@@ -154,8 +154,7 @@ class NavigationMenu extends Component {
    * @param {CategoryId} categoryId
    */
   onClickRemoveCategory(categoryId) {
-    // appState.switchCategory(categoryId);
-    // appState.set({isOpenNavMenu: false});
+    appState.deleteCategory(categoryId);
   }
   /**
    * @param {CategoryId} categoryId
