@@ -133,7 +133,6 @@ class NavigationMenu extends Component {
                 onClick={() => this.setState({isShowingEmail: !isShowingEmail})}
               />
             </div>
-
           </div>
 
           {/* secret menu options */}

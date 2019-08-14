@@ -6,7 +6,6 @@ import CategoryListItemComponent from 'components/CategoryListItemComponent';
 
 import combineClassNames from 'utilities/combineClassNames';
 
-const CONTAINER_HEIGHT = '60vh';
 const ITEM_PADDING = 10;
 const ITEM_HEIGHT = 60;
 const ITEM_WRAPPER_HEIGHT = ITEM_HEIGHT + ITEM_PADDING;
@@ -32,7 +31,7 @@ function AnimatedList(props) {
     <div
       className={combineClassNames('', className)}
       style={{
-        height: CONTAINER_HEIGHT,
+        height: list.length * ITEM_WRAPPER_HEIGHT,
       }}
     >
       { animatedItems.map(({item, props}) => {
