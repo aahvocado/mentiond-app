@@ -100,6 +100,14 @@ export class AppState extends Model {
 
     collection.splice(categoryIdx, 1);
 
+    // if we just deleted the category we are looking at,
+    //  create a new category
+    if (this.get('currentCategoryModel').get('id') === categoryId) {
+      const newCategoryModel = this.createCategory();
+      this.switchCategory(newCategoryModel.get('id'));
+      return;
+    }
+
     this.save();
   }
   /**
