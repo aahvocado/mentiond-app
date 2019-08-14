@@ -97,7 +97,7 @@ export default class CategoryListItemComponent extends PureComponent {
               isHidden={isHidden}
               label={label}
               mentions={mentions}
-              onClick={onClickPlus}
+              onClickPlus={onClickPlus}
 
               shouldShowMinVersion={shouldShowMinVersion}
             />
@@ -143,7 +143,6 @@ export default class CategoryListItemComponent extends PureComponent {
       onHide,
       onUnHide,
     } = this.props;
-    console.log('onSlideLeft()', isHidden);
 
     gestureEvent.cancel();
 

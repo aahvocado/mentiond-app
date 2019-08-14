@@ -152,7 +152,6 @@ class CategoryListComponent extends Component {
    * @param {GestureEvent} gestureEvent
    */
   onUnHideItem(itemId, gestureEvent) {
-    console.log('onUnHideItem()');
     const {categoryModel} = this.props;
     categoryModel.toggleItemHidden(itemId, false);
 
