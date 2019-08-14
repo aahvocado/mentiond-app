@@ -67,7 +67,6 @@ class CategoryListComponent extends Component {
     super(props);
 
     this.onClickItem = this.onClickItem.bind(this);
-    this.onDoubleClickItem = this.onDoubleClickItem.bind(this);
     this.onClickPlusItem = this.onClickPlusItem.bind(this);
     this.onCompleteItem = this.onCompleteItem.bind(this);
     this.onUnCompleteItem = this.onUnCompleteItem.bind(this);
@@ -85,9 +84,8 @@ class CategoryListComponent extends Component {
     const list = categoryModel.get('list');
     const boundList = list.map((item) => ({
       ...item,
-      onClickItem: () => this.onClickItem(item),
-      onDoubleClickItem: () => this.onDoubleClickItem(item),
-      onClickPlus: () => this.onClickPlusItem(item),
+      onClickItem: (clickEvt) => this.onClickItem(item, clickEvt),
+      onClickPlus: (clickEvt) => this.onClickPlusItem(item, clickEvt),
       onComplete: (gestureEvent) => this.onCompleteItem(item, gestureEvent),
       onUnComplete: (gestureEvent) => this.onUnCompleteItem(item, gestureEvent),
       onHide: (gestureEvent) => this.onHideItem(item, gestureEvent),
@@ -107,15 +105,11 @@ class CategoryListComponent extends Component {
   onClickItem(item) {
     const {categoryModel} = this.props;
 
-    // mark the item as the focused one
-    categoryModel.focusItem(item.id);
-  }
-  /**
-   * @param {Object} item
-   */
-  onDoubleClickItem(item) {
-    const {categoryModel} = this.props;
-    console.log('onDoubleClickItem()');
+    // mark the item as the focused if not
+    if (!item.isFocused) {
+      categoryModel.focusItem(item.id);
+      return;
+    }
   }
   /**
    * @param {Object} item
