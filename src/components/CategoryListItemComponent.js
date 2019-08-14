@@ -12,7 +12,7 @@ export default class CategoryListItemComponent extends PureComponent {
   /** @override */
   static defaultProps = {
     /** @type {String} */
-    itemClassName: 'width-full boxsizing-border flex-row aitems-center overflow-hidden fontfamily-secondary borradius-2 pad-2',
+    itemClassName: 'fontfamily-secondary borradius-2 width-full height-full',
     /** @type {Number} */
     mentions: 0,
     /** @type {String} */
@@ -27,6 +27,8 @@ export default class CategoryListItemComponent extends PureComponent {
     isHidden: false,
     /** @type {String} */
     label: '',
+    /** @type {Function} */
+    onClickItem: () => {},
     /** @type {Function} */
     onClickPlus: () => {},
     /** @type {Function} */
@@ -55,6 +57,7 @@ export default class CategoryListItemComponent extends PureComponent {
       mentions,
       label,
       style,
+      onClickItem,
       onClickPlus,
     } = this.props;
 
@@ -97,13 +100,14 @@ export default class CategoryListItemComponent extends PureComponent {
               isHidden={isHidden}
               label={label}
               mentions={mentions}
+              onClickItem={onClickItem}
               onClickPlus={onClickPlus}
 
               shouldShowMinVersion={shouldShowMinVersion}
             />
           </SlideGestureComponent>
 
-          <div className={combineClassNames(itemClassName, 'height-full color-white')}
+          <div className={combineClassNames(itemClassName, 'flex-row aitems-center pad-2 boxsizing-border height-full color-white')}
             style={{
               background: 'linear-gradient(90deg, rgba(0,179,1,1) 0%, rgba(204,255,0,1) 25%, rgba(255,139,0,1) 75%, rgba(255,0,0,1) 100%)',
             }}
@@ -172,6 +176,8 @@ class CategoryListItemBodyComponent extends PureComponent {
     /** @type {Number} */
     mentions: 0,
     /** @type {Function} */
+    onClickItem: () => {},
+    /** @type {Function} */
     onClickPlus: () => {},
     //
     /** @type {Boolean} */
@@ -186,6 +192,7 @@ class CategoryListItemBodyComponent extends PureComponent {
       isHidden,
       label,
       mentions,
+      onClickItem,
       onClickPlus,
       shouldShowMinVersion,
     } = this.props;
@@ -206,14 +213,21 @@ class CategoryListItemBodyComponent extends PureComponent {
 
     return (
       <div
-        className={combineClassNames(className, 'height-full color-grayest', borderClassName, hiddenClassName)}
+        className={combineClassNames('boxsizing-border flex-row aitems-center overflow-hidden', className, borderClassName, hiddenClassName)}
       >
-        <div className='flex-auto text-ellipsis fsize-4 adjacent-mar-l-3'>{label}</div>
-        <div className='flex-none fsize-3 adjacent-mar-l-3'>{`${mentions} mentions`}</div>
+        {/* left container */}
+        <div
+          className='flex-row-center height-full flex-auto boxsizing-border pad-2 adjacent-mar-l-3'
+          onClick={onClickItem}
+        >
+          <div className='flex-auto text-ellipsis fsize-4 adjacent-mar-l-3'>{label}</div>
+          <div className='flex-none fsize-3 adjacent-mar-l-3'>{`${mentions} mentions`}</div>
+        </div>
 
+        {/* right container - actions */}
         { !shouldShowMinVersion &&
           <button
-            className='flex-none cursor-pointer fsize-4 pad-1 adjacent-mar-l-3'
+            className='flex-none cursor-pointer fsize-4 pad-3 adjacent-mar-l-3'
             disabled={isHidden || isComplete}
             onClick={onClickPlus}
           >

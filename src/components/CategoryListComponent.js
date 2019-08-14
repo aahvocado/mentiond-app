@@ -66,6 +66,7 @@ class CategoryListComponent extends Component {
   constructor(props) {
     super(props);
 
+    this.onClickItem = this.onClickItem.bind(this);
     this.onClickPlusItem = this.onClickPlusItem.bind(this);
     this.onCompleteItem = this.onCompleteItem.bind(this);
     this.onUnCompleteItem = this.onUnCompleteItem.bind(this);
@@ -83,6 +84,7 @@ class CategoryListComponent extends Component {
     const list = categoryModel.get('list');
     const boundList = list.map((item) => ({
       ...item,
+      onClickItem: () => this.onClickItem(item.id),
       onClickPlus: () => this.onClickPlusItem(item.id),
       onComplete: this.onCompleteItem,
       onUnComplete: this.onUnCompleteItem,
@@ -96,6 +98,15 @@ class CategoryListComponent extends Component {
         list={boundList}
       />
     );
+  }
+  /**
+   * @param {String} itemId
+   */
+  onClickItem(itemId) {
+    const {categoryModel} = this.props;
+
+    // mark the item as the focused one
+    categoryModel.focusItem(itemId);
   }
   /**
    * @param {String} itemId
