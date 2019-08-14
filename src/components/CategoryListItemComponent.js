@@ -32,14 +32,18 @@ export default class CategoryListItemComponent extends PureComponent {
     /** @type {Function} */
     onComplete: () => {},
     /** @type {Function} */
+    onUnComplete: () => {},
+    /** @type {Function} */
     onHide: () => {},
+    /** @type {Function} */
+    onUnHide: () => {},
   };
   /** @override */
   constructor(props) {
     super(props);
 
-    this.onSlideComplete = this.onSlideComplete.bind(this);
-    this.onSlideHide = this.onSlideHide.bind(this);
+    this.onSlideRight = this.onSlideRight.bind(this);
+    this.onSlideLeft = this.onSlideLeft.bind(this);
   }
   /** @override */
   render() {
@@ -55,6 +59,9 @@ export default class CategoryListItemComponent extends PureComponent {
     } = this.props;
 
     const shouldShowMinVersion = isComplete || isHidden;
+
+    const leftLabel = isComplete ? 'Un-complete' : 'Complete';
+    const rightLabel = isHidden ? 'Un-hide' : 'Hide';
 
     return (
       <animated.div
@@ -77,11 +84,11 @@ export default class CategoryListItemComponent extends PureComponent {
               bottom: 0,
               zIndex: 2,
             }}
-            enabled={!isHidden && !isComplete}
+            // enabled={!isHidden && !isComplete}
             min={[-110, 0]}
             max={[110, 0]}
-            onSlideXMin={this.onSlideHide}
-            onSlideXMax={this.onSlideComplete}
+            onSlideXMin={this.onSlideLeft}
+            onSlideXMax={this.onSlideRight}
           >
             <CategoryListItemBodyComponent
               className={itemClassName}
@@ -101,8 +108,8 @@ export default class CategoryListItemComponent extends PureComponent {
               background: 'linear-gradient(90deg, rgba(0,179,1,1) 0%, rgba(204,255,0,1) 25%, rgba(255,139,0,1) 75%, rgba(255,0,0,1) 100%)',
             }}
           >
-            <div className='flex-auto talign-left'>Complete</div>
-            <div className='flex-auto talign-right'>Hide</div>
+            <div className='flex-auto talign-left'>{leftLabel}</div>
+            <div className='flex-auto talign-right'>{rightLabel}</div>
           </div>
         </div>
       </animated.div>
@@ -111,26 +118,40 @@ export default class CategoryListItemComponent extends PureComponent {
   /**
    * @param {GestureEvent} gestureEvent
    */
-  onSlideComplete(gestureEvent) {
+  onSlideRight(gestureEvent) {
     const {
       id,
+      isComplete,
       onComplete,
+      onUnComplete,
     } = this.props;
 
     gestureEvent.cancel();
-    onComplete(id, gestureEvent);
+    if (isComplete) {
+      onUnComplete(id, gestureEvent);
+    } else {
+      onComplete(id, gestureEvent);
+    }
   }
   /**
    * @param {GestureEvent} gestureEvent
    */
-  onSlideHide(gestureEvent) {
+  onSlideLeft(gestureEvent) {
     const {
       id,
+      isHidden,
       onHide,
+      onUnHide,
     } = this.props;
+    console.log('onSlideLeft()', isHidden);
 
     gestureEvent.cancel();
-    onHide(id, gestureEvent);
+
+    if (isHidden) {
+      onUnHide(id, gestureEvent);
+    } else {
+      onHide(id, gestureEvent);
+    }
   }
 }
 /**

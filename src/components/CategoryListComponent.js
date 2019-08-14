@@ -68,7 +68,9 @@ class CategoryListComponent extends Component {
 
     this.onClickPlusItem = this.onClickPlusItem.bind(this);
     this.onCompleteItem = this.onCompleteItem.bind(this);
+    this.onUnCompleteItem = this.onUnCompleteItem.bind(this);
     this.onHideItem = this.onHideItem.bind(this);
+    this.onUnHideItem = this.onUnHideItem.bind(this);
   }
   /** @override */
   render() {
@@ -83,7 +85,9 @@ class CategoryListComponent extends Component {
       ...item,
       onClickPlus: () => this.onClickPlusItem(item.id),
       onComplete: this.onCompleteItem,
+      onUnComplete: this.onUnCompleteItem,
       onHide: this.onHideItem,
+      onUnHide: this.onUnHideItem,
     }));
 
     return (
@@ -107,7 +111,7 @@ class CategoryListComponent extends Component {
     const foundItem = list.find((item) => item.id === itemId);
     foundItem.mentions += 1;
 
-    // then resort
+    // then reupdate indices
     categoryModel.updateIndices();
   }
   /**
@@ -118,7 +122,18 @@ class CategoryListComponent extends Component {
     const {categoryModel} = this.props;
     categoryModel.toggleItemComplete(itemId, true);
 
-    // then resort
+    // then reupdate indices
+    categoryModel.updateIndices();
+  }
+  /**
+   * @param {String} itemId
+   * @param {GestureEvent} gestureEvent
+   */
+  onUnCompleteItem(itemId, gestureEvent) {
+    const {categoryModel} = this.props;
+    categoryModel.toggleItemComplete(itemId, false);
+
+    // then reupdate indices
     categoryModel.updateIndices();
   }
   /**
@@ -129,7 +144,19 @@ class CategoryListComponent extends Component {
     const {categoryModel} = this.props;
     categoryModel.toggleItemHidden(itemId, true);
 
-    // then resort
+    // then reupdate indices
+    categoryModel.updateIndices();
+  }
+  /**
+   * @param {String} itemId
+   * @param {GestureEvent} gestureEvent
+   */
+  onUnHideItem(itemId, gestureEvent) {
+    console.log('onUnHideItem()');
+    const {categoryModel} = this.props;
+    categoryModel.toggleItemHidden(itemId, false);
+
+    // then reupdate indices
     categoryModel.updateIndices();
   }
 });
