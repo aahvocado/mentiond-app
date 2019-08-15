@@ -28,6 +28,7 @@ class NavigationMenu extends Component {
   constructor(props) {
     super(props);
 
+    this.onClickAddCategory = this.onClickAddCategory.bind(this);
     this.onClickRemoveCategory = this.onClickRemoveCategory.bind(this);
     this.onClickSelectCategory = this.onClickSelectCategory.bind(this);
 
@@ -84,6 +85,15 @@ class NavigationMenu extends Component {
             <h3 className='color-grayer adjacent-mar-t-2'>
               Categories
             </h3>
+
+            <ButtonComponent
+              className='width-full borradius-2 bor-1-gray pad-2 flex-none adjacent-mar-t-2'
+              theme={BUTTON_THEME.NONE}
+              disabled={appState.get('isViewingNewCategory')}
+              onClick={this.onClickAddCategory}
+            >
+              New Category
+            </ButtonComponent>
 
             <div className='flex-col overflow-auto mar-t-3 width-full adjacent-mar-t-2'>
               { categoryCollection.map((categoryModel) => (
@@ -160,6 +170,14 @@ class NavigationMenu extends Component {
    */
   onClickSelectCategory(categoryId) {
     appState.switchCategory(categoryId);
+    appState.set({isOpenNavMenu: false});
+  }
+  /**
+   *
+   */
+  onClickAddCategory() {
+    const newCategoryModel = appState.createCategory();
+    appState.switchCategory(newCategoryModel.get('id'));
     appState.set({isOpenNavMenu: false});
   }
 });
