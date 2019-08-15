@@ -52,6 +52,7 @@ class App extends Component {
           {/* footer */}
           <ActionbarComponent
             className='zindex-1 pad-h-3 pad-v-1 flex-none'
+            isInputDisabled={appState.get('isViewingNewCategory')}
           />
         </div>
       </BrowserRouter>

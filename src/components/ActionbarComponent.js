@@ -21,12 +21,15 @@ export default class ActionbarComponent extends PureComponent {
     this.state = {
       /** @type {String} */
       searchValue: '',
+      /** @type {Boolean} */
+      isInputDisabled: false,
     }
   }
   /** @override */
   render() {
     const {
       className,
+      isInputDisabled,
     } = this.props;
 
     const {
@@ -46,15 +49,16 @@ export default class ActionbarComponent extends PureComponent {
           onSubmit={this.onClickAddItem}
         >
           <input
-            className='fsize-3 bg-white borradius-l-2 flex-auto boxsizing-border pad-v-1 pad-h-2'
+            className={combineClassNames('fsize-3 bg-white borradius-l-2 flex-auto boxsizing-border pad-v-1 pad-h-2', isInputDisabled ? 'bg-light-gray' : '')}
             placeholder='Add a Mentionable...'
             value={searchValue}
+            disabled={isInputDisabled}
             onChange={(evt) => this.setState({searchValue: evt.target.value})}
           />
 
           <ButtonComponent
             className='fsize-3 flex-none borradius-r-2 talign-center'
-            disabled={searchValue.length <= 0}
+            disabled={searchValue.length <= 0 || isInputDisabled}
             onClick={this.onClickAddItem}
           >
             Add
