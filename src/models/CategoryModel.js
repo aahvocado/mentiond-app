@@ -32,6 +32,8 @@ export default class CategoryModel extends Model {
       name: '',
       /** @type {String} */
       id: uuid(),
+      /** @type {Number} */
+      index: -1,
       /** @type {Array} */
       list: [],
       /** @type {Object} */

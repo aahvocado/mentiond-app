@@ -81,8 +81,14 @@ export class AppState extends Model {
    * @returns {CategoryModel}
    */
   createCategory(newAttributes = {}) {
-    const newCategoryModel = new CategoryModel(newAttributes);
-    this.get('categoryCollection').push(newCategoryModel);
+    const categoryCollection = this.get('categoryCollection');
+
+    const newCategoryModel = new CategoryModel({
+      ...newAttributes,
+      index: categoryCollection.length,
+    });
+
+    categoryCollection.push(newCategoryModel);
 
     this.save();
 

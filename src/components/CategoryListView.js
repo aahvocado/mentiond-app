@@ -6,7 +6,7 @@ import CategoryListViewItem from 'components/CategoryListViewItem';
 import combineClassNames from 'utilities/combineClassNames';
 
 const ITEM_PADDING = 10;
-const ITEM_HEIGHT = 60;
+const ITEM_HEIGHT = 30;
 const ITEM_WRAPPER_HEIGHT = ITEM_HEIGHT + ITEM_PADDING;
 
 function AnimatedList(props) {
@@ -19,10 +19,10 @@ function AnimatedList(props) {
     list,
     item => item.id,
     {
-      from: (item) => ({ y: item.index * ITEM_WRAPPER_HEIGHT, opacity: 0}),
-      leave: { opacity: 0 },
-      enter: (item) => ({ y: item.index * ITEM_WRAPPER_HEIGHT, opacity: 1 }),
-      update: (item) => ({ y: item.index * ITEM_WRAPPER_HEIGHT, opacity: 1 }),
+      from: (item) => ({ y: item.index * ITEM_WRAPPER_HEIGHT }),
+      leave: {},
+      enter: (item) => ({ y: item.index * ITEM_WRAPPER_HEIGHT }),
+      update: (item) => ({ y: item.index * ITEM_WRAPPER_HEIGHT }),
     }
   );
 
@@ -40,7 +40,6 @@ function AnimatedList(props) {
             style={{
               height: ITEM_HEIGHT,
               transform: props.y.interpolate(y => `translateY(${y}px)`),
-              opacity: props.opacity,
             }}
             {...item}
           />
@@ -50,44 +49,45 @@ function AnimatedList(props) {
   );
 }
 
-export default class CategoryListViewComponent extends Component {
+export default class CategoryListView extends Component {
   /** @override */
   static defaultProps = {
     /** @type {String} */
-    baseClassName: 'position-relative flex-col',
+    baseClassName: 'position-relative flex-col adjacent-mar-t-2',
     /** @type {String} */
     className: '',
-    /** @type {CategoryModel} */
-    categoryModel: [],
+    /** @type {Array<CategoryModel>} */
+    list: [],
   };
   /** @override */
   constructor(props) {
     super(props);
 
-    this.onClickItem = this.onClickItem.bind(this);
-    this.onClickPlusItem = this.onClickPlusItem.bind(this);
-    this.onCompleteItem = this.onCompleteItem.bind(this);
-    this.onUnCompleteItem = this.onUnCompleteItem.bind(this);
-    this.onHideItem = this.onHideItem.bind(this);
-    this.onUnHideItem = this.onUnHideItem.bind(this);
+    // this.onClickItem = this.onClickItem.bind(this);
+    // this.onClickPlusItem = this.onClickPlusItem.bind(this);
+    // this.onCompleteItem = this.onCompleteItem.bind(this);
+    // this.onUnCompleteItem = this.onUnCompleteItem.bind(this);
+    // this.onHideItem = this.onHideItem.bind(this);
+    // this.onUnHideItem = this.onUnHideItem.bind(this);
   }
   /** @override */
   render() {
     const {
       baseClassName,
       className,
-      categoryModel,
+      list,
     } = this.props;
 
-    const list = categoryModel.get('list');
-    const boundList = list.map((item) => ({
-      ...item,
-      onClickItem: (clickEvt) => this.onClickItem(item, clickEvt),
-      onClickPlus: (clickEvt) => this.onClickPlusItem(item, clickEvt),
-      onComplete: (gestureEvent) => this.onCompleteItem(item, gestureEvent),
-      onUnComplete: (gestureEvent) => this.onUnCompleteItem(item, gestureEvent),
-      onHide: (gestureEvent) => this.onHideItem(item, gestureEvent),
-      onUnHide: (gestureEvent) => this.onUnHideItem(item, gestureEvent),
+    const boundList = list.map((categoryModel) => ({
+      categoryModel: categoryModel,
+      id: categoryModel.get('id'),
+      index: categoryModel.get('index'),
+      // onClickItem: (clickEvt) => this.onClickItem(item, clickEvt),
+      // onClickPlus: (clickEvt) => this.onClickPlusItem(item, clickEvt),
+      // onComplete: (gestureEvent) => this.onCompleteItem(item, gestureEvent),
+      // onUnComplete: (gestureEvent) => this.onUnCompleteItem(item, gestureEvent),
+      // onHide: (gestureEvent) => this.onHideItem(item, gestureEvent),
+      // onUnHide: (gestureEvent) => this.onUnHideItem(item, gestureEvent),
     }));
 
     return (
@@ -96,59 +96,5 @@ export default class CategoryListViewComponent extends Component {
         list={boundList}
       />
     );
-  }
-  /**
-   * @param {Object} item
-   */
-  onClickItem(item) {
-    const {categoryModel} = this.props;
-
-    // mark the item as the focused if not
-    if (!item.isFocused) {
-      categoryModel.focusItem(item.id);
-      return;
-    }
-  }
-  /**
-   * @param {Object} item
-   */
-  onClickPlusItem(item) {
-    const {categoryModel} = this.props;
-
-    // update the mentions count and then focus on it
-    categoryModel.updateItemMentions(item.id, 1);
-    categoryModel.focusItem(item.id);
-  }
-  /**
-   * @param {Object} item
-   * @param {GestureEvent} gestureEvent
-   */
-  onCompleteItem(item, gestureEvent) {
-    const {categoryModel} = this.props;
-    categoryModel.toggleItemComplete(item.id, true);
-  }
-  /**
-   * @param {Object} item
-   * @param {GestureEvent} gestureEvent
-   */
-  onUnCompleteItem(item, gestureEvent) {
-    const {categoryModel} = this.props;
-    categoryModel.toggleItemComplete(item.id, false);
-  }
-  /**
-   * @param {Object} item
-   * @param {GestureEvent} gestureEvent
-   */
-  onHideItem(item, gestureEvent) {
-    const {categoryModel} = this.props;
-    categoryModel.toggleItemHidden(item.id, true);
-  }
-  /**
-   * @param {Object} item
-   * @param {GestureEvent} gestureEvent
-   */
-  onUnHideItem(item, gestureEvent) {
-    const {categoryModel} = this.props;
-    categoryModel.toggleItemHidden(item.id, false);
   }
 };

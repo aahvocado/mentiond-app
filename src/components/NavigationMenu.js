@@ -94,9 +94,9 @@ class NavigationMenu extends Component {
               New Category
             </ButtonComponent>
 
-            {/*<CategoryListView
+            <CategoryListView
               list={categoryCollection}
-            />*/}
+            />
 
             {/*<div className='flex-col overflow-auto mar-t-3 width-full adjacent-mar-t-2'>
               { categoryCollection.map((categoryModel) => (
