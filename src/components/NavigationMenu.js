@@ -28,8 +28,6 @@ class NavigationMenu extends Component {
     super(props);
 
     this.onClickAddCategory = this.onClickAddCategory.bind(this);
-    this.onClickRemoveCategory = this.onClickRemoveCategory.bind(this);
-    this.onClickSelectCategory = this.onClickSelectCategory.bind(this);
 
     this.state = {
       /** @type {Boolean} */
@@ -97,17 +95,6 @@ class NavigationMenu extends Component {
             <CategoryListView
               list={categoryCollection}
             />
-
-            {/*<div className='flex-col overflow-auto mar-t-3 width-full adjacent-mar-t-2'>
-              { categoryCollection.map((categoryModel) => (
-                <CategoryListViewItem
-                  key={`category-item-${categoryModel.get('id')}-key`}
-                  categoryModel={categoryModel}
-                  onClickRemove={() => this.onClickRemoveCategory(categoryModel.get('id'))}
-                  onClickSelect={() => this.onClickSelectCategory(categoryModel.get('id'))}
-                />
-              ))}
-            </div>*/}
           </div>
 
           {/* info section */}
@@ -161,19 +148,6 @@ class NavigationMenu extends Component {
         </FixedMenuComponent>
       </Fragment>
     );
-  }
-  /**
-   * @param {CategoryId} categoryId
-   */
-  onClickRemoveCategory(categoryId) {
-    appState.deleteCategory(categoryId);
-  }
-  /**
-   * @param {CategoryId} categoryId
-   */
-  onClickSelectCategory(categoryId) {
-    appState.switchCategory(categoryId);
-    appState.set({isOpenNavMenu: false});
   }
   /**
    *

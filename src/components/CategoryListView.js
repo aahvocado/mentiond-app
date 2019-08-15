@@ -1,7 +1,10 @@
 import React, { Component } from 'react';
 import { useTransition } from 'react-spring';
+import { observer } from 'mobx-react';
 
 import CategoryListViewItem from 'components/CategoryListViewItem';
+
+import appState from 'state/appState';
 
 import combineClassNames from 'utilities/combineClassNames';
 
@@ -49,7 +52,8 @@ function AnimatedList(props) {
   );
 }
 
-export default class CategoryListView extends Component {
+export default observer(
+class CategoryListView extends Component {
   /** @override */
   static defaultProps = {
     /** @type {String} */
@@ -63,12 +67,8 @@ export default class CategoryListView extends Component {
   constructor(props) {
     super(props);
 
-    // this.onClickItem = this.onClickItem.bind(this);
-    // this.onClickPlusItem = this.onClickPlusItem.bind(this);
-    // this.onCompleteItem = this.onCompleteItem.bind(this);
-    // this.onUnCompleteItem = this.onUnCompleteItem.bind(this);
-    // this.onHideItem = this.onHideItem.bind(this);
-    // this.onUnHideItem = this.onUnHideItem.bind(this);
+    this.onClickRemoveCategory = this.onClickRemoveCategory.bind(this);
+    this.onClickSelectCategory = this.onClickSelectCategory.bind(this);
   }
   /** @override */
   render() {
@@ -82,12 +82,8 @@ export default class CategoryListView extends Component {
       categoryModel: categoryModel,
       id: categoryModel.get('id'),
       index: categoryModel.get('index'),
-      // onClickItem: (clickEvt) => this.onClickItem(item, clickEvt),
-      // onClickPlus: (clickEvt) => this.onClickPlusItem(item, clickEvt),
-      // onComplete: (gestureEvent) => this.onCompleteItem(item, gestureEvent),
-      // onUnComplete: (gestureEvent) => this.onUnCompleteItem(item, gestureEvent),
-      // onHide: (gestureEvent) => this.onHideItem(item, gestureEvent),
-      // onUnHide: (gestureEvent) => this.onUnHideItem(item, gestureEvent),
+      onClickRemove: (clickEvt) => this.onClickRemoveCategory(categoryModel.get('id'), clickEvt),
+      onClickSelect: (clickEvt) => this.onClickSelectCategory(categoryModel.get('id'), clickEvt),
     }));
 
     return (
@@ -97,4 +93,17 @@ export default class CategoryListView extends Component {
       />
     );
   }
-};
+  /**
+   * @param {CategoryId} categoryId
+   */
+  onClickRemoveCategory(categoryId) {
+    appState.deleteCategory(categoryId);
+  }
+  /**
+   * @param {CategoryId} categoryId
+   */
+  onClickSelectCategory(categoryId) {
+    appState.switchCategory(categoryId);
+    appState.set({isOpenNavMenu: false});
+  }
+});
