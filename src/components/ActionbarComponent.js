@@ -1,6 +1,6 @@
 import React, { PureComponent } from 'react';
 
-import ButtonComponent, {BUTTON_THEME} from 'common-components/ButtonComponent';
+import ButtonComponent from 'common-components/ButtonComponent';
 
 import appState from 'state/appState';
 
@@ -11,45 +11,71 @@ export default class ActionbarComponent extends PureComponent {
   static defaultProps = {
     /** @type {String} */
     className: '',
-    /** @type {Boolean} */
-    canAddNewCategory: false,
   };
   /** @override */
   constructor(props) {
     super(props);
 
-    this.onClickAddCategory = this.onClickAddCategory.bind(this);
+    this.onClickAddItem = this.onClickAddItem.bind(this);
+
+    this.state = {
+      /** @type {String} */
+      searchValue: '',
+    }
   }
   /** @override */
   render() {
     const {
       className,
-      canAddNewCategory,
     } = this.props;
+
+    const {
+      searchValue,
+    } = this.state;
 
     return (
       <div
-        className={combineClassNames('flex-row jcontent-end bg-primary-darker', className)}
+        className={combineClassNames('flex-row bg-primary-darker', className)}
         style={{
           boxShadow:'0 -5px 10px rgba(212, 227, 232, 1)',
         }}
       >
-        <ButtonComponent
-          className='pad-2'
-          theme={BUTTON_THEME.TRANSPARENT_SECONDARY_DARKER}
-          disabled={!canAddNewCategory}
-          onClick={this.onClickAddCategory}
+        {/* new mentionable form */}
+        <form
+          className='flex-auto flex-row adjacent-mar-t-3'
+          onSubmit={this.onClickAddItem}
         >
-          New Category
-        </ButtonComponent>
+          <input
+            className='fsize-3 bg-white borradius-l-2 flex-auto boxsizing-border pad-v-1 pad-h-2'
+            placeholder='Add a Mentionable...'
+            value={searchValue}
+            onChange={(evt) => this.setState({searchValue: evt.target.value})}
+          />
+
+          <ButtonComponent
+            className='fsize-3 flex-none borradius-r-2 talign-center'
+            disabled={searchValue.length <= 0}
+            onClick={this.onClickAddItem}
+          >
+            Add
+          </ButtonComponent>
+        </form>
       </div>
     );
   }
   /**
    *
    */
-  onClickAddCategory() {
-    const newCategoryModel = appState.createCategory();
-    appState.switchCategory(newCategoryModel.get('id'));
+  onClickAddItem() {
+    const {
+      searchValue,
+    } = this.state;
+
+    // add to list
+    const categoryModel = appState.get('currentCategoryModel');
+    categoryModel.addItem({label: searchValue});
+
+    // reset value
+    this.setState({searchValue: ''});
   }
 }
