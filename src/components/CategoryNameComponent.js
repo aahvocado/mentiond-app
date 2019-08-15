@@ -42,7 +42,7 @@ export default class CategoryNameComponent extends PureComponent {
     return (
       <input
         {...otherProps}
-        className={combineClassNames('white-text-shadow text-ellipsis fsize-6 talign-center color-secondary fontfamily-primary flex-auto bor-2-transparent focus:borcolor-white', className)}
+        className={combineClassNames('white-text-shadow text-ellipsis fsize-6 talign-center color-secondary fontfamily-primary flex-auto bor-2-transparent focus:borcolor-white focus:bg-white', className)}
         placeholder='new category name...'
         value={value}
         onChange={this.onChangeNewValue}

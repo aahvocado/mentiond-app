@@ -86,7 +86,7 @@ class NavigationMenu extends Component {
             </h3>
 
             <ButtonComponent
-              className='width-full pad-2 flex-none adjacent-mar-t-2'
+              className='width-full pad-2 borradius-2 flex-none adjacent-mar-t-2'
               theme={BUTTON_THEME.WHITE}
               disabled={appState.get('isViewingNewCategory')}
               onClick={this.onClickAddCategory}
