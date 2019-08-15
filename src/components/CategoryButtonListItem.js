@@ -28,17 +28,17 @@ export default class CategoryButtonListItem extends PureComponent {
     } = this.props;
 
     return (
-      <div className='flex-row adjacent-mar-t-1'>
+      <div className='flex-row borradius-2 bor-1-gray adjacent-mar-t-1'>
         <IconButtonComponent
-          className='flex-none adjacent-mar-l-1'
-          theme={BUTTON_THEME.WHITE}
+          className='flex-none pad-2 adjacent-mar-l-1 bor-r-1-gray'
+          theme={BUTTON_THEME.TRANSPARENT_GRAY}
           icon={faTrash}
           onClick={onClickRemove}
         />
 
         <ButtonComponent
-          className='flex-auto adjacent-mar-l-1'
-          theme={BUTTON_THEME.WHITE}
+          className='flex-auto pad-2 adjacent-mar-l-1'
+          theme={BUTTON_THEME.TRANSPARENT_GRAY}
           onClick={onClickSelect}
         >
           {categoryModel.get('name')}

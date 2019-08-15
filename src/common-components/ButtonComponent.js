@@ -33,9 +33,14 @@ export const BUTTON_THEME = {
     enabled: 'color-white hover:color-white focus:color-white',
     disabled: 'color-grayest bor-3-grayest',
   },
+  TRANSPARENT_GRAY: {
+    base: 'bg-transparent',
+    enabled: 'color-grayer hover:color-black focus:color-black',
+    disabled: 'color-gray',
+  },
   WHITE: {
-    base: 'bg-white pad-2 borradius-2',
-    enabled: 'color-grayer bor-1-grayer hover:color-black focus:color-black',
+    base: 'bg-white',
+    enabled: 'color-grayer bor-1-gray hover:color-black focus:color-black',
     disabled: 'color-gray bor-1-gray',
   },
 }
