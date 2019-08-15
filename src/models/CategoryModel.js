@@ -210,5 +210,6 @@ export default class CategoryModel extends Model {
   save() {
     const data = this.export();
     storageController.setItem(this.get('id'), JSON.stringify(data));
+    // console.log(JSON.stringify(data));
   }
 }
