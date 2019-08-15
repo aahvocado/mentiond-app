@@ -19,8 +19,8 @@ export default class CategoryButtonComponent extends PureComponent {
 
     return (
       <ButtonComponent
-        className='flex-auto borradius-2 bor-1-gray pad-2'
-        theme={BUTTON_THEME.NONE}
+        className='flex-auto'
+        theme={BUTTON_THEME.WHITE}
         {...otherProps}
       >
         {categoryModel.get('name')}
