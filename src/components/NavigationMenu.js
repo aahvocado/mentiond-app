@@ -18,7 +18,7 @@ import CategoryButtonListItem from 'components/CategoryButtonListItem';
 
 import storageController from 'data/storageController';
 
-// import CategoryListComponent from 'components/CategoryListComponent';
+// import CategoryView from 'components/CategoryView';
 import appState from 'state/appState';
 
 export default observer(

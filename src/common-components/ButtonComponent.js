@@ -35,12 +35,12 @@ export const BUTTON_THEME = {
   },
   TRANSPARENT_GRAY: {
     base: 'bg-transparent',
-    enabled: 'color-grayer hover:color-black focus:color-black',
+    enabled: 'color-black hover:color-grayer focus:color-grayer',
     disabled: 'color-gray',
   },
   WHITE: {
     base: 'bg-white',
-    enabled: 'color-grayer bor-1-gray hover:color-black focus:color-black',
+    enabled: 'color-black bor-1-gray hover:color-grayer focus:color-grayer',
     disabled: 'color-gray bor-1-gray',
   },
 }

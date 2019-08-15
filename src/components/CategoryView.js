@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { useTransition } from 'react-spring';
 import { observer } from 'mobx-react';
 
-import CategoryListItemComponent from 'components/CategoryListItemComponent';
+import CategoryViewItem from 'components/CategoryViewItem';
 
 import combineClassNames from 'utilities/combineClassNames';
 
@@ -36,7 +36,7 @@ function AnimatedList(props) {
     >
       { animatedItems.map(({item, props}) => {
         return (
-          <CategoryListItemComponent
+          <CategoryViewItem
             key={`list-item-${item.id}-key`}
             style={{
               height: ITEM_HEIGHT,
@@ -52,7 +52,7 @@ function AnimatedList(props) {
 }
 
 export default observer(
-class CategoryListComponent extends Component {
+class CategoryView extends Component {
   /** @override */
   static defaultProps = {
     /** @type {String} */

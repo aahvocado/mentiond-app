@@ -3,7 +3,7 @@ import { observer } from 'mobx-react';
 
 // import ButtonComponent from 'common-components/ButtonComponent';
 
-import CategoryListComponent from 'components/CategoryListComponent';
+import CategoryView from 'components/CategoryView';
 import CategoryNameComponent from 'components/CategoryNameComponent';
 
 import appState from 'state/appState';
@@ -48,7 +48,7 @@ class CategoryPage extends Component {
 
 
         {/* the list */}
-        <CategoryListComponent
+        <CategoryView
           className='flex-auto adjacent-mar-t-3'
           categoryModel={categoryModel}
         />

@@ -8,7 +8,7 @@ import combineClassNames from 'utilities/combineClassNames';
 /**
  * Basic Mentionable List Item
  */
-export default class CategoryListItemComponent extends PureComponent {
+export default class CategoryViewItem extends PureComponent {
   /** @override */
   static defaultProps = {
     /** @type {String} */
