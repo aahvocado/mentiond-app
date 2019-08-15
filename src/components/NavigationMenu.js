@@ -6,7 +6,6 @@ import {
   faCode,
   faCodeBranch,
   faEnvelope,
-  faTrash,
   faTrashAlt,
  } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -15,7 +14,7 @@ import ButtonComponent, { BUTTON_THEME } from 'common-components/ButtonComponent
 import IconButtonComponent from 'common-components/IconButtonComponent';
 import FixedMenuComponent from 'common-components/FixedMenuComponent';
 
-import CategoryButtonComponent from 'components/CategoryButtonComponent';
+import CategoryButtonListItem from 'components/CategoryButtonListItem';
 
 import storageController from 'data/storageController';
 
@@ -181,32 +180,3 @@ class NavigationMenu extends Component {
     appState.set({isOpenNavMenu: false});
   }
 });
-/**
- *
- */
-class CategoryButtonListItem extends Component {
-  /** @override */
-  render() {
-    const {
-      categoryModel,
-      onClickRemove,
-      onClickSelect,
-    } = this.props;
-
-    return (
-      <div className='flex-row adjacent-mar-t-1'>
-        <IconButtonComponent
-          className='borradius-2 bor-1-gray pad-h-2 pad-v-1 flex-none mar-r-1'
-          icon={faTrash}
-          onClick={onClickRemove}
-        />
-
-        <CategoryButtonComponent
-          key={`category-item-${categoryModel.get('id')}-key`}
-          categoryModel={categoryModel}
-          onClick={onClickSelect}
-        />
-      </div>
-    );
-  }
-}
