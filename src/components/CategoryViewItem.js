@@ -222,18 +222,18 @@ class CategoryViewItemBody extends PureComponent {
       >
         {/* left container */}
         <div
-          className='flex-row-center height-full flex-auto boxsizing-border pad-2 adjacent-mar-l-3'
+          className='flex-row-center height-full flex-auto boxsizing-border adjacent-mar-l-3'
           onClick={onClickItem}
           onDoubleClick={onDoubleClickItem}
         >
-          <div className='flex-auto text-ellipsis fsize-4 adjacent-mar-l-3'>{label}</div>
-          <div className='flex-none fsize-3 adjacent-mar-l-3'>{`${mentions} mentions`}</div>
+          <div className='pad-2 flex-auto text-ellipsis fsize-4 '>{label}</div>
+          <div className='pad-2 flex-none fsize-3 '>{`${mentions} mentions`}</div>
         </div>
 
         {/* right container - actions */}
         { !shouldShowMinVersion &&
           <button
-            className='flex-none cursor-pointer fsize-4 pad-3 adjacent-mar-l-3'
+            className='flex-none cursor-pointer fsize-4 pad-3'
             disabled={isHidden || isComplete}
             onClick={onClickPlus}
           >

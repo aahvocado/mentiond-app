@@ -46,7 +46,6 @@ class CategoryPage extends Component {
           />
         </div>
 
-
         {/* the list */}
         <CategoryView
           className='flex-auto adjacent-mar-t-3'

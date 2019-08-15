@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { useTransition } from 'react-spring';
+import { observer } from 'mobx-react';
 
 import CategoryViewItem from 'components/CategoryViewItem';
 
@@ -50,7 +51,8 @@ function AnimatedList(props) {
   );
 }
 
-export default class CategoryView extends Component {
+export default observer(
+class CategoryView extends Component {
   /** @override */
   static defaultProps = {
     /** @type {String} */
@@ -89,6 +91,17 @@ export default class CategoryView extends Component {
       onHide: (gestureEvent) => this.onHideItem(item, gestureEvent),
       onUnHide: (gestureEvent) => this.onUnHideItem(item, gestureEvent),
     }));
+
+    const isEmpty = list.length <= 0;
+    if (isEmpty) {
+      return (
+        <div
+          className={combineClassNames('fsize-4 color-secondary-darker talign-center', className)}
+        >
+          It's empty - add some Mentionable items!
+        </div>
+      )
+    }
 
     return (
       <AnimatedList
@@ -151,4 +164,4 @@ export default class CategoryView extends Component {
     const {categoryModel} = this.props;
     categoryModel.toggleItemHidden(item.id, false);
   }
-};
+});

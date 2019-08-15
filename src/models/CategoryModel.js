@@ -129,10 +129,6 @@ export default class CategoryModel extends Model {
     const sortedList = mentionableUtils.getSortedList(list.slice());
     sortedList.forEach((item, idx) => item.index = idx);
     list.replace(sortedList);
-
-    // update and save
-    this.updateIndices();
-    this.save();
   }
   // -- item functions
   /**
