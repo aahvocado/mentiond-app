@@ -116,17 +116,10 @@ class CategoryListComponent extends Component {
    */
   onClickPlusItem(item) {
     const {categoryModel} = this.props;
-    const list = categoryModel.get('list');
 
-    // mark the item as the focused one
+    // update the mentions count and then focus on it
+    categoryModel.updateItemMentions(item.id, 1);
     categoryModel.focusItem(item.id);
-
-    // update the mentions count
-    const foundItem = list.find((listItem) => listItem.id === item.id);
-    foundItem.mentions += 1;
-
-    // then reupdate indices
-    categoryModel.updateIndices();
   }
   /**
    * @param {Object} item
@@ -135,9 +128,6 @@ class CategoryListComponent extends Component {
   onCompleteItem(item, gestureEvent) {
     const {categoryModel} = this.props;
     categoryModel.toggleItemComplete(item.id, true);
-
-    // then reupdate indices
-    categoryModel.updateIndices();
   }
   /**
    * @param {Object} item
@@ -146,9 +136,6 @@ class CategoryListComponent extends Component {
   onUnCompleteItem(item, gestureEvent) {
     const {categoryModel} = this.props;
     categoryModel.toggleItemComplete(item.id, false);
-
-    // then reupdate indices
-    categoryModel.updateIndices();
   }
   /**
    * @param {Object} item
@@ -157,9 +144,6 @@ class CategoryListComponent extends Component {
   onHideItem(item, gestureEvent) {
     const {categoryModel} = this.props;
     categoryModel.toggleItemHidden(item.id, true);
-
-    // then reupdate indices
-    categoryModel.updateIndices();
   }
   /**
    * @param {Object} item
@@ -168,8 +152,5 @@ class CategoryListComponent extends Component {
   onUnHideItem(item, gestureEvent) {
     const {categoryModel} = this.props;
     categoryModel.toggleItemHidden(item.id, false);
-
-    // then reupdate indices
-    categoryModel.updateIndices();
   }
 });

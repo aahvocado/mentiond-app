@@ -59,6 +59,7 @@ export default class CategoryModel extends Model {
 
     this.updateIndices();
   }
+  // -- list utility functions
   /**
    * finds an item by its `itemId`
    *
@@ -83,6 +84,8 @@ export default class CategoryModel extends Model {
       id: uuid(),
     });
 
+    // update and save
+    this.updateIndices();
     this.save();
   }
   /**
@@ -92,13 +95,15 @@ export default class CategoryModel extends Model {
    */
   removeItem(itemId) {
     const list = this.get('list');
-    const itemIdx = list.findIndex((item) => item.id === itemId);
+    const itemIdx = list.findIndex((listItem) => listItem.id === itemId);
     if (itemIdx === undefined) {
       return;
     }
 
     list.splice(itemIdx, 1);
 
+    // update and save
+    this.updateIndices();
     this.save();
   }
   /**
@@ -113,6 +118,32 @@ export default class CategoryModel extends Model {
       const sortedIdx = sortedList.findIndex((sortedItem) => sortedItem.id === item.id);
       item.index = sortedIdx;
     });
+  }
+  /**
+   * sorts the the current list with highest number of mentions at the top
+   */
+  reorganizeList() {
+    const list = this.get('list');
+    const sortedList = mentionableUtils.getSortedList(list.slice());
+    sortedList.forEach((item, idx) => item.index = idx);
+    list.replace(sortedList);
+
+    // update and save
+    this.updateIndices();
+    this.save();
+  }
+  // -- item functions
+  /**
+   * @param {String} itemId
+   * @param {Number} [amount]
+   */
+  updateItemMentions(itemId, amount = 1) {
+    const item = this.getItem(itemId);
+    item.mentions += amount;
+
+    // update and save
+    this.updateIndices();
+    this.save();
   }
   /**
    * changes the state of completion of an item
@@ -132,6 +163,8 @@ export default class CategoryModel extends Model {
       item.isComplete = !item.isComplete;
     }
 
+    // update and save
+    this.updateIndices();
     this.save();
   }
   /**
@@ -152,17 +185,8 @@ export default class CategoryModel extends Model {
       item.isHidden = !item.isHidden;
     }
 
-    this.save();
-  }
-  /**
-   * sorts the the current list with highest number of mentions at the top
-   */
-  reorganizeList() {
-    const list = this.get('list');
-    const sortedList = mentionableUtils.getSortedList(list.slice());
-    sortedList.forEach((item, idx) => item.index = idx);
-    list.replace(sortedList);
-
+    // update and save
+    this.updateIndices();
     this.save();
   }
   /**
