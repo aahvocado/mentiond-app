@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { useTransition } from 'react-spring';
 
-import CategoryViewItem from 'components/CategoryViewItem';
+import CategoryListViewItem from 'components/CategoryListViewItem';
 
 import combineClassNames from 'utilities/combineClassNames';
 
@@ -35,7 +35,7 @@ function AnimatedList(props) {
     >
       { animatedItems.map(({item, props}) => {
         return (
-          <CategoryViewItem
+          <CategoryListViewItem
             key={`list-item-${item.id}-key`}
             style={{
               height: ITEM_HEIGHT,
@@ -50,7 +50,7 @@ function AnimatedList(props) {
   );
 }
 
-export default class CategoryView extends Component {
+export default class CategoryListViewComponent extends Component {
   /** @override */
   static defaultProps = {
     /** @type {String} */

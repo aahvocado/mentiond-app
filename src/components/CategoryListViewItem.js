@@ -10,7 +10,7 @@ import IconButtonComponent from 'common-components/IconButtonComponent';
 /**
  *
  */
-export default class CategoryButtonListItem extends PureComponent {
+export default class CategoryListViewItem extends PureComponent {
   static defaultProps = {
     /** @type {CategoryModel} */
     categoryModel: undefined,

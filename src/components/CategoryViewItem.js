@@ -96,7 +96,7 @@ export default class CategoryViewItem extends PureComponent {
             onSlideXMin={this.onSlideLeft}
             onSlideXMax={this.onSlideRight}
           >
-            <CategoryListItemBodyComponent
+            <CategoryViewItemBody
               className={itemClassName}
               isComplete={isComplete}
               isFocused={isFocused}
@@ -162,7 +162,7 @@ export default class CategoryViewItem extends PureComponent {
 /**
  * body of a mentionable list item
  */
-class CategoryListItemBodyComponent extends PureComponent {
+class CategoryViewItemBody extends PureComponent {
   /** @override */
   static defaultProps = {
     /** @type {String} */

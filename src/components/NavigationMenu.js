@@ -14,7 +14,7 @@ import ButtonComponent, { BUTTON_THEME } from 'common-components/ButtonComponent
 import IconButtonComponent from 'common-components/IconButtonComponent';
 import FixedMenuComponent from 'common-components/FixedMenuComponent';
 
-import CategoryButtonListItem from 'components/CategoryButtonListItem';
+import CategoryListView from 'components/CategoryListView';
 
 import storageController from 'data/storageController';
 
@@ -94,16 +94,20 @@ class NavigationMenu extends Component {
               New Category
             </ButtonComponent>
 
-            <div className='flex-col overflow-auto mar-t-3 width-full adjacent-mar-t-2'>
+            {/*<CategoryListView
+              list={categoryCollection}
+            />*/}
+
+            {/*<div className='flex-col overflow-auto mar-t-3 width-full adjacent-mar-t-2'>
               { categoryCollection.map((categoryModel) => (
-                <CategoryButtonListItem
+                <CategoryListViewItem
                   key={`category-item-${categoryModel.get('id')}-key`}
                   categoryModel={categoryModel}
                   onClickRemove={() => this.onClickRemoveCategory(categoryModel.get('id'))}
                   onClickSelect={() => this.onClickSelectCategory(categoryModel.get('id'))}
                 />
               ))}
-            </div>
+            </div>*/}
           </div>
 
           {/* info section */}
