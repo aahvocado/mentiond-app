@@ -37,34 +37,27 @@ export default class ActionbarComponent extends PureComponent {
     } = this.state;
 
     return (
-      <div
-        className={combineClassNames('flex-row bg-primary-darker', className)}
-        style={{
-          boxShadow:'0 -5px 10px rgba(212, 227, 232, 1)',
-        }}
+      <form
+        className={combineClassNames('flex-auto flex-row adjacent-mar-t-3', className)}
+        onSubmit={this.onClickAddItem}
       >
-        {/* new mentionable form */}
-        <form
-          className='flex-auto flex-row adjacent-mar-t-3'
-          onSubmit={this.onClickAddItem}
-        >
-          <input
-            className={combineClassNames('fsize-4 bg-white borradius-l-2 flex-auto boxsizing-border pad-v-1 pad-h-2', isInputDisabled ? 'bg-light-gray' : '')}
-            placeholder='Add a Mentionable...'
-            value={searchValue}
-            disabled={isInputDisabled}
-            onChange={(evt) => this.setState({searchValue: evt.target.value})}
-          />
+        <input
+          className={combineClassNames('bg-white borradius-l-2 flex-auto boxsizing-border pad-v-1 pad-h-2', isInputDisabled ? 'bg-light-gray' : '')}
+          style={{fontSize: 18}}
+          placeholder='Add a Mentionable...'
+          value={searchValue}
+          disabled={isInputDisabled}
+          onChange={(evt) => this.setState({searchValue: evt.target.value})}
+        />
 
-          <ButtonComponent
-            className='fsize-3 flex-none borradius-r-2 talign-center'
-            disabled={searchValue.length <= 0 || isInputDisabled}
-            onClick={this.onClickAddItem}
-          >
-            Add
-          </ButtonComponent>
-        </form>
-      </div>
+        <ButtonComponent
+          className='fsize-3 flex-none borradius-r-2 talign-center'
+          disabled={searchValue.length <= 0 || isInputDisabled}
+          onClick={this.onClickAddItem}
+        >
+          Add
+        </ButtonComponent>
+      </form>
     );
   }
   /**

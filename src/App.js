@@ -53,7 +53,10 @@ class App extends Component {
           {/* footer */}
           <div
             id='app-header'
-            className='zindex-1 flex-none'
+            className='zindex-1 bg-primary-darker flex-none pad-b-2'
+            style={{
+              boxShadow:'0 -5px 10px rgba(212, 227, 232, 1)',
+            }}
           >
             <ActionbarComponent
               className='pad-h-3 pad-v-1'
