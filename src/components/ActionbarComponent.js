@@ -49,7 +49,7 @@ export default class ActionbarComponent extends PureComponent {
           onSubmit={this.onClickAddItem}
         >
           <input
-            className={combineClassNames('fsize-3 bg-white borradius-l-2 flex-auto boxsizing-border pad-v-1 pad-h-2', isInputDisabled ? 'bg-light-gray' : '')}
+            className={combineClassNames('fsize-4 bg-white borradius-l-2 flex-auto boxsizing-border pad-v-1 pad-h-2', isInputDisabled ? 'bg-light-gray' : '')}
             placeholder='Add a Mentionable...'
             value={searchValue}
             disabled={isInputDisabled}

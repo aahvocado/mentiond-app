@@ -29,7 +29,8 @@ class App extends Component {
           }}
         >
           {/* header */}
-          <div id='app-header'
+          <div
+            id='app-header'
             className='zindex-2 flex-row aitems-center pad-h-3 pad-v-2 boxsizing-border'
             style={{
               height: 55,
@@ -50,10 +51,15 @@ class App extends Component {
           </div>
 
           {/* footer */}
-          <ActionbarComponent
-            className='zindex-1 pad-h-3 pad-v-1 flex-none'
-            isInputDisabled={appState.get('isViewingNewCategory')}
-          />
+          <div
+            id='app-header'
+            className='zindex-1 flex-none'
+          >
+            <ActionbarComponent
+              className='pad-h-3 pad-v-1'
+              isInputDisabled={appState.get('isViewingNewCategory')}
+            />
+          </div>
         </div>
       </BrowserRouter>
     );

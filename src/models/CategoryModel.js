@@ -207,6 +207,10 @@ export default class CategoryModel extends Model {
    */
   save() {
     const data = this.export();
+
+    // extended attributes seem to be exporting on Safari
+    delete data.isNew;
+
     storageController.setItem(this.get('id'), JSON.stringify(data));
     // console.log(JSON.stringify(data));
   }
