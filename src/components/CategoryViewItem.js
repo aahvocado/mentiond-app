@@ -222,7 +222,7 @@ class CategoryViewItemBody extends PureComponent {
       >
         {/* left container */}
         <div
-          className='flex-row-center height-full flex-auto boxsizing-border adjacent-mar-l-3'
+          className='flex-row-center width-full height-full flex-auto boxsizing-border adjacent-mar-l-3'
           onClick={onClickItem}
           onDoubleClick={onDoubleClickItem}
         >
