@@ -71,7 +71,7 @@ class App extends Component {
           {/* body */}
           <div
             id='app-body'
-            className='position-relative overflow-auto pad-h-3 flex-col flex-auto adjacent-mar-t-2'
+            className='position-relative overflow-auto flex-col flex-auto adjacent-mar-t-2 desktop:pad-h-2 tablet:pad-h-5 phone:pad-h-5'
           >
             <Route exact path="/" component={CategoryPage} />
           </div>
