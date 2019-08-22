@@ -1,109 +1,110 @@
 [
   {
-    "name": "movies",
-    "id": "test-category-id",
+    "name": "Demo List!",
+    "id": "54918387-7100-4451-be75-0701cf207489",
+    "index": 1,
     "list": [
       {
-        "id": "ce2f291f-5a04-427a-9fc7-456dbdf69f7b",
+        "id": "e4876fbf-81d4-427c-ae00-e4205d7e6354",
         "initialIndex": 0,
-        "index": 1,
-        "label": "In the Mood for Love",
-        "mentions": 2,
-        "isComplete": false,
+        "index": 8,
+        "label": "completed item",
+        "mentions": 1,
+        "isComplete": true,
         "isFocused": false,
         "isHidden": false
       },
       {
-        "id": "1198256c-8973-4853-8b55-b8b9b2903709",
+        "id": "ab683733-bc7b-477a-a144-e619536be6f7",
         "initialIndex": 1,
         "index": 9,
-        "label": "The Farewell",
-        "mentions": 5,
-        "isComplete": true,
-        "isFocused": true,
-        "isHidden": false
-      },
-      {
-        "id": "8934d189-0b37-4148-81bd-a40745e82809",
-        "initialIndex": 2,
-        "index": 0,
-        "label": "Once Upon a Time in Hollywood",
-        "mentions": 3,
-        "isComplete": true,
-        "isFocused": false,
-        "isHidden": false
-      },
-      {
-        "id": "3e035011-14d8-4b09-9a0f-75be172a0310",
-        "initialIndex": 3,
-        "index": 2,
-        "label": "YiYi",
+        "label": "hidden item",
         "mentions": 1,
-        "isComplete": false,
-        "isFocused": false,
-        "isHidden": false
-      },
-      {
-        "id": "64a88545-4a37-4002-b3ce-c8ea36dc5608",
-        "initialIndex": 4,
-        "index": 3,
-        "label": "Parasite",
-        "mentions": 1,
-        "isComplete": false,
-        "isFocused": false,
-        "isHidden": false
-      },
-      {
-        "id": "d92cf9ac-fb3a-439a-b6dd-3a134e30806b",
-        "initialIndex": 5,
-        "index": 5,
-        "label": "Toy Story 4",
-        "mentions": 0,
-        "isComplete": false,
-        "isFocused": false,
-        "isHidden": false
-      },
-      {
-        "id": "f51fec92-f7e0-4ea0-9573-e9b0e38665ef",
-        "initialIndex": 6,
-        "index": 6,
-        "label": "The Lion King",
-        "mentions": 0,
         "isComplete": false,
         "isFocused": false,
         "isHidden": true
       },
       {
-        "id": "90ee3c38-9bf4-40ee-b6e0-7cd6bd8a850b",
-        "initialIndex": 7,
+        "id": "d5ba48e6-6bfd-454d-91b1-94b6b4f3e171",
+        "initialIndex": 2,
+        "index": 6,
+        "label": "swipe right on me to complete",
+        "mentions": 0,
+        "isComplete": false,
+        "isFocused": false,
+        "isHidden": false
+      },
+      {
+        "id": "661526dd-ef25-4228-81c2-c83e784f59ab",
+        "initialIndex": 3,
         "index": 7,
-        "label": "Stuber",
+        "label": "swipe left on me to hide",
         "mentions": 0,
         "isComplete": false,
         "isFocused": false,
         "isHidden": false
       },
       {
-        "id": "78fb57e9-e345-413d-8739-d1d9a603e0c8",
+        "id": "29f30f75-b0ff-4c86-9272-b10d303c01a2",
+        "initialIndex": 4,
+        "index": 0,
+        "label": "this",
+        "mentions": 10,
+        "isComplete": false,
+        "isFocused": false,
+        "isHidden": false
+      },
+      {
+        "id": "ead2ad81-4749-434a-b91e-1de8bac76859",
+        "initialIndex": 5,
+        "index": 1,
+        "label": "is",
+        "mentions": 9,
+        "isComplete": false,
+        "isFocused": false,
+        "isHidden": false
+      },
+      {
+        "id": "5e0066de-1f03-4554-8b6e-f4a3c0285f7a",
+        "initialIndex": 6,
+        "index": 2,
+        "label": "a",
+        "mentions": 8,
+        "isComplete": false,
+        "isFocused": false,
+        "isHidden": false
+      },
+      {
+        "id": "2ad1af1b-18aa-4ed3-b4f4-a3dd5b697823",
+        "initialIndex": 7,
+        "index": 3,
+        "label": "demo",
+        "mentions": 7,
+        "isComplete": false,
+        "isFocused": false,
+        "isHidden": false
+      },
+      {
+        "id": "63453a23-1461-4d89-96bc-2e62638312a2",
         "initialIndex": 8,
-        "index": 8,
-        "label": "Alita Battle Angel",
-        "mentions": 0,
+        "index": 4,
+        "label": "list",
+        "mentions": 6,
         "isComplete": false,
         "isFocused": false,
         "isHidden": false
       },
       {
-        "id": "0bc79802-0b07-4175-892c-c313c98beed9",
+        "id": "fe456c0e-46da-42ac-9b6a-5798901ad3c3",
         "initialIndex": 9,
-        "index": 4,
-        "label": "Shadows",
-        "mentions": 1,
+        "index": 5,
+        "label": "press + to add mentions",
+        "mentions": 2,
         "isComplete": false,
-        "isFocused": false,
+        "isFocused": true,
         "isHidden": false
       }
     ],
-    "modelId": "fbe5e51d-bb0d-4c40-840b-24f7f19f350f"
+    "modelId": "325728b4-fa15-41dc-b9d9-6c66550d13a0"
   }
 ]
