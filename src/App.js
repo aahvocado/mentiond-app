@@ -17,14 +17,40 @@ import appState from 'state/appState';
 
 export default observer(
 class App extends Component {
+  /** @override */
+  constructor(props) {
+    super(props);
+
+    this.onResize = this.onResize.bind(this);
+
+    this.state = {
+      /** @type {Number} */
+      innerHeight: 0,
+    };
+  }
+  /** @override */
+  componentDidMount() {
+    window.addEventListener('resize', this.onResize);
+
+    this.onResize();
+  }
+  /** @override */
+  componentWillUnmount() {
+    window.removeEventListener('resize', this.onResize);
+  }
+  /** @override */
   render() {
+    const {
+      innerHeight = 1,
+    } = this.state;
+
     return (
       <BrowserRouter>
         <div
           className="App overflow-auto position-relative bg-primary fontfamily-secondary boxsizing-border flex-col mar-h-auto"
           style={{
             maxWidth: 640,
-            height: '100vh',
+            height: innerHeight,
             boxShadow: '0 0 10px 2px #b3c1c5',
           }}
         >
@@ -67,4 +93,14 @@ class App extends Component {
       </BrowserRouter>
     );
   };
+  /**
+   *
+   */
+  onResize() {
+    // this is mostly a hacky fix for Safari
+    //  whose default height does not consider the browser bar
+    this.setState({
+      innerHeight: window.innerHeight,
+    });
+  }
 });
