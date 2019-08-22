@@ -67,6 +67,7 @@ class CategoryView extends Component {
     super(props);
 
     this.onClickItem = this.onClickItem.bind(this);
+    this.onClickMinusItem = this.onClickMinusItem.bind(this);
     this.onClickPlusItem = this.onClickPlusItem.bind(this);
     this.onCompleteItem = this.onCompleteItem.bind(this);
     this.onUnCompleteItem = this.onUnCompleteItem.bind(this);
@@ -85,6 +86,7 @@ class CategoryView extends Component {
     const boundList = list.map((item) => ({
       ...item,
       onClickItem: (clickEvt) => this.onClickItem(item, clickEvt),
+      onClickMinus: (clickEvt) => this.onClickMinusItem(item, clickEvt),
       onClickPlus: (clickEvt) => this.onClickPlusItem(item, clickEvt),
       onComplete: (gestureEvent) => this.onCompleteItem(item, gestureEvent),
       onUnComplete: (gestureEvent) => this.onUnCompleteItem(item, gestureEvent),
@@ -121,6 +123,16 @@ class CategoryView extends Component {
       categoryModel.focusItem(item.id);
       return;
     }
+  }
+  /**
+   * @param {Object} item
+   */
+  onClickMinusItem(item) {
+    const {categoryModel} = this.props;
+
+    // update the mentions count and then focus on it
+    categoryModel.updateItemMentions(item.id, -1);
+    categoryModel.focusItem(item.id);
   }
   /**
    * @param {Object} item

@@ -111,6 +111,8 @@ export default class CategoryViewItem extends PureComponent {
     /** @type {Function} */
     onDoubleClickItem: () => {},
     /** @type {Function} */
+    onClickMinus: () => {},
+    /** @type {Function} */
     onClickPlus: () => {},
     /** @type {Function} */
     onComplete: () => {},
@@ -140,6 +142,7 @@ export default class CategoryViewItem extends PureComponent {
       style,
       onClickItem,
       onDoubleClickItem,
+      onClickMinus,
       onClickPlus,
     } = this.props;
 
@@ -184,6 +187,7 @@ export default class CategoryViewItem extends PureComponent {
               mentions={mentions}
               onClickItem={onClickItem}
               onDoubleClickItem={onDoubleClickItem}
+              onClickMinus={onClickMinus}
               onClickPlus={onClickPlus}
 
               shouldShowMinVersion={shouldShowMinVersion}
@@ -261,6 +265,8 @@ class CategoryViewItemBody extends PureComponent {
     /** @type {Function} */
     onDoubleClickItem: () => {},
     /** @type {Function} */
+    onClickMinus: () => {},
+    /** @type {Function} */
     onClickPlus: () => {},
     //
     /** @type {Boolean} */
@@ -276,18 +282,21 @@ class CategoryViewItemBody extends PureComponent {
       label,
       mentions,
       onClickItem,
+      onClickMinus,
       onClickPlus,
       onDoubleClickItem,
       shouldShowMinVersion,
     } = this.props;
 
-    const borderClassName = (() => {
-      if (isComplete) {
-        return 'bor-2-green';
-      }
+    const canModifyMentions = !shouldShowMinVersion;
 
+    const borderClassName = (() => {
       if (isFocused) {
         return 'bor-2-tertiary';
+      }
+
+      if (isComplete) {
+        return 'bor-2-green';
       }
 
       return 'bor-2-transparent';
@@ -297,20 +306,25 @@ class CategoryViewItemBody extends PureComponent {
 
     return (
       <div
-        className={combineClassNames('boxsizing-border flex-row aitems-center overflow-hidden', className, borderClassName, hiddenClassName)}
+        className={combineClassNames('boxsizing-border flex-row-center aitems-center overflow-hidden', className, borderClassName, hiddenClassName)}
+        onClick={onClickItem}
+        onDoubleClick={onDoubleClickItem}
       >
-        {/* left container */}
-        <div
-          className={combineClassNames('flex-row-center height-full flex-auto boxsizing-border adjacent-mar-l-3', shouldShowMinVersion ? 'width-full' : '')}
-          onClick={onClickItem}
-          onDoubleClick={onDoubleClickItem}
-        >
-          <div className='pad-2 flex-auto text-ellipsis fsize-4 '>{label}</div>
-          <div className='pad-2 flex-none fsize-3 '>{`${mentions} mentions`}</div>
-        </div>
+        <div className='pad-2 flex-auto text-ellipsis fsize-4 '>{label}</div>
 
-        {/* right container - actions */}
-        { !shouldShowMinVersion &&
+        {/* allow subtracting when focused */}
+        { canModifyMentions && isFocused &&
+          <button
+            className='flex-none cursor-pointer fsize-4 pad-2'
+            onClick={onClickMinus}
+          >
+            -
+          </button>
+        }
+        <div className='pad-2 flex-none fsize-3 '>{`${mentions} mentions`}</div>
+
+        {/* add */}
+        { canModifyMentions &&
           <button
             className='flex-none cursor-pointer fsize-4 pad-2'
             disabled={isHidden || isComplete}
