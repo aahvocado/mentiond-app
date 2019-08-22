@@ -7,7 +7,7 @@ import CategoryViewItem from 'components/CategoryViewItem';
 import combineClassNames from 'utilities/combineClassNames';
 
 const ITEM_PADDING = 10;
-const ITEM_HEIGHT = 60;
+const ITEM_HEIGHT = 50;
 const ITEM_WRAPPER_HEIGHT = ITEM_HEIGHT + ITEM_PADDING;
 
 function AnimatedList(props) {
