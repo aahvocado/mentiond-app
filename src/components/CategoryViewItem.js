@@ -1,10 +1,89 @@
 import React, { PureComponent } from 'react';
-import { animated } from 'react-spring';
+import { useSpring, animated } from 'react-spring';
+import { useDrag } from 'react-use-gesture';
 
-import SlideGestureComponent from 'common-components/SlideGestureComponent';
-
+import clamp from 'utilities/clamp';
 import combineClassNames from 'utilities/combineClassNames';
 
+/**
+ * specialized gesture renderer for CategoryViewItem
+ * @param {Object} props
+ */
+function GestureHandlerComponent(props) {
+  const {
+    /** @type {String} */
+    className,
+    /** @type {Boolean} */
+    enabled = true,
+    /** @type {Array} default [x, y] translation */
+    base = [0, 0],
+    /** @type {Array} minimum distance allowed to slide [left, up] */
+    min = [-1000, -1000],
+    /** @type {Array} maximum distance allowed to slide [right, down] */
+    max = [1000, 1000],
+    /** @type {Function} */
+    onSlideXMin = () => {},
+    /** @type {Function} */
+    onSlideXMax = () => {},
+    /** @type {Object} */
+    style,
+    ...otherProps
+  } = props;
+
+  const HORIZONTAL_MINIMUM = 15;
+  const VERTICAL_LIMIT = 150;
+
+  const [{ xy }, set] = useSpring(() => ({ xy: [0, 0] }));
+
+  // 1. we define the drag gesture logic using the useDrag hook
+  const bind = useDrag(({ cancel, down, delta, last }) => {
+    // reset if user's pointer moves too far away vertically
+    if (Math.abs(delta[1]) > VERTICAL_LIMIT) {
+      set({ xy: [0, 0]});
+      return;
+    }
+
+    // do not do anything if pointer has not moved very much,
+    //  because the user could just be doing a vertical scroll
+    if (Math.abs(delta[0]) < HORIZONTAL_MINIMUM) {
+      set({ xy: [0, 0]});
+      return;
+    }
+
+    // callback when hitting horizontal min
+    if (last && delta[0] <= min[0]) {
+      onSlideXMin({delta, cancel});
+    };
+
+    // callback when hitting horizontal max
+    if (last && delta[0] >= max[0]) {
+      onSlideXMax({delta, cancel});
+    }
+
+    // keep x value within bounds
+    delta[0] = clamp(delta[0], min[0], max[0]);
+    delta[1] = clamp(delta[1], min[1], max[1]);
+
+    // done
+    set({ xy: down ? delta : [0, 0] });
+  }, {
+    enabled: enabled,
+  });
+
+  return (
+    <animated.div
+      className={className}
+      // 2. we bind the result of the hook to our component
+      {...bind()}
+      style={{
+        ...style,
+        userSelect: 'none',
+        transform: xy.interpolate((x, y) => `translate3D(${base[0] + x}px, ${base[1] + y}px, 0)`),
+      }}
+      {...otherProps}
+    />
+  )
+}
 /**
  * Basic Mentionable List Item
  */
@@ -81,7 +160,7 @@ export default class CategoryViewItem extends PureComponent {
         }}
       >
         <div className='position-relative width-full height-full'>
-          <SlideGestureComponent
+          <GestureHandlerComponent
             className='position-absolute'
             style={{
               left: 0,
@@ -109,7 +188,7 @@ export default class CategoryViewItem extends PureComponent {
 
               shouldShowMinVersion={shouldShowMinVersion}
             />
-          </SlideGestureComponent>
+          </GestureHandlerComponent>
 
           <div className={combineClassNames(itemClassName, 'flex-row aitems-center pad-2 boxsizing-border height-full color-white')}
             style={{
