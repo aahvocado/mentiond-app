@@ -2,6 +2,13 @@ import React, { PureComponent } from 'react';
 import { useSpring, animated } from 'react-spring';
 import { useDrag } from 'react-use-gesture';
 
+import {
+  faPlus,
+  faMinus,
+ } from '@fortawesome/free-solid-svg-icons';
+
+import IconButtonComponent from 'common-components/IconButtonComponent';
+
 import clamp from 'utilities/clamp';
 import combineClassNames from 'utilities/combineClassNames';
 
@@ -310,28 +317,29 @@ class CategoryViewItemBody extends PureComponent {
         onClick={onClickItem}
         onDoubleClick={onDoubleClickItem}
       >
+        {/* name of mentionable */}
         <div className='pad-2 flex-auto text-ellipsis fsize-4 '>{label}</div>
 
         {/* allow subtracting when focused */}
         { canModifyMentions && isFocused &&
-          <button
-            className='flex-none cursor-pointer fsize-4 pad-2'
+          <IconButtonComponent
+            className='flex-none cursor-pointer fsize-2 pad-2'
+            icon={faMinus}
             onClick={onClickMinus}
-          >
-            -
-          </button>
+          />
         }
+
+        {/* Mentions count */}
         <div className='pad-2 flex-none fsize-3 '>{`${mentions} mentions`}</div>
 
         {/* add */}
         { canModifyMentions &&
-          <button
-            className='flex-none cursor-pointer fsize-4 pad-2'
+          <IconButtonComponent
+            className='flex-none cursor-pointer fsize-2 pad-2'
+            icon={faPlus}
             disabled={isHidden || isComplete}
             onClick={onClickPlus}
-          >
-            +
-          </button>
+          />
         }
       </div>
 
